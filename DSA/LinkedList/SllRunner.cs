@@ -15,10 +15,11 @@ namespace LinkedList
             sLinkedList.PushToHead(1);
             sLinkedList.PushToHead(2);
             sLinkedList.PushToHead(3);
-            sLinkedList.PushToHead(4);
-            sLinkedList.PushToHead(4);
-            sLinkedList.PushToHead(5);
+            sLinkedList.PushToHead(3);
+            sLinkedList.PushToHead(2);
+            sLinkedList.PushToHead(1);
             sLinkedList.Print();
+            Console.WriteLine("Palindrome: " + sLinkedList.IsPalindromeWithStack());
             sLinkedList.ReverseList();
             //sLinkedList.ReverseRecursive();
            

@@ -126,6 +126,31 @@ namespace LinkedList
             }
         }
 
+        public bool IsPalindromeWithStack()
+        {
+            Stack<SllNode<T>> stack = new Stack<SllNode<T>>();
+            SllNode<T> currentNode = Head;
+            while(currentNode!=null)
+            {
+                stack.Push(currentNode);
+                currentNode = currentNode.Next;
+            }
+
+            //Now check by poping each node from stack and compare with current iteration
+            SllNode<T> otherIterationNode = Head;
+            while (otherIterationNode!=null)
+            {
+                SllNode<T> stackNode = stack.Pop();
+                if(stackNode.Data.CompareTo(otherIterationNode.Data)!=0)
+                {
+                    return false;
+                }
+                otherIterationNode = otherIterationNode.Next;
+            }
+
+            return true;
+        }
+
         public bool IsLoopPresentByUsingExtraSpace()
         {
             Dictionary<SllNode<T>, bool> hashTable = new Dictionary<SllNode<T>, bool>();
