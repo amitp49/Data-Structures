@@ -126,6 +126,41 @@ namespace LinkedList
             }
         }
 
+        public bool IsLoopPresentByUsingExtraSpace()
+        {
+            Dictionary<SllNode<T>, bool> hashTable = new Dictionary<SllNode<T>, bool>();
+            SllNode<T> currentNode = Head;
+            while (currentNode!=null)
+            {
+                if(hashTable.ContainsKey(currentNode))
+                {
+                    return true;//Loop detected
+                }
+
+                hashTable.Add(currentNode, true);
+                currentNode = currentNode.Next;
+            }
+            return false;
+        }
+
+        public bool IsLoopPresent()
+        {
+            SllNode<T> fastPointer = Head;
+            SllNode<T> slowPointer = Head;
+
+            while (fastPointer != null && fastPointer.Next != null)
+            {
+                fastPointer = fastPointer.Next.Next;
+                slowPointer = slowPointer.Next;
+                if(fastPointer==slowPointer)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public int countOccurances(T data)
         {
             int count = 0;

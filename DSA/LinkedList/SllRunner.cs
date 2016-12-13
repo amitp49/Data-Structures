@@ -19,15 +19,20 @@ namespace LinkedList
             sLinkedList.PushToHead(4);
             sLinkedList.PushToHead(5);
             sLinkedList.Print();
-            //sLinkedList.ReverseList();
-            sLinkedList.ReverseRecursive();
+            sLinkedList.ReverseList();
+            //sLinkedList.ReverseRecursive();
+           
             sLinkedList.Print();
 
             Console.WriteLine("Count of 4: " + sLinkedList.countOccurances(4));
             SllNode<int> node1 = sLinkedList.GetNthNodeFromStart(2);
-            SllNode<int> node2 = sLinkedList.GetNthNodeFromEnd(2);
+            SllNode<int> node2 = sLinkedList.GetNthNodeFromEnd(1);
+            
             Console.WriteLine("Second node: " + node1.Data);
-            Console.WriteLine("Second last node: " + node2.Data);
+            Console.WriteLine("last node: " + node2.Data);
+
+            //node2.Next = node1;
+            Console.WriteLine("Loop:" + sLinkedList.IsLoopPresent());
             Console.WriteLine("Middle node: " + sLinkedList.MiddleNode().Data);
             sLinkedList.DeleteNode(node1);
             sLinkedList.Print();
