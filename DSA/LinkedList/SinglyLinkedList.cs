@@ -58,6 +58,32 @@ namespace LinkedList
             return null; // not found, index > length of sll
         }
 
+        public void DeleteNode(SllNode<T> node)
+        {
+            //Trick works only if its not last node
+            SllNode<T> nextNode = node.Next;
+            if(nextNode!=null)
+            {
+                node.Data = nextNode.Data;
+                node.Next = nextNode.Next;
+                nextNode.Next = null;//Garbage collector will delete it
+            }
+        }
+
+        public SllNode<T> MiddleNode()
+        {
+            SllNode<T> fastPointer = head;
+            SllNode<T> slowPointer = head;
+
+            while (fastPointer!=null && fastPointer.Next!=null)
+            {
+                fastPointer = fastPointer.Next.Next;
+                slowPointer = slowPointer.Next;
+            }
+
+            return slowPointer;
+        }
+
         public void Print()
         {
             SllNode<T> current = head;

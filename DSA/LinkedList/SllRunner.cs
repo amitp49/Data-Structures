@@ -20,8 +20,12 @@ namespace LinkedList
             sLinkedList.Print();
             SllNode<int> node1 = sLinkedList.GetNthNodeFromStart(2);
             SllNode<int> node2 = sLinkedList.GetNthNodeFromEnd(2);
-            Console.WriteLine(node1.Data);
-            Console.WriteLine(node2.Data);
+            Console.WriteLine("Second node: " + node1.Data);
+            Console.WriteLine("Second last node: " + node2.Data);
+            Console.WriteLine("Middle node: " + sLinkedList.MiddleNode().Data);
+            sLinkedList.DeleteNode(node1);
+            sLinkedList.Print();
+            Console.WriteLine("Middle node: " + sLinkedList.MiddleNode().Data);
 
             Console.ReadLine();
         }
