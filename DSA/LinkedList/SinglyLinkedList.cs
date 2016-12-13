@@ -8,7 +8,8 @@ namespace LinkedList
 {
     public class SinglyLinkedList<T> where T : IComparable
     {
-        SllNode<T> head; //the head of singly linked list
+        //the head of singly linked list
+        public SllNode<T> Head { get; private set; }
 
         public void PushToHead(T data)
         {
@@ -16,16 +17,16 @@ namespace LinkedList
             SllNode<T> newNode = new SllNode<T>(data);
 
             //Append whole list behind new node
-            newNode.Next = head;
+            newNode.Next = Head;
 
             //Make new node as head of the list
-            head = newNode;
+            Head = newNode;
         }
 
         public SllNode<T> GetNthNodeFromEnd(int index)
         {
-            SllNode<T> currentAhead = head;
-            SllNode<T> currentBehind = head;
+            SllNode<T> currentAhead = Head;
+            SllNode<T> currentBehind = Head;
             int i=0;
             //Skip index nodes from beginning
             for (i = 0; currentAhead!=null && i < index; i++)
@@ -48,7 +49,7 @@ namespace LinkedList
 
         public SllNode<T> GetNthNodeFromStart(int index)
         {
-            SllNode<T> current = head;
+            SllNode<T> current = Head;
             int count = 0;
             while (current!=null && current.Next != null)
             {
@@ -75,8 +76,8 @@ namespace LinkedList
 
         public SllNode<T> MiddleNode()
         {
-            SllNode<T> fastPointer = head;
-            SllNode<T> slowPointer = head;
+            SllNode<T> fastPointer = Head;
+            SllNode<T> slowPointer = Head;
 
             while (fastPointer!=null && fastPointer.Next!=null)
             {
@@ -87,10 +88,48 @@ namespace LinkedList
             return slowPointer;
         }
 
+        public void ReverseList()
+        {
+            SllNode<T> current = Head, prev = null, next = null;
+
+            while (current!=null)
+            {
+                next = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = next;
+            }
+            Head = prev;
+        }
+
+        public void ReverseRecursive()
+        {
+            if (Head != null)
+            {
+                SllNode<T> oldHead = Head;
+                ReverseRecursiveInternalUtil(Head);
+                oldHead.Next = null; //Critical to make new last node's next as null
+            }
+        }
+
+        private void ReverseRecursiveInternalUtil(SllNode<T> currentNode)
+        {
+            SllNode<T> nextNode = currentNode.Next;
+            if (nextNode != null)
+            {
+                ReverseRecursiveInternalUtil(currentNode.Next);
+                nextNode.Next = currentNode;
+            }
+            else
+            {
+                Head = currentNode;
+            }
+        }
+
         public int countOccurances(T data)
         {
             int count = 0;
-            SllNode<T> current = head;
+            SllNode<T> current = Head;
             while(current!=null)
             {
                 if (current.Data.CompareTo(data)==0)
@@ -103,12 +142,12 @@ namespace LinkedList
 
         public void DeleteList()
         {
-            head = null;
+            Head = null;
         }
 
         public void Print()
         {
-            SllNode<T> current = head;
+            SllNode<T> current = Head;
             while(current!=null)
             {
                 Console.Write(current.Data);

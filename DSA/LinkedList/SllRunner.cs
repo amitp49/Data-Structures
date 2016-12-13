@@ -19,6 +19,10 @@ namespace LinkedList
             sLinkedList.PushToHead(4);
             sLinkedList.PushToHead(5);
             sLinkedList.Print();
+            //sLinkedList.ReverseList();
+            sLinkedList.ReverseRecursive();
+            sLinkedList.Print();
+
             Console.WriteLine("Count of 4: " + sLinkedList.countOccurances(4));
             SllNode<int> node1 = sLinkedList.GetNthNodeFromStart(2);
             SllNode<int> node2 = sLinkedList.GetNthNodeFromEnd(2);
