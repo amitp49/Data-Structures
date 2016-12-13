@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class SinglyLinkedList<T>
+    public class SinglyLinkedList<T> where T : IComparable
     {
         SllNode<T> head; //the head of singly linked list
 
@@ -26,12 +26,15 @@ namespace LinkedList
         {
             SllNode<T> currentAhead = head;
             SllNode<T> currentBehind = head;
-
+            int i=0;
             //Skip index nodes from beginning
-            for (int i = 0; i < index; i++)
+            for (i = 0; currentAhead!=null && i < index; i++)
             {
                 currentAhead = currentAhead.Next;
             }
+
+            if (i < index)
+                return null;
 
             //when ahead one reaches end of list, behind one whould be index behind from end
             while (currentAhead!=null)
@@ -82,6 +85,25 @@ namespace LinkedList
             }
 
             return slowPointer;
+        }
+
+        public int countOccurances(T data)
+        {
+            int count = 0;
+            SllNode<T> current = head;
+            while(current!=null)
+            {
+                if (current.Data.CompareTo(data)==0)
+                    count++;
+
+                current = current.Next;
+            }
+            return count;
+        }
+
+        public void DeleteList()
+        {
+            head = null;
         }
 
         public void Print()
