@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Interfaces;
+using LinkedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,9 @@ namespace DSA
     {
         static void Main(string[] args)
         {
+            IRunner sllRunner = new SllRunner();
+            sllRunner.Run();
+
         }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSA", "DSA\DSA.csproj", "{D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList", "LinkedList\LinkedList.csproj", "{20E669C5-3151-49DD-BD24-D2320FFD2BC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{20E669C5-3151-49DD-BD24-D2320FFD2BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20E669C5-3151-49DD-BD24-D2320FFD2BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20E669C5-3151-49DD-BD24-D2320FFD2BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

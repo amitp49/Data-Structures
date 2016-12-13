@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkedList
+namespace Interfaces
 {
-    public class Class1
+    public interface IRunner
     {
+        void Run();
     }
 }
