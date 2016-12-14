@@ -11,7 +11,6 @@ namespace Array
     {
         public void Run()
         {
-            throw new NotImplementedException();
         }
     }
 }

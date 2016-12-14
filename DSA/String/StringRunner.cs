@@ -11,7 +11,6 @@ namespace String
     {
         public void Run()
         {
-            throw new NotImplementedException();
         }
     }
 }

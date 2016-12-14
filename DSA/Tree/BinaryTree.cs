@@ -35,5 +35,20 @@ namespace Tree
         {
             
         }
+
+        public void PreorderTraversalRecursive()
+        {
+            PreorderTraversalInternalUtil(this.Root);
+        }
+
+        private void PreorderTraversalInternalUtil(BinaryTreeNode<T> current)
+        {
+            if(current!=null)
+            {
+                Console.Write(current.Data + ", ");
+                PreorderTraversalInternalUtil(current.Left);
+                PreorderTraversalInternalUtil(current.Right);
+            }
+        }
     }
 }

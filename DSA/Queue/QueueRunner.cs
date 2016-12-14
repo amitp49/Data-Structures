@@ -11,7 +11,6 @@ namespace Queue
     {
         public void Run()
         {
-            throw new NotImplementedException();
         }
     }
 }

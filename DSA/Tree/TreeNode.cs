@@ -9,27 +9,29 @@ namespace Tree
     public class TreeNode<T> where T : IComparable
     {
         private T data;
-        private IList<TreeNode<T>> neighbors;
+        private NodeList<T> neighbors;
 
         public T Data
         {
             get { return data; }
             set { data = value; }
         }
-        
-        public IList<TreeNode<T>> Neighbors {
+
+        public NodeList<T> Neighbors
+        {
             get { return neighbors; } 
             set{neighbors = value;}
         }
         public TreeNode(T data)
         {
-            this.data = data;
+            this.Data = data;
+            this.Neighbors = null;
         }
 
-        public TreeNode(T data, IList<TreeNode<T>> neighbors)
+        public TreeNode(T data, NodeList<T> neighbors)
         {
-            this.data = data;
-            this.neighbors = neighbors;
+            this.Data = data;
+            this.Neighbors = neighbors;
         }
     }
 }

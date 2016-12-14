@@ -20,7 +20,9 @@ namespace Tree
             set
             {
                 if(base.Neighbors==null)
-                    base.Neighbors = new List<TreeNode<T>>(2);
+                {
+                    base.Neighbors = new NodeList<T>(2);
+                }
                 base.Neighbors[0] = value;
             }
         }
@@ -37,7 +39,9 @@ namespace Tree
             set
             {
                 if (base.Neighbors == null)
-                    base.Neighbors = new List<TreeNode<T>>(2);
+                {
+                    base.Neighbors = new NodeList<T>(2);
+                }
                 base.Neighbors[1] = value;
             }
         }
@@ -49,7 +53,8 @@ namespace Tree
         public BinaryTreeNode(T data, BinaryTreeNode<T> left, BinaryTreeNode<T> right)
             : base(data)
         {
-            this.Neighbors = new List<TreeNode<T>>(2);
+            this.Neighbors = new NodeList<T>(2);
+           
             this.Neighbors[0] = left;
             this.Neighbors[1] = right;
         }

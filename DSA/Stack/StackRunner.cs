@@ -11,7 +11,7 @@ namespace Stack
     {
         public void Run()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
