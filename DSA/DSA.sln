@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList", "LinkedList\Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree", "Tree\Tree.csproj", "{D3FBEDAE-0C9F-4162-87DA-8BD3BCFC0046}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3FBEDAE-0C9F-4162-87DA-8BD3BCFC0046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3FBEDAE-0C9F-4162-87DA-8BD3BCFC0046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3FBEDAE-0C9F-4162-87DA-8BD3BCFC0046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3FBEDAE-0C9F-4162-87DA-8BD3BCFC0046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
