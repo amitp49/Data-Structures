@@ -8,8 +8,22 @@ namespace LinkedList
 {
     public class SinglyLinkedList<T> where T : IComparable
     {
+        private SllNode<T> head;
         //the head of singly linked list
-        public SllNode<T> Head { get; private set; }
+        public SllNode<T> Head { 
+            get {return head;}
+            private set {head = value;}
+        }
+
+        public SinglyLinkedList()
+        {
+            this.Head = null;
+        }
+
+        public SinglyLinkedList(SllNode<T> someHeadOfOtherList)
+        {
+            this.Head = someHeadOfOtherList;
+        }
 
         public void PushToHead(T data)
         {
@@ -21,6 +35,18 @@ namespace LinkedList
 
             //Make new node as head of the list
             Head = newNode;
+        }
+
+        public int GetCount()
+        {
+            SllNode<T> current = Head;
+            int count = 0;
+            while(current!=null)
+            {
+                count++;
+                current = current.Next;
+            }
+            return count;
         }
 
         public SllNode<T> GetNthNodeFromEnd(int index)
@@ -74,14 +100,22 @@ namespace LinkedList
             }
         }
 
-        public SllNode<T> MiddleNode()
+        public SllNode<T> GetMiddleNode()
+        {
+            SllNode<T> prevToMiddleNode = null;
+            return this.GetMiddleNode(out prevToMiddleNode);
+        }
+
+        public SllNode<T> GetMiddleNode(out SllNode<T> prevToMiddleNode)
         {
             SllNode<T> fastPointer = Head;
             SllNode<T> slowPointer = Head;
+            prevToMiddleNode = null;
 
-            while (fastPointer!=null && fastPointer.Next!=null)
+            while (fastPointer != null && fastPointer.Next != null && fastPointer.Next.Next != null)
             {
                 fastPointer = fastPointer.Next.Next;
+                prevToMiddleNode = slowPointer;
                 slowPointer = slowPointer.Next;
             }
 
@@ -124,6 +158,45 @@ namespace LinkedList
             {
                 Head = currentNode;
             }
+        }
+
+        
+        public bool IsPalindromeWithoutExtraSpace()
+        {
+            SllNode<T> prevToMiddleNode = null;
+            SllNode<T> middleNode = this.GetMiddleNode(out prevToMiddleNode);
+
+            //Get the starting of list after middle node
+            SllNode<T> nextToMiddleNode = middleNode.Next;
+
+            //Get the odd or even count
+            int length = GetCount();
+
+            //Critical to ignore middle node if its odd count
+            if (length % 2 != 0)
+            {
+                middleNode = prevToMiddleNode;
+            }
+
+            // Break list from middle
+            middleNode.Next = null;
+
+            //Make new second half from next to middle
+            SinglyLinkedList<T> newSecondHalfList = new SinglyLinkedList<T>(nextToMiddleNode);
+
+            //Reverse second half
+            newSecondHalfList.ReverseList();
+
+            //Compare original first half and reversed second half
+            bool isSame = this.IsSameDataList(newSecondHalfList);
+
+            //Reverse second half again to make original list
+            newSecondHalfList.ReverseList();
+
+            //Join both list again
+            middleNode.Next = newSecondHalfList.Head;
+
+            return isSame;
         }
 
         public bool IsPalindromeWithStack()
@@ -215,6 +288,30 @@ namespace LinkedList
                 current = current.Next;
             }
             Console.WriteLine();
+        }
+
+        public bool IsSameDataList(SinglyLinkedList<T> otherList)
+        {
+            SllNode<T> currentForThisList = this.Head;
+            SllNode<T> currentForOtherList = otherList.Head;
+
+            while(currentForThisList!=null && currentForOtherList!=null)
+            {
+                if(currentForThisList.Data.CompareTo(currentForOtherList.Data)==0)
+                {
+                    currentForThisList = currentForThisList.Next;
+                    currentForOtherList = currentForOtherList.Next;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            if (currentForThisList == null && currentForOtherList == null)
+                return true;
+
+            return false;
         }
     }
 }

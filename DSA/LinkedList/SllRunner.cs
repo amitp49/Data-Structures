@@ -15,11 +15,14 @@ namespace LinkedList
             sLinkedList.PushToHead(1);
             sLinkedList.PushToHead(2);
             sLinkedList.PushToHead(3);
+            sLinkedList.PushToHead(4);
             sLinkedList.PushToHead(3);
             sLinkedList.PushToHead(2);
             sLinkedList.PushToHead(1);
             sLinkedList.Print();
-            Console.WriteLine("Palindrome: " + sLinkedList.IsPalindromeWithStack());
+            Console.WriteLine("Palindrome with stack: " + sLinkedList.IsPalindromeWithStack());
+            Console.WriteLine("Palindrome without space: " + sLinkedList.IsPalindromeWithoutExtraSpace());
+
             sLinkedList.ReverseList();
             //sLinkedList.ReverseRecursive();
            
@@ -34,10 +37,11 @@ namespace LinkedList
 
             //node2.Next = node1;
             Console.WriteLine("Loop:" + sLinkedList.IsLoopPresent());
-            Console.WriteLine("Middle node: " + sLinkedList.MiddleNode().Data);
+            
+            Console.WriteLine("Middle node: " + sLinkedList.GetMiddleNode().Data);
             sLinkedList.DeleteNode(node1);
             sLinkedList.Print();
-            Console.WriteLine("Middle node: " + sLinkedList.MiddleNode().Data);
+            Console.WriteLine("Middle node: " + sLinkedList.GetMiddleNode().Data);
 
             Console.ReadLine();
         }
