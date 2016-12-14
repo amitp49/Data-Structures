@@ -160,11 +160,37 @@ namespace LinkedList
             }
         }
 
+        public bool IsPalindromeRecursive()
+        {
+            SllNode<T> currentReverse = Head;
+            SllNode<T> currentForward = Head;
+            //Critical - passing by reference will work as data member/double pointer
+            return IsPalindromeRecursiveInternalUtil(currentReverse,ref currentForward);
+        }
+
+        private bool IsPalindromeRecursiveInternalUtil(SllNode<T> currentReverse, ref SllNode<T> currentForward)
+        {
+            bool remainingListIsPalindrome = true;
+            //Go ahead till you reach end of list for one pointer
+            if (currentReverse.Next != null)
+            {
+                remainingListIsPalindrome = IsPalindromeRecursiveInternalUtil(currentReverse.Next,ref currentForward);
+            }
+
+            //Now when coming back from recursion, will check for data equality
+            if(currentForward.Data.CompareTo(currentReverse.Data)==0)
+            {
+                currentForward = currentForward.Next;
+                return remainingListIsPalindrome;
+            }
+            return false;
+        }
         
         public bool IsPalindromeWithoutExtraSpace()
         {
             SllNode<T> prevToMiddleNode = null;
             SllNode<T> middleNode = this.GetMiddleNode(out prevToMiddleNode);
+            SllNode<T> backUpMiddleNode = middleNode;
 
             //Get the starting of list after middle node
             SllNode<T> nextToMiddleNode = middleNode.Next;
@@ -192,6 +218,12 @@ namespace LinkedList
 
             //Reverse second half again to make original list
             newSecondHalfList.ReverseList();
+
+            if (length % 2 != 0)
+            {
+                middleNode.Next = backUpMiddleNode;
+                middleNode = middleNode.Next;
+            }
 
             //Join both list again
             middleNode.Next = newSecondHalfList.Head;

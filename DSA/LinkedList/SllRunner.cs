@@ -22,6 +22,7 @@ namespace LinkedList
             sLinkedList.Print();
             Console.WriteLine("Palindrome with stack: " + sLinkedList.IsPalindromeWithStack());
             Console.WriteLine("Palindrome without space: " + sLinkedList.IsPalindromeWithoutExtraSpace());
+            Console.WriteLine("Palindrome with recursion: " + sLinkedList.IsPalindromeRecursive());
 
             sLinkedList.ReverseList();
             //sLinkedList.ReverseRecursive();
