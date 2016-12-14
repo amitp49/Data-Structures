@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D3FBEDAE-0C9F-4162-87DA-8BD3BCFC0046}</ProjectGuid>
+    <ProjectGuid>{0DBDD2C9-41A0-4509-86B8-9813D28B8B61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tree</RootNamespace>
-    <AssemblyName>Tree</AssemblyName>
+    <RootNamespace>String</RootNamespace>
+    <AssemblyName>String</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,10 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryTree.cs" />
-    <Compile Include="BinaryTreeNode.cs" />
-    <Compile Include="BTRunner.cs" />
-    <Compile Include="TreeNode.cs" />
+    <Compile Include="StringRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

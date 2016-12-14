@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tree
 {
-    public class BinaryTreeNode<T> : TreeNode<T>
+    public class BinaryTreeNode<T> : TreeNode<T> where T : IComparable
     {
         public BinaryTreeNode<T> Left 
         { 
@@ -17,7 +17,7 @@ namespace Tree
                 else
                     return null;
             }
-            private set
+            set
             {
                 if(base.Neighbors==null)
                     base.Neighbors = new List<TreeNode<T>>(2);
@@ -34,7 +34,7 @@ namespace Tree
                 else
                     return null;
             }
-            private set
+            set
             {
                 if (base.Neighbors == null)
                     base.Neighbors = new List<TreeNode<T>>(2);

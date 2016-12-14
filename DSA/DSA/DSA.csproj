@@ -48,6 +48,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Array\Array.csproj">
+      <Project>{5d882e20-a8ea-43cb-bba6-b824bbe3360e}</Project>
+      <Name>Array</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{5f720dfa-4f40-451e-a7b0-5ef6d3fecaae}</Project>
       <Name>Interfaces</Name>
@@ -55,6 +59,22 @@
     <ProjectReference Include="..\LinkedList\LinkedList.csproj">
       <Project>{20e669c5-3151-49dd-bd24-d2320ffd2bc4}</Project>
       <Name>LinkedList</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Queue\Queue.csproj">
+      <Project>{131a2c7b-7a75-4f77-ac9e-8c8e2c6014e7}</Project>
+      <Name>Queue</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stack\Stack.csproj">
+      <Project>{b0b7994b-761f-41ab-8af6-487534eff02f}</Project>
+      <Name>Stack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\String\String.csproj">
+      <Project>{0dbdd2c9-41a0-4509-86b8-9813d28b8b61}</Project>
+      <Name>String</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tree\Tree.csproj">
+      <Project>{d3fbedae-0c9f-4162-87da-8bd3bcfc0046}</Project>
+      <Name>Tree</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

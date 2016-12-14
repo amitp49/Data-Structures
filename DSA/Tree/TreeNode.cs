@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tree
 {
-    public class TreeNode<T>
+    public class TreeNode<T> where T : IComparable
     {
         private T data;
         private IList<TreeNode<T>> neighbors;
