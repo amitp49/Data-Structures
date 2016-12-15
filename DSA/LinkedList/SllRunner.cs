@@ -22,7 +22,9 @@ namespace LinkedList
 
 
             sLinkedList.Print();
-            sLinkedList.SortByNodeMovement();
+            //sLinkedList.SortByNodeMovement();
+            //sLinkedList.SortByDataMovement();
+            sLinkedList.MergeSort();
             sLinkedList.Print();
 
             Console.WriteLine("Palindrome with stack: " + sLinkedList.IsPalindromeWithStack());

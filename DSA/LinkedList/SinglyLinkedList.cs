@@ -108,8 +108,13 @@ namespace LinkedList
 
         public SllNode<T> GetMiddleNode(out SllNode<T> prevToMiddleNode)
         {
-            SllNode<T> fastPointer = Head;
-            SllNode<T> slowPointer = Head;
+            return GetMiddleNode(this.Head, out prevToMiddleNode);
+        }
+
+        private SllNode<T> GetMiddleNode(SllNode<T> startOfList,out SllNode<T> prevToMiddleNode)
+        {
+            SllNode<T> fastPointer = startOfList;
+            SllNode<T> slowPointer = startOfList;
             prevToMiddleNode = null;
 
             while (fastPointer != null && fastPointer.Next != null && fastPointer.Next.Next != null)
@@ -317,6 +322,10 @@ namespace LinkedList
 
         private SllNode<T> MergeSortInternalUtil(SllNode<T> currentHead)
         {
+            //If no node or only one node then it is already sorted, no more recursion
+            if (currentHead == null || currentHead.Next == null)
+                return currentHead;
+
             SllNode<T> firstHalf = null;
             SllNode<T> secondHalf = null;
 
@@ -330,15 +339,42 @@ namespace LinkedList
             return newHead;
         }
 
-        private SllNode<T> MergeSortedHalfs(SllNode<T> firstHalf, SllNode<T> secondHalf)
-        {
-            throw new NotImplementedException();
-        }
-
         private void SplitListIntoTwoHalf(SllNode<T> currentHead, ref SllNode<T> firstHalf, ref SllNode<T> secondHalf)
         {
-            throw new NotImplementedException();
+            SllNode<T> prevToMiddleNode = null;
+            SllNode<T> middleNode = this.GetMiddleNode(currentHead,out prevToMiddleNode);
+
+            prevToMiddleNode = middleNode;
+            middleNode = middleNode.Next;
+
+            prevToMiddleNode.Next = null;
+
+            firstHalf = currentHead;
+            secondHalf = middleNode;
         }
+
+        private SllNode<T> MergeSortedHalfs(SllNode<T> firstHalf, SllNode<T> secondHalf)
+        {
+            if (firstHalf == null)
+                return secondHalf;
+            if (secondHalf == null)
+                return firstHalf;
+
+            SllNode<T> combinedList = null;
+
+            if(firstHalf.Data.CompareTo(secondHalf.Data) <= 0)
+            {
+                combinedList = firstHalf;
+                combinedList.Next = MergeSortedHalfs(firstHalf.Next, secondHalf);
+            }
+            else
+            {
+                combinedList = secondHalf;
+                combinedList.Next = MergeSortedHalfs(firstHalf, secondHalf.Next);
+            }
+            return combinedList;
+        }
+
 
         public void SortByDataMovement()
         {
