@@ -49,6 +49,37 @@ namespace LinkedList
             return count;
         }
 
+        public bool areIdenticalRecursive(SinglyLinkedList<T> otherList)
+        {
+            SllNode<T> currentOfThisList = this.Head;
+            SllNode<T> currentOfOtherList = otherList.Head;
+            return areIdenticalRecursive(currentOfThisList, currentOfOtherList);
+        }
+
+        public bool areIdenticalRecursive(SllNode<T> currentOfThisList, SllNode<T> currentOfOtherList)
+        {
+            if (currentOfThisList == null && currentOfOtherList == null)
+                return true;
+            if (currentOfThisList.Data.CompareTo(currentOfOtherList.Data) != 0)
+                return false;
+            return areIdenticalRecursive(currentOfThisList.Next, currentOfOtherList.Next);
+        }
+
+        public bool areIdentical(SinglyLinkedList<T> otherList)
+        {
+            SllNode<T> currentOfThisList = this.Head;
+            SllNode<T> currentOfOtherList = otherList.Head;
+
+            while(currentOfThisList!=null && currentOfOtherList!=null)
+            {
+                if (currentOfThisList.Data.CompareTo(currentOfOtherList.Data) != 0)
+                    return false;
+                currentOfThisList = currentOfThisList.Next;
+                currentOfOtherList = currentOfOtherList.Next;
+            }
+            return (currentOfThisList == null && currentOfOtherList == null);
+        }
+
         public SllNode<T> GetNthNodeFromEnd(int index)
         {
             SllNode<T> currentAhead = Head;
