@@ -39,6 +39,8 @@ namespace Tree
         public void PreorderTraversalRecursive()
         {
             PreorderTraversalInternalUtil(this.Root);
+            Console.WriteLine();
+
         }
 
         private void PreorderTraversalInternalUtil(BinaryTreeNode<T> current)
@@ -48,6 +50,39 @@ namespace Tree
                 Console.Write(current.Data + ", ");
                 PreorderTraversalInternalUtil(current.Left);
                 PreorderTraversalInternalUtil(current.Right);
+            }
+        }
+
+        public void PostorderTraversalRecursive()
+        {
+            PostorderTraversalInternalUtil(this.Root);
+            Console.WriteLine();
+        }
+
+        private void PostorderTraversalInternalUtil(BinaryTreeNode<T> current)
+        {
+            if (current != null)
+            {
+                PostorderTraversalInternalUtil(current.Left);
+                PostorderTraversalInternalUtil(current.Right);
+                Console.Write(current.Data + ", ");
+            }
+        }
+
+        public void InorderTraversalRecursive()
+        {
+            InorderTraversalInternalUtil(this.Root);
+            Console.WriteLine();
+
+        }
+
+        private void InorderTraversalInternalUtil(BinaryTreeNode<T> current)
+        {
+            if (current != null)
+            {
+                InorderTraversalInternalUtil(current.Left);
+                Console.Write(current.Data + ", ");
+                InorderTraversalInternalUtil(current.Right);
             }
         }
     }

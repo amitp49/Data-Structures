@@ -25,6 +25,9 @@ namespace Tree
             btree.Root.Right.Right.Right.Right = new BinaryTreeNode<int>(8);
 
             btree.PreorderTraversalRecursive();
+            btree.PostorderTraversalRecursive();
+            btree.InorderTraversalRecursive();
+
             Console.ReadLine();
         }
     }
