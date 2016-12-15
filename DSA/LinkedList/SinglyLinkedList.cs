@@ -49,6 +49,66 @@ namespace LinkedList
             return count;
         }
 
+        public SinglyLinkedList<T> SortedIntersectionRecursive(SinglyLinkedList<T> otherList)
+        {
+            SllNode<T> mergedListHead = SortedIntersectionRecursiveInternalUtil(this.Head,otherList.Head);
+            return new SinglyLinkedList<T>(mergedListHead);
+        }
+        private SllNode<T> SortedIntersectionRecursiveInternalUtil(SllNode<T> thisHead, SllNode<T> otherHead)
+        {
+            if ((thisHead == null && otherHead != null) || (thisHead != null && otherHead == null))
+                return null;
+
+            SllNode<T> result = null;
+            if(thisHead.Data.CompareTo(otherHead.Data) == 0)
+            {
+                result = new SllNode<T>(thisHead.Data);
+                result.Next = SortedIntersectionRecursiveInternalUtil(thisHead.Next,otherHead.Next);
+            }
+            else if (thisHead.Data.CompareTo(otherHead.Data) < 0)
+            {
+                return SortedIntersectionRecursiveInternalUtil(thisHead.Next,otherHead);
+            }
+            else
+            {
+                return SortedIntersectionRecursiveInternalUtil(thisHead, otherHead.Next);
+            }
+            return result;
+        }
+
+        public SinglyLinkedList<T> SortedIntersectionIterative(SinglyLinkedList<T> otherList)
+        {
+            SllNode<T> thisCurrent = this.Head;
+            SllNode<T> otherCurrent = otherList.Head;
+
+            SllNode<T> result = null;
+
+            while (thisCurrent != null && otherCurrent != null)
+            {
+                if(thisCurrent.Data.CompareTo(otherCurrent.Data) == 0)
+                {
+                    if(result==null)
+                    {
+                        result = new SllNode<T>(thisCurrent.Data);
+                    }
+                    else
+                    {
+                        result.Next = new SllNode<T>(thisCurrent.Data);
+                        result = result.Next;
+                    }
+                }
+                else if(thisCurrent.Data.CompareTo(otherCurrent.Data) < 0)
+                {
+                    thisCurrent = thisCurrent.Next;
+                }
+                else
+                {
+                    otherCurrent = otherCurrent.Next;
+                }
+            }
+            return new SinglyLinkedList<T>(result);
+        }
+
         public bool areIdenticalRecursive(SinglyLinkedList<T> otherList)
         {
             SllNode<T> currentOfThisList = this.Head;
