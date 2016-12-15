@@ -310,6 +310,36 @@ namespace LinkedList
             Head = null;
         }
 
+        public void MergeSort()
+        {
+            this.Head = MergeSortInternalUtil(this.Head);
+        }
+
+        private SllNode<T> MergeSortInternalUtil(SllNode<T> currentHead)
+        {
+            SllNode<T> firstHalf = null;
+            SllNode<T> secondHalf = null;
+
+            SplitListIntoTwoHalf(currentHead, ref firstHalf, ref secondHalf);
+
+            SllNode<T> firstHalfNewHead = MergeSortInternalUtil(firstHalf);
+            SllNode<T> secondHalfNewHead = MergeSortInternalUtil(secondHalf);
+
+            SllNode<T> newHead = MergeSortedHalfs(firstHalfNewHead, secondHalfNewHead);
+
+            return newHead;
+        }
+
+        private SllNode<T> MergeSortedHalfs(SllNode<T> firstHalf, SllNode<T> secondHalf)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SplitListIntoTwoHalf(SllNode<T> currentHead, ref SllNode<T> firstHalf, ref SllNode<T> secondHalf)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SortByDataMovement()
         {
             SllNode<T> outer = Head;
