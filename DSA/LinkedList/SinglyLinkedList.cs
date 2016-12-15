@@ -362,30 +362,52 @@ namespace LinkedList
             //If node1 or node2 is head
             if (node1 == Head)
                 Head = node2;
-            if (node2 == Head)
+            else if (node2 == Head)
                 Head = node1;
 
             //If node1 or node2 is null
-            if (node1 == null)
+            if(node1 == null && node2 == null)
+            {
+                return;
+            }
+            else if (node1 == null)
             {
                 node1 = node2;
                 node2 = null;
             }
-            if (node2 == null)
+            else if (node2 == null)
             {
                 node2 = node1;
                 node1 = null;
             }
 
-            //Break node1 from its position and put it between prevToNode2 and nextToNode2, and vice versa
-            if(prevToNode2!=null)
-                prevToNode2.Next = node1;
-            node1.Next = nextToNode2;
+            //adjecent
+            if(node1.Next == node2)
+            {
+                if (prevToNode1 != null)
+                    prevToNode1.Next = node2;
+                node2.Next = node1;
+                node1.Next = nextToNode2;
+            }
+            else if (node2.Next == node1)
+            {
+                if (prevToNode2 != null)
+                    prevToNode2.Next = node1;
+                node1.Next = node2;
+                node2.Next = nextToNode1;
+            }
+            else
+            {
+                //Break node1 from its position and put it between prevToNode2 and nextToNode2, and vice versa
+                if (prevToNode2 != null)
+                    prevToNode2.Next = node1;
+                node1.Next = nextToNode2;
 
-            if(prevToNode1!=null)
-                prevToNode1.Next = node2;
-            node2.Next = nextToNode1;
-
+                if (prevToNode1 != null)
+                    prevToNode1.Next = node2;
+                node2.Next = nextToNode1;
+            }
+           
             //Put reference back, so that outer loops can work
             SllNode<T> temp = node1;
             node1 = node2;

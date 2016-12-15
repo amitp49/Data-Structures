@@ -19,6 +19,8 @@ namespace LinkedList
             sLinkedList.PushToHead(3);
             sLinkedList.PushToHead(2);
             sLinkedList.PushToHead(1);
+
+
             sLinkedList.Print();
             sLinkedList.SortByNodeMovement();
             sLinkedList.Print();
