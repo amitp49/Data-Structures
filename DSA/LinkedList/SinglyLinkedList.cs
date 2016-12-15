@@ -310,6 +310,95 @@ namespace LinkedList
             Head = null;
         }
 
+        public void SortByDataMovement()
+        {
+            SllNode<T> outer = Head;
+            
+            while(outer!=null)
+            {
+                SllNode<T> inner = outer;
+                while(inner!=null)
+                {
+                    if(outer.Data.CompareTo(inner.Data) > 0)
+                    {
+                        //We are swaping data itself and not nodes
+                        SwapData(outer, inner);
+                    }
+                    inner = inner.Next;
+                }
+                outer = outer.Next;
+            }
+        }
+
+        public void SortByNodeMovement()
+        {
+            SllNode<T> outer = Head;
+            SllNode<T> prevToOuter = null;
+            SllNode<T> prevToInner = null;
+
+
+            while (outer != null)
+            {
+                SllNode<T> inner = outer;
+                while (inner != null)
+                {
+                    if (outer.Data.CompareTo(inner.Data) > 0)
+                    {
+                        SwapNode(ref outer,ref  inner, prevToOuter, prevToInner);
+                    }
+                    prevToInner = inner;
+                    inner = inner.Next;
+                }
+                prevToOuter = outer;
+                outer = outer.Next;
+            }
+        }
+
+        private void SwapNode(ref SllNode<T> node1, ref SllNode<T> node2, SllNode<T> prevToNode1, SllNode<T> prevToNode2)
+        {
+            SllNode<T> nextToNode1 = node1.Next;
+            SllNode<T> nextToNode2 = node2.Next;
+
+            //If node1 or node2 is head
+            if (node1 == Head)
+                Head = node2;
+            if (node2 == Head)
+                Head = node1;
+
+            //If node1 or node2 is null
+            if (node1 == null)
+            {
+                node1 = node2;
+                node2 = null;
+            }
+            if (node2 == null)
+            {
+                node2 = node1;
+                node1 = null;
+            }
+
+            //Break node1 from its position and put it between prevToNode2 and nextToNode2, and vice versa
+            if(prevToNode2!=null)
+                prevToNode2.Next = node1;
+            node1.Next = nextToNode2;
+
+            if(prevToNode1!=null)
+                prevToNode1.Next = node2;
+            node2.Next = nextToNode1;
+
+            //Put reference back, so that outer loops can work
+            SllNode<T> temp = node1;
+            node1 = node2;
+            node2 = temp;
+        }
+
+        private void SwapData(SllNode<T> outer, SllNode<T> inner)
+        {
+            T tempData = outer.Data;
+            outer.Data = inner.Data;
+            inner.Data = tempData;
+        }
+
         public void Print()
         {
             SllNode<T> current = Head;

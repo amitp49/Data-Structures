@@ -20,6 +20,9 @@ namespace LinkedList
             sLinkedList.PushToHead(2);
             sLinkedList.PushToHead(1);
             sLinkedList.Print();
+            sLinkedList.SortByNodeMovement();
+            sLinkedList.Print();
+
             Console.WriteLine("Palindrome with stack: " + sLinkedList.IsPalindromeWithStack());
             Console.WriteLine("Palindrome without space: " + sLinkedList.IsPalindromeWithoutExtraSpace());
             Console.WriteLine("Palindrome with recursion: " + sLinkedList.IsPalindromeRecursive());

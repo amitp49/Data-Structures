@@ -18,10 +18,10 @@ namespace DSA
         static void Main(string[] args)
         {
             IRunner sllRunner = new SllRunner();
-            //sllRunner.Run();
+            sllRunner.Run();
 
             IRunner btRunner = new BTRunner();
-            btRunner.Run();
+            //btRunner.Run();
 
             IRunner stackRunner = new StackRunner();
             stackRunner.Run();
