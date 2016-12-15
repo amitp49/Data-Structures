@@ -37,6 +37,16 @@ namespace LinkedList
             Head = newNode;
         }
 
+        public void DeleteAlternateNodes()
+        {
+            DeleteNodesAtDistance(2);
+        }
+
+        public void DeleteNodesAtDistance(int distance)
+        {
+           
+        }
+
         public int GetCount()
         {
             SllNode<T> current = Head;
@@ -48,7 +58,6 @@ namespace LinkedList
             }
             return count;
         }
-
         public SinglyLinkedList<T> SortedIntersectionRecursive(SinglyLinkedList<T> otherList)
         {
             SllNode<T> mergedListHead = SortedIntersectionRecursiveInternalUtil(this.Head,otherList.Head);
@@ -96,6 +105,8 @@ namespace LinkedList
                         result.Next = new SllNode<T>(thisCurrent.Data);
                         result = result.Next;
                     }
+                    thisCurrent = thisCurrent.Next;
+                    otherCurrent = otherCurrent.Next;
                 }
                 else if(thisCurrent.Data.CompareTo(otherCurrent.Data) < 0)
                 {

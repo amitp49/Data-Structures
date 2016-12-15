@@ -12,19 +12,28 @@ namespace LinkedList
         public void Run()
         {
             SinglyLinkedList<int> sLinkedList = new SinglyLinkedList<int>();
+            sLinkedList.PushToHead(6);
+            sLinkedList.PushToHead(5);
             sLinkedList.PushToHead(4);
             sLinkedList.PushToHead(3);
             sLinkedList.PushToHead(2);
+            sLinkedList.PushToHead(1);
+
             sLinkedList.Print();
+
+            sLinkedList.DeleteAlternateNodes();
+            sLinkedList.Print();
+
 
             SinglyLinkedList<int> sLinkedListOther = new SinglyLinkedList<int>();
             sLinkedListOther.PushToHead(5);
             sLinkedListOther.PushToHead(3);
 
-
             sLinkedListOther.Print();
 
-            SinglyLinkedList<int> mergedIntersectionList = sLinkedList.SortedIntersectionRecursive(sLinkedListOther);
+            SinglyLinkedList<int> mergedIntersectionList = null;
+            //mergedIntersectionList = sLinkedList.SortedIntersectionRecursive(sLinkedListOther);
+            mergedIntersectionList = sLinkedList.SortedIntersectionIterative(sLinkedListOther);
             mergedIntersectionList.Print();
 
 
