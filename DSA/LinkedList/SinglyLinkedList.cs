@@ -44,7 +44,56 @@ namespace LinkedList
 
         public void DeleteNodesAtDistance(int distance)
         {
-           
+            SllNode<T> current = Head;
+            SllNode<T> prev = null;
+
+            while (current!=null)
+            {
+                //Skip distance nodes
+                for (int i = 1; i < distance; i++)
+                {
+                    prev = current;
+                    current = current.Next;
+                }
+
+                if (current != null && prev != null)
+                {
+                    prev.Next = current.Next;
+                    current = prev.Next;
+                }
+            }
+        }
+
+        public void DeleteAlternateNodesRecursive()
+        {
+            DeleteNodesAtDistanceRecursive(2);
+        }
+
+        public void DeleteNodesAtDistanceRecursive(int distance)
+        {
+            SllNode<T> current = Head;
+            DeleteNodesAtDistanceRecursiveInternalUtil(current,distance);
+        }
+
+        private void DeleteNodesAtDistanceRecursiveInternalUtil(SllNode<T> currentHead, int distance)
+        {
+            if (currentHead == null)
+                return;
+
+            SllNode<T> prev = null;
+            //Skip distance nodes
+            for (int i = 1; i < distance; i++)
+            {
+                prev = currentHead;
+                currentHead = currentHead.Next;
+            }
+
+            if (currentHead != null && prev != null)
+            {
+                prev.Next = currentHead.Next;
+                currentHead = currentHead.Next;
+            }
+            DeleteNodesAtDistanceRecursiveInternalUtil(currentHead,distance);
         }
 
         public int GetCount()
@@ -91,6 +140,7 @@ namespace LinkedList
             SllNode<T> otherCurrent = otherList.Head;
 
             SllNode<T> result = null;
+            SllNode<T> resultHead = null;
 
             while (thisCurrent != null && otherCurrent != null)
             {
@@ -98,7 +148,8 @@ namespace LinkedList
                 {
                     if(result==null)
                     {
-                        result = new SllNode<T>(thisCurrent.Data);
+                        resultHead = new SllNode<T>(thisCurrent.Data);
+                        result = resultHead;
                     }
                     else
                     {
@@ -117,7 +168,7 @@ namespace LinkedList
                     otherCurrent = otherCurrent.Next;
                 }
             }
-            return new SinglyLinkedList<T>(result);
+            return new SinglyLinkedList<T>(resultHead);
         }
 
         public bool areIdenticalRecursive(SinglyLinkedList<T> otherList)
