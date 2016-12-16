@@ -37,6 +37,39 @@ namespace LinkedList
             Head = newNode;
         }
 
+        public void PushToHead(SllNode<T> newNode)
+        {
+            //Append whole list behind new node
+            newNode.Next = Head;
+
+            //Make new node as head of the list
+            Head = newNode;
+        }
+
+        public void AlternateSplitOfNodes(out SinglyLinkedList<T> firstList, out SinglyLinkedList<T> secondList)
+        {
+            SllNode<T> current = this.Head;
+            SllNode<T> nextNode = null;
+            firstList = new SinglyLinkedList<T>();
+            secondList = new SinglyLinkedList<T>();
+
+            while (current!=null)
+            {
+                nextNode = current.Next;
+                firstList.PushToHead(current);
+                current = nextNode;
+                if(current!=null)
+                {
+                    nextNode = current.Next;
+                    secondList.PushToHead(current);
+                    current = nextNode;
+                }
+            }
+
+            firstList.ReverseList();
+            secondList.ReverseList();
+        }
+
         public void DeleteAlternateNodes()
         {
             DeleteNodesAtDistance(2);

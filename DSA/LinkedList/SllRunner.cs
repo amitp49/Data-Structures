@@ -21,7 +21,19 @@ namespace LinkedList
 
             sLinkedList.Print();
 
-            sLinkedList.DeleteAlternateNodes();
+            SinglyLinkedList<int> firstList = new SinglyLinkedList<int>();
+            SinglyLinkedList<int> secondList = new SinglyLinkedList<int>();
+
+            //Split original list into two nodes, dont allocate new list nodes
+            //sLinkedList.AlternateSplitOfNodes(out firstList,out secondList);
+
+            firstList.Print();
+            secondList.Print();
+
+            //sLinkedList.DeleteAlternateNodes();
+            //sLinkedList.DeleteNodesAtDistanceRecursive(3);
+            //sLinkedList.DeleteAlternateNodesRecursive();
+            sLinkedList.DeleteNodesAtDistanceRecursive(3);
             sLinkedList.Print();
 
 
