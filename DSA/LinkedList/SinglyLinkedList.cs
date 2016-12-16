@@ -118,6 +118,8 @@ namespace LinkedList
             for (int i = 1; i < distance; i++)
             {
                 prev = currentHead;
+                if (currentHead == null)
+                    return;
                 currentHead = currentHead.Next;
             }
 
@@ -311,6 +313,32 @@ namespace LinkedList
             }
 
             return slowPointer;
+        }
+
+        public void ReverseListWithGroupSizeRecursive(int size)
+        {
+            this.Head = ReverseListWithGroupSizeRecursiveInternalUtil(this.Head,size);
+        }
+        private SllNode<T> ReverseListWithGroupSizeRecursiveInternalUtil(SllNode<T> currentHead, int size)
+        {
+            if (currentHead == null)
+                return null;
+
+            SllNode<T> current = currentHead, prev = null, next = null;
+            SllNode<T> newHead = null;
+            SllNode<T> passedHead = currentHead;
+
+            for (int i = 0; current!=null && i < size; i++)
+            {
+                next = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = next;
+            }
+
+            newHead = prev;
+            passedHead.Next = ReverseListWithGroupSizeRecursiveInternalUtil(current, size);
+            return newHead;
         }
 
         public void ReverseList()

@@ -12,6 +12,8 @@ namespace LinkedList
         public void Run()
         {
             SinglyLinkedList<int> sLinkedList = new SinglyLinkedList<int>();
+            sLinkedList.PushToHead(7);
+
             sLinkedList.PushToHead(6);
             sLinkedList.PushToHead(5);
             sLinkedList.PushToHead(4);
@@ -20,15 +22,15 @@ namespace LinkedList
             sLinkedList.PushToHead(1);
 
             sLinkedList.Print();
-
-            SinglyLinkedList<int> firstList = new SinglyLinkedList<int>();
-            SinglyLinkedList<int> secondList = new SinglyLinkedList<int>();
+            sLinkedList.ReverseListWithGroupSizeRecursive(3);
+            sLinkedList.Print();
 
             //Split original list into two nodes, dont allocate new list nodes
+            //SinglyLinkedList<int> firstList = new SinglyLinkedList<int>();
+            //SinglyLinkedList<int> secondList = new SinglyLinkedList<int>();
             //sLinkedList.AlternateSplitOfNodes(out firstList,out secondList);
-
-            firstList.Print();
-            secondList.Print();
+            //firstList.Print();
+            //secondList.Print();
 
             //sLinkedList.DeleteAlternateNodes();
             //sLinkedList.DeleteNodesAtDistanceRecursive(3);
