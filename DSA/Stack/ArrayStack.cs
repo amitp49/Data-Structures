@@ -66,7 +66,7 @@ namespace Stacks
         }
     
         
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             for (int i = this.Count-1; i >=0; i--)
             {
@@ -74,12 +74,10 @@ namespace Stacks
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        System.Collections.IEnumerator IEnumerable.GetEnumerator()
         {
-            for (int i = this.Count - 1; i >= 0; i--)
-            {
-                yield return this.arr[i];
-            }
+            return this.GetEnumerator();
         }
+
     }
 }

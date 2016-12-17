@@ -22,6 +22,18 @@ namespace Stacks
                 Console.WriteLine("Item:" + item);
             }
 
+            Console.WriteLine("---------");
+            SllStack<int> sllStack = new SllStack<int>(); //no need of any capacity
+            sllStack.Push(2);
+            sllStack.Push(5);
+            sllStack.Push(1);
+            sllStack.Push(6);
+
+            foreach (var item in sllStack)
+            {
+                Console.WriteLine("Item:" + item);
+            }
+
             Console.ReadKey();
         }
     }

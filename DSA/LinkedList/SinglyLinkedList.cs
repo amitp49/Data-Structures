@@ -276,16 +276,59 @@ namespace LinkedList
             return null; // not found, index > length of sll
         }
 
-        public void DeleteNode(SllNode<T> node)
+        public SllNode<T> DeleteHeadNode()
         {
-            //Trick works only if its not last node
-            SllNode<T> nextNode = node.Next;
-            if(nextNode!=null)
+            return DeleteNode(this.Head);
+        }
+
+        public SllNode<T> DeleteNode(SllNode<T> node)
+        {
+            if(this.Head==node)
             {
-                node.Data = nextNode.Data;
-                node.Next = nextNode.Next;
-                nextNode.Next = null;//Garbage collector will delete it
+                SllNode<T> nextNode = this.Head.Next;
+                this.Head.Next = null;
+                this.Head = nextNode;
             }
+            else
+            {
+                SllNode<T> current = this.Head;
+                while (current.Next != node)
+                {
+                    current = current.Next;
+                }
+                current.Next = node.Next;
+            }
+            
+            return node;
+        }
+
+        public void DeleteNodeTricky(SllNode<T> node)
+        {
+            if(node.Next!=null)
+            {
+                //Trick works only if its not last node
+                SllNode<T> nextNode = node.Next;
+                if (nextNode != null)
+                {
+                    node.Data = nextNode.Data;
+                    node.Next = nextNode.Next;
+                    nextNode.Next = null;//Garbage collector will delete it
+                }
+            }
+            else if(node == this.Head)
+            {
+                this.Head = null;
+            }
+            else
+            {
+                SllNode<T> current = this.Head;
+                while (current.Next != node)
+                {
+                    current = current.Next;
+                }
+                current.Next = node.Next; //always null
+            }
+            
         }
 
         public SllNode<T> GetMiddleNode()

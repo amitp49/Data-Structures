@@ -47,6 +47,10 @@
       <Project>{5f720dfa-4f40-451e-a7b0-5ef6d3fecaae}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LinkedList\LinkedList.csproj">
+      <Project>{20e669c5-3151-49dd-bd24-d2320ffd2bc4}</Project>
+      <Name>LinkedList</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
