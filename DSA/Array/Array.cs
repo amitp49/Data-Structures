@@ -163,5 +163,15 @@ namespace Arrays
                 }
             }
         }
+
+        public int FindOddOccuranceNumberFromEvenArray()
+        {
+            int xorResult=0;
+            for (int i = 0; i < this.size; i++)
+            {
+                xorResult = xorResult ^ Convert.ToInt32(this.Arr[i]);
+            }
+            return xorResult;
+        }
     }
 }

@@ -22,6 +22,13 @@ namespace Arrays
             myArray.PrintElementsHavingSumAsUsingDictionary(sum);
 
             Console.WriteLine("Majority element : " +  myArray.FindMajorityElement());
+
+            MyArray<int> myArray2 = new MyArray<int>(9)
+            {
+                Arr = new int[] { 5,5,2,2,2,2,6,6,6 }
+            };
+            Console.WriteLine("Odd occurance from array where all other are even is:" + myArray2.FindOddOccuranceNumberFromEvenArray());
+
             Console.ReadLine();
 
             
