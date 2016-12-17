@@ -164,6 +164,13 @@ namespace Arrays
             }
         }
 
+        public void LeftRotate(int d)
+        {
+            Reverse(0, d-1);
+            Reverse(d, this.size-1);
+            Reverse(0, this.size-1);
+        }
+
         public int FindOddOccuranceNumberFromEvenArray()
         {
             int xorResult=0;
@@ -172,6 +179,30 @@ namespace Arrays
                 xorResult = xorResult ^ Convert.ToInt32(this.Arr[i]);
             }
             return xorResult;
+        }
+
+        public void Reverse(int start, int end)
+        {
+            this.Reverse(this.Arr,start,end);
+        }
+
+        private void Reverse(T[] arr,int start, int end)
+        {
+            for (int i = start,j=end; i < j; i++,j--)
+            {
+                T temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        public void Print()
+        {
+            for (int i = 0; i < this.size; i++)
+            {
+                Console.Write(this.Arr[i] + ", ");
+            }
+            Console.WriteLine();
         }
     }
 }

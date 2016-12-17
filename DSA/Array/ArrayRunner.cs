@@ -29,6 +29,9 @@ namespace Arrays
             };
             Console.WriteLine("Odd occurance from array where all other are even is:" + myArray2.FindOddOccuranceNumberFromEvenArray());
 
+            myArray2.LeftRotate(3);
+            myArray2.Print();
+
             Console.ReadLine();
 
             
