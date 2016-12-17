@@ -9,8 +9,15 @@ namespace Arrays
     public class MyArray<T> where T : IComparable
     {
         private int size;
-        
+
+
         public T[] Arr { get; set; }
+
+        public MyArray()
+        {
+            this.size = 0;
+            this.Arr = null;
+        }
 
         public MyArray(int size)
         {
@@ -43,6 +50,85 @@ namespace Arrays
             {
                 if(Arr[i].CompareTo(another[i]) >= 0)
                     Console.WriteLine(Arr[i] + ",");
+            }
+        }
+
+        public T FindMajorityElement()
+        {
+            //Element which occurs > n/2 times
+
+            //Find possible candidate
+            T element = FindPossibleMajorityElement();
+
+            //Confirm if possible candidate is actually majority element
+            bool confirmation = ConfirmMajorityElement(element);
+
+            if(confirmation==true)
+            {
+                return element;
+            }
+            return default(T);
+        }
+
+        private T FindPossibleMajorityElement()
+        {
+            int possibleMajorityElementIndex = 0; //Lets say first element is majority element
+            int count = 1; // Increase count as 1 because we have considered first element as majority
+
+            for (int i = 1; i < this.size; i++)
+            {
+                if(this.Arr[i].CompareTo(this.Arr[possibleMajorityElementIndex]) == 0)
+                {
+                    count++;
+                }
+                else
+                {
+                    count--;
+                }
+
+                //Critical : at any point if count drops to zero then possible majority candidate is out of race, and we will pick up new candidate
+                if(count==0)
+                {
+                    possibleMajorityElementIndex = i;
+                    count = 1;
+                }
+            }
+            return this.Arr[possibleMajorityElementIndex];
+        }
+
+        private bool ConfirmMajorityElement(T element)
+        {
+            int count = 0;
+            for (int i = 0; i < this.size; i++)
+            {
+                if(this.Arr[i].CompareTo(element) == 0)
+                {
+                    count++;
+                }
+            }
+
+            //check and confirm
+            return (count > this.size / 2);
+        }
+
+        public void PrintElementsHavingSumAsUsingDictionary(int sum)
+        {
+            Dictionary<int, bool> dictionary = new Dictionary<int, bool>();
+
+            for (int i = 0; i < this.size; i++)
+            {
+                if (dictionary.ContainsKey(Convert.ToInt32(this.Arr[i])) == false)
+                    dictionary.Add(Convert.ToInt32(this.Arr[i]),true);
+            }
+
+            for (int i = 0; i < this.size; i++)
+            {
+                if(dictionary.ContainsKey(sum - Convert.ToInt32(this.Arr[i])))
+                {
+                    Console.WriteLine("Pair:" + (sum - Convert.ToInt32(this.Arr[i])) + " + " + Convert.ToInt32(this.Arr[i]) + " = " + sum);
+                    //remove key from dictionary, so that reverse duplicate pair does not print again
+                    dictionary.Remove(Convert.ToInt32(this.Arr[i]));
+                }
             }
         }
 

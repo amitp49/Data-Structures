@@ -11,14 +11,17 @@ namespace Arrays
     {
         public void Run()
         {
-            MyArray<int> myArray = new MyArray<int>(8) 
+            MyArray<int> myArray = new MyArray<int>(16) 
             { 
-                Arr = new int[] {12,15,10,11,5,6,2,3} 
+                Arr = new int[] {12,15,10,11,5,6,2,3,2,2,2,2,2,2,2,2} 
             };
             myArray.PrintElementsWhichDoesntHaveAnyHigerOnTheirRight();
 
             int sum = 15;
-            myArray.PrintElementsHavingSumAs(sum);
+            //myArray.PrintElementsHavingSumAs(sum);
+            myArray.PrintElementsHavingSumAsUsingDictionary(sum);
+
+            Console.WriteLine("Majority element : " +  myArray.FindMajorityElement());
             Console.ReadLine();
 
             
