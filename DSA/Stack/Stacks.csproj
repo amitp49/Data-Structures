@@ -42,6 +42,7 @@
     <Compile Include="ArrayStack.cs" />
     <Compile Include="MyStack.cs" />
     <Compile Include="SllStack.cs" />
+    <Compile Include="SpecialStack.cs" />
     <Compile Include="StackAlgos.cs" />
     <Compile Include="StackRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

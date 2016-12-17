@@ -35,6 +35,19 @@ namespace Stacks
             }
             Console.WriteLine("---------");
 
+            SpecialStack<int> specialStack = new SpecialStack<int>(); //no need of any capacity
+            specialStack.Push(2);
+            specialStack.Push(5);
+            specialStack.Push(1);
+            specialStack.Push(6);
+
+            while (!specialStack.IsEmpty())
+            {
+                Console.WriteLine("Item:"+specialStack.Peek() + ", min:" + specialStack.GetMin() + ", max:" + specialStack.GetMax());
+                specialStack.Pop();
+            }
+            Console.WriteLine("---------");
+
             Console.WriteLine("Balanced: "  + StackAlgos.AreParenthesisBalanced("[(1*2)+{5+6}"));
             Console.WriteLine("---------");
 
