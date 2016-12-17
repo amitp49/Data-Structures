@@ -1,4 +1,4 @@
-﻿using Array;
+﻿using Arrays;
 using Interfaces;
 using LinkedList;
 using Queue;

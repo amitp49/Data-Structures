@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Array
+namespace Arrays
 {
     public class MyArray<T> where T : IComparable
     {
@@ -43,6 +43,38 @@ namespace Array
             {
                 if(Arr[i].CompareTo(another[i]) >= 0)
                     Console.WriteLine(Arr[i] + ",");
+            }
+        }
+
+        public void PrintElementsHavingSumAs(int sum)
+        {
+            //Make another copy if we need to modify it for this function purpose only
+            T[] anotherCopy = new T[this.size];
+            Array.Copy(this.Arr,anotherCopy,this.size);
+
+            //Sort given copy array
+            Array.Sort(anotherCopy);
+
+            //Take two indexes and find sum
+            int start = 0;
+            int end = this.size-1;
+
+            for (int i = start, j = end; i < j;)
+            {
+                if (Convert.ToInt32(anotherCopy[i]) + Convert.ToInt32(anotherCopy[j]) > sum)
+                {
+                    j--;
+                }
+                else if(Convert.ToInt32(anotherCopy[i]) + Convert.ToInt32(anotherCopy[j]) < sum)
+                {
+                    i++;
+                }
+                else // found sum
+                {
+                    Console.WriteLine("Pair:" + anotherCopy[i] + " + " + anotherCopy[j] + " = " + sum);
+                    i++;
+                    j--;
+                }
             }
         }
     }

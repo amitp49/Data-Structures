@@ -7,7 +7,7 @@
     <ProjectGuid>{5D882E20-A8EA-43CB-BBA6-B824BBE3360E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Array</RootNamespace>
+    <RootNamespace>Arrays</RootNamespace>
     <AssemblyName>Array</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

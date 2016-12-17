@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Array
+namespace Arrays
 {
     public class ArrayRunner : IRunner
     {
@@ -16,7 +16,12 @@ namespace Array
                 Arr = new int[] {12,15,10,11,5,6,2,3} 
             };
             myArray.PrintElementsWhichDoesntHaveAnyHigerOnTheirRight();
+
+            int sum = 15;
+            myArray.PrintElementsHavingSumAs(sum);
             Console.ReadLine();
+
+            
         }
     }
 }

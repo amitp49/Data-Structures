@@ -48,9 +48,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Array\Array.csproj">
+    <ProjectReference Include="..\Array\Arrays.csproj">
       <Project>{5d882e20-a8ea-43cb-bba6-b824bbe3360e}</Project>
-      <Name>Array</Name>
+      <Name>Arrays</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{5f720dfa-4f40-451e-a7b0-5ef6d3fecaae}</Project>
