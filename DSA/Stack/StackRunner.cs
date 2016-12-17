@@ -33,8 +33,19 @@ namespace Stacks
             {
                 Console.WriteLine("Item:" + item);
             }
+            Console.WriteLine("---------");
 
             Console.WriteLine("Balanced: "  + StackAlgos.AreParenthesisBalanced("[(1*2)+{5+6}"));
+            Console.WriteLine("---------");
+
+            StackAlgos.ReverseStackUsingStackOperationsOnly(arrayStack);
+            Console.WriteLine("After reverse");
+            foreach (var item in arrayStack)
+            {
+                Console.WriteLine("Item:" + item);
+            }
+            Console.WriteLine("---------");
+
             Console.ReadKey();
         }
     }

@@ -45,5 +45,34 @@ namespace Stacks
             //at the end nothing should be left out on stack
             return (myStack.Count == 0);
         }
+
+        public static void ReverseStackUsingStackOperationsOnly(MyStack<int> myStack)
+        {
+            RecursiveReverseInternalUtil(myStack);
+        }
+
+        private static void AddDataAtBottom(MyStack<int> myStack, int data)
+        {
+            if(myStack.IsEmpty())
+            {
+                myStack.Push(data);
+            }
+            else
+            {
+                int otherData = myStack.Pop();
+                AddDataAtBottom(myStack,data);
+                myStack.Push(otherData);
+            }
+        }
+
+        private static void RecursiveReverseInternalUtil(MyStack<int> myStack)
+        {
+            if(!myStack.IsEmpty())
+            {
+                int data = myStack.Pop();
+                RecursiveReverseInternalUtil(myStack);
+                AddDataAtBottom(myStack, data);
+            }
+        }
     }
 }
