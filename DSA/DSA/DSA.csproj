@@ -64,9 +64,9 @@
       <Project>{131a2c7b-7a75-4f77-ac9e-8c8e2c6014e7}</Project>
       <Name>Queue</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Stack\Stack.csproj">
+    <ProjectReference Include="..\Stack\Stacks.csproj">
       <Project>{b0b7994b-761f-41ab-8af6-487534eff02f}</Project>
-      <Name>Stack</Name>
+      <Name>Stacks</Name>
     </ProjectReference>
     <ProjectReference Include="..\String\String.csproj">
       <Project>{0dbdd2c9-41a0-4509-86b8-9813d28b8b61}</Project>

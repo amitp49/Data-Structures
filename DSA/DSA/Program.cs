@@ -2,7 +2,7 @@
 using Interfaces;
 using LinkedList;
 using Queue;
-using Stack;
+using Stacks;
 using String;
 using System;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace DSA
             queueRunner.Run();
 
             IRunner arrayRunner = new ArrayRunner();
-            arrayRunner.Run();
+            //arrayRunner.Run();
 
             IRunner stringRunner = new StringRunner();
             stringRunner.Run();
