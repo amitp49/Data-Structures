@@ -32,6 +32,13 @@ namespace Arrays
             myArray2.LeftRotate(3);
             myArray2.Print();
 
+            bool[,] knows = new bool[4,4] {
+                {false,false,false,false},
+                {false,false,false,false},
+                {false,false,false,false},
+                {false,false,false,false}
+            };
+            ArrayAlgos.PrintCelebrity(knows);
             Console.ReadLine();
 
             

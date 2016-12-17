@@ -24,13 +24,13 @@ namespace DSA
             //btRunner.Run();
 
             IRunner stackRunner = new StackRunner();
-            stackRunner.Run();
+            //stackRunner.Run();
 
             IRunner queueRunner = new QueueRunner();
             queueRunner.Run();
 
             IRunner arrayRunner = new ArrayRunner();
-            //arrayRunner.Run();
+            arrayRunner.Run();
 
             IRunner stringRunner = new StringRunner();
             stringRunner.Run();
