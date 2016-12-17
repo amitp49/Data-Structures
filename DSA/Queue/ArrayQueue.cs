@@ -43,6 +43,7 @@ namespace Queues
                 this.arr[this.rear] = data;
                 this.rear++;
             }
+            throw new Exception("Queue is full");
         }
 
         public T DeQueue()
