@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Stacks
 {
-    public class SllStack<T> : IEnumerable<T> where T: IComparable
+    public class SllStack<T> : MyStack<T>, IEnumerable<T> where T: IComparable
     {
         private SinglyLinkedList<T> linkedList = new SinglyLinkedList<T>();
 
@@ -44,6 +44,10 @@ namespace Stacks
             return default(T);
         }
 
+        public bool IsEmpty()
+        {
+            return (Count == 0);
+        }
 
         public IEnumerator<T> GetEnumerator()
         {

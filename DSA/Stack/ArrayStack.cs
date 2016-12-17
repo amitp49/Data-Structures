@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stacks
 {
-    public class ArrayStack<T>: IEnumerable<T> where T: IComparable
+    public class ArrayStack<T> : MyStack<T>, IEnumerable<T> where T : IComparable
     {
         private T[] arr;
         private int capacity;
@@ -49,15 +49,15 @@ namespace Stacks
             return default(T);
         }
 
+        public bool IsEmpty()
+        {
+            return (Count == 0);
+        }
+
         public void ClearAll()
         {
             this.arr = new T[this.capacity];
             this.Count = 0;
-        }
-
-        private bool IsEmpty()
-        {
-            return (this.Count == 0);
         }
 
         private bool IsFull()

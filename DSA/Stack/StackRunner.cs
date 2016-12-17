@@ -34,6 +34,7 @@ namespace Stacks
                 Console.WriteLine("Item:" + item);
             }
 
+            Console.WriteLine("Balanced: "  + StackAlgos.AreParenthesisBalanced("[(1*2)+{5+6}"));
             Console.ReadKey();
         }
     }
