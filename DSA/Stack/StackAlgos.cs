@@ -74,5 +74,40 @@ namespace Stacks
                 AddDataAtBottom(myStack, data);
             }
         }
+
+        public static void PrintNextGreaterElementInRightSideForAll(int[] arr)
+        {
+            if (arr.Length == 0)
+                return;
+
+            MyStack<int> myStack = new ArrayStack<int>(arr.Length);
+            myStack.Push(arr[0]);
+            for (int i = 1; i < arr.Length; i++)
+            {
+                int currentItem = arr[i];
+                if(!myStack.IsEmpty())
+                {
+                    int peekedItem = myStack.Peek();
+                    while(currentItem > peekedItem) //we found greater for some item
+                    {
+                        Console.WriteLine("For item " + peekedItem + ", next greater is: "+ currentItem);
+                        myStack.Pop(); //Remove that processed item
+
+                        if (!myStack.IsEmpty())
+                            peekedItem = myStack.Peek(); //there can be many small than current item in stack
+                        else
+                            break;
+                    }
+                }
+                //Add current item to stack
+                myStack.Push(currentItem);
+            }
+
+            //Once we are done with this, all items in stack doesn't have greater on right.
+            while (!myStack.IsEmpty())
+            {
+                Console.WriteLine("For item " + myStack.Pop() + ", next greater is: " + "NOT-FOUND");
+            }
+        }
     }
 }

@@ -46,6 +46,9 @@ namespace Stacks
             }
             Console.WriteLine("---------");
 
+            StackAlgos.PrintNextGreaterElementInRightSideForAll(new int[] { 11,13,21,3 });
+            Console.WriteLine("---------");
+
             Console.ReadKey();
         }
     }
