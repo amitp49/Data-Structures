@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayQueue.cs" />
+    <Compile Include="CircularArrayQueue.cs" />
     <Compile Include="MyQueue.cs" />
     <Compile Include="QueueRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

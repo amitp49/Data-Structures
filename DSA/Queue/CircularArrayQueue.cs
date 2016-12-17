@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Queues
 {
-    public class ArrayQueue<T> : MyQueue<T> where T: IComparable
+    public class CircularArrayQueue<T> : MyQueue<T> where T: IComparable
     {
         private T[] arr;
         private int capacity;
@@ -15,10 +15,20 @@ namespace Queues
 
         public int Count
         {
-            get { return rear - front; }
+            get 
+            { 
+                if(rear>=front)
+                {
+                    return (rear - front); 
+                }
+                else
+                {
+                    return (this.capacity - front) + (rear);
+                }
+            }
         }
 
-        public ArrayQueue(int capacity)
+        public CircularArrayQueue(int capacity)
         {
             this.capacity = capacity;
             this.arr = new T[capacity];
@@ -33,7 +43,7 @@ namespace Queues
 
         public bool IsFull()
         {
-            return (rear >= this.capacity);
+            return (this.Count == (this.capacity-1));
         }
 
         public void EnQueue(T data)
@@ -41,7 +51,7 @@ namespace Queues
             if(!this.IsFull())
             {
                 this.arr[this.rear] = data;
-                this.rear++;
+                this.rear = (this.rear + 1) % this.capacity;
                 return;
             }
             throw new Exception("Queue is full");
@@ -52,7 +62,7 @@ namespace Queues
             if(!this.IsEmpty())
             {
                 T data = this.arr[front];
-                this.front++;
+                this.front = (this.front + 1) % this.capacity;
                 return data;
             }
             return default(T);

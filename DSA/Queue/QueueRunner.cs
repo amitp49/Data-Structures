@@ -17,7 +17,6 @@ namespace Queues
             myQueue.EnQueue(3);
             myQueue.EnQueue(4);
             myQueue.EnQueue(5);
-            myQueue.EnQueue(6);
 
             while (!myQueue.IsEmpty())
             {
@@ -37,6 +36,24 @@ namespace Queues
             {
                 Console.WriteLine("Item:" + sllQueue.DeQueue());
             }
+            Console.WriteLine("-------");
+
+            MyQueue<int> crQueue = new CircularArrayQueue<int>(5);
+            crQueue.EnQueue(1);
+            crQueue.EnQueue(2);
+            crQueue.EnQueue(3);
+            crQueue.EnQueue(4);
+            crQueue.DeQueue();
+            crQueue.EnQueue(5);
+            crQueue.DeQueue();
+            crQueue.EnQueue(6);
+
+            while (!crQueue.IsEmpty())
+            {
+                Console.WriteLine("Item:" + crQueue.DeQueue());
+            }
+            Console.WriteLine("-------");
+
             Console.ReadKey();
         }
     }
