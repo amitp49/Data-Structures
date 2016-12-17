@@ -7,7 +7,7 @@
     <ProjectGuid>{131A2C7B-7A75-4F77-AC9E-8C8E2C6014E7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Queue</RootNamespace>
+    <RootNamespace>Queues</RootNamespace>
     <AssemblyName>Queue</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayQueue.cs" />
+    <Compile Include="MyQueue.cs" />
     <Compile Include="QueueRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

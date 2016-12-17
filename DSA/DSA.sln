@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree", "Tree\Tree.csproj", "{D3FBEDAE-0C9F-4162-87DA-8BD3BCFC0046}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queue", "Queue\Queue.csproj", "{131A2C7B-7A75-4F77-AC9E-8C8E2C6014E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queues", "Queue\Queues.csproj", "{131A2C7B-7A75-4F77-AC9E-8C8E2C6014E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stacks", "Stack\Stacks.csproj", "{B0B7994B-761F-41AB-8AF6-487534EFF02F}"
 EndProject

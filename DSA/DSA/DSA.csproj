@@ -60,9 +60,9 @@
       <Project>{20e669c5-3151-49dd-bd24-d2320ffd2bc4}</Project>
       <Name>LinkedList</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Queue\Queue.csproj">
+    <ProjectReference Include="..\Queue\Queues.csproj">
       <Project>{131a2c7b-7a75-4f77-ac9e-8c8e2c6014e7}</Project>
-      <Name>Queue</Name>
+      <Name>Queues</Name>
     </ProjectReference>
     <ProjectReference Include="..\Stack\Stacks.csproj">
       <Project>{b0b7994b-761f-41ab-8af6-487534eff02f}</Project>
