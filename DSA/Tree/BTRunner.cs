@@ -51,6 +51,8 @@ namespace Tree
             Console.WriteLine("Size of tree:" + btree.GetSizeOfTree());
 
             Console.WriteLine("Are identical: " + btree.AreIdentical(btreeOther));
+
+            Console.WriteLine("Max depth of tree: " + btree.MaxDepth());
             Console.ReadLine();
         }
     }

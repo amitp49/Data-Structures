@@ -48,6 +48,22 @@ namespace Tree
                 );
         }
 
+        public int MaxDepth()
+        {
+            return MaxDepthInternalRecursiveUtil(this.Root);
+        }
+
+        private int MaxDepthInternalRecursiveUtil(BinaryTreeNode<T> binaryTreeNode)
+        {
+            if (binaryTreeNode == null)
+                return 0;
+
+            int leftTreeDepth = MaxDepthInternalRecursiveUtil(binaryTreeNode.Left);
+            int rightTreeDepth = MaxDepthInternalRecursiveUtil(binaryTreeNode.Right);
+
+            return 1+ Math.Max(leftTreeDepth, rightTreeDepth);
+        }
+
         public bool AreIdentical(BinaryTree<T> other)
         {
             return AreIdenticalInternalRecursiveUtil(this.Root,other.Root);
