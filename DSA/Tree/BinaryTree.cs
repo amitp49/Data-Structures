@@ -132,9 +132,46 @@ namespace Tree
             Console.WriteLine();
         }
 
+        public void PreOrderTraversalIterative()
+        {
+            Stack<BinaryTreeNode<T>> myStack = new Stack<BinaryTreeNode<T>>();
+
+            List<BinaryTreeNode<T>> listOfNodes = new List<BinaryTreeNode<T>>();
+
+            myStack.Push(this.Root);
+
+            while (myStack.Count > 0)
+            {
+                BinaryTreeNode<T> current = myStack.Peek();
+                listOfNodes.Add(current);
+                myStack.Pop();
+
+                if (current.Right != null)
+                {
+                    myStack.Push(current.Right);
+                }
+                if (current.Left != null)
+                {
+                    myStack.Push(current.Left);
+                }
+            }
+
+            //Print list
+            foreach (var item in listOfNodes)
+            {
+                Console.Write(item.Data + ", ");
+            }
+            Console.WriteLine();
+        }
+
         private static bool IsLeaf(BinaryTreeNode<T> current)
         {
             return (current.Right == null && current.Left == null);
+        }
+
+        public void InorderTraversalIterative()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -24,11 +24,13 @@ namespace Tree
 
             btree.Root.Right.Right.Right.Right = new BinaryTreeNode<int>(8);
 
-            btree.InorderTraversalRecursive();
-            btree.PreorderTraversalRecursive();
             btree.PostorderTraversalRecursive();
+            btree.PreorderTraversalRecursive();
+            btree.InorderTraversalRecursive();
 
             btree.PostOrderTraversalIterative();
+            btree.PreOrderTraversalIterative();
+            btree.InorderTraversalIterative();
             Console.ReadLine();
         }
     }
