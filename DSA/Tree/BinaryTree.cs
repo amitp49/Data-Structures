@@ -93,6 +93,34 @@ namespace Tree
             return 1+ Math.Max(leftTreeDepth, rightTreeDepth);
         }
 
+        public BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
+        {
+            return FindLowestCommonAncestorInternalUtil(this.Root,data1,data2);
+        }
+
+        private BinaryTreeNode<T> FindLowestCommonAncestorInternalUtil(BinaryTreeNode<T> currentRoot, T data1, T data2)
+        {
+            if (currentRoot == null)
+                return null;
+
+            if (currentRoot.Data.CompareTo(data1) == 0 || currentRoot.Data.CompareTo(data2) == 0)
+                return currentRoot;
+
+            BinaryTreeNode<T> nodeFoundOnLeft = FindLowestCommonAncestorInternalUtil(currentRoot.Left,data1,data2);
+            BinaryTreeNode<T> nodeFoundOnRight = FindLowestCommonAncestorInternalUtil(currentRoot.Right,data1,data2);
+
+            if (nodeFoundOnLeft != null && nodeFoundOnRight != null)
+                return currentRoot;
+
+            if (nodeFoundOnLeft != null)
+                return nodeFoundOnLeft;
+
+            if (nodeFoundOnRight != null)
+                return nodeFoundOnRight;
+
+            return null;
+        }
+
         public void PrintRootToLeafPaths()
         {
             T[] arr = new T[this.MaxDepth()]; // to get max length of path

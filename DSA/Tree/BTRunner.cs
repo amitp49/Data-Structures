@@ -62,6 +62,8 @@ namespace Tree
             //btree.PrintLevelOrderTranversal();
 
             btree.PrintRootToLeafPaths();
+
+            Console.WriteLine("LCA for binary tree: " + btree.FindLowestCommonAncestor(7, 6).Data);
             Console.ReadLine();
         }
     }
