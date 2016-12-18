@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayStack.cs" />
+    <Compile Include="DllStack.cs" />
     <Compile Include="MyStack.cs" />
     <Compile Include="SllStack.cs" />
     <Compile Include="SpecialStack.cs" />

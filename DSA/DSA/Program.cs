@@ -17,8 +17,8 @@ namespace DSA
     {
         static void Main(string[] args)
         {
-            IRunner sllRunner = new SllRunner();
-            //sllRunner.Run();
+            IRunner linkedListRunner = new LinkedListRunner();
+            //linkedListRunner.Run();
 
             IRunner btRunner = new BTRunner();
             //btRunner.Run();

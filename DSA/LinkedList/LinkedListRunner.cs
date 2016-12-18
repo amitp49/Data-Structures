@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class SllRunner : IRunner
+    public class LinkedListRunner : IRunner
     {
         public void Run()
         {
+            
             SinglyLinkedList<int> sLinkedList = new SinglyLinkedList<int>();
             sLinkedList.PushToHead(7);
 
@@ -83,6 +84,16 @@ namespace LinkedList
             sLinkedList.Print();
             Console.WriteLine("Middle node: " + sLinkedList.GetMiddleNode().Data);
 
+
+            Console.WriteLine("------Doubly linked list--------");
+
+            DoublyLinkedList<int> doublyLinkedList = new DoublyLinkedList<int>();
+            doublyLinkedList.PushToHead(1);
+            doublyLinkedList.PushToHead(2);
+            doublyLinkedList.PushToHead(3);
+            doublyLinkedList.PushToHead(4);
+            doublyLinkedList.PushToHead(5);
+            doublyLinkedList.Print();
             Console.ReadLine();
         }
     }

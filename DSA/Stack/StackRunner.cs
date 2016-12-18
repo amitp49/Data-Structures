@@ -33,6 +33,18 @@ namespace Stacks
             {
                 Console.WriteLine("Item:" + item);
             }
+
+            Console.WriteLine("---------");
+            DllStack<int> dllStack = new DllStack<int>(); //no need of any capacity
+            dllStack.Push(1);
+            dllStack.Push(2);
+            dllStack.Push(3);
+            dllStack.Push(4);
+
+            foreach (var item in dllStack)
+            {
+                Console.WriteLine("Item:" + item);
+            }
             Console.WriteLine("---------");
 
             SpecialStack<int> specialStack = new SpecialStack<int>(); //no need of any capacity

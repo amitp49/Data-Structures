@@ -25,6 +25,18 @@ namespace LinkedList
             this.Head = someHeadOfOtherList;
         }
 
+        public int GetCount()
+        {
+            SllNode<T> current = Head;
+            int count = 0;
+            while (current != null)
+            {
+                count++;
+                current = current.Next;
+            }
+            return count;
+        }
+
         public void PushToHead(T data)
         {
             //Allocate new node
@@ -44,6 +56,100 @@ namespace LinkedList
 
             //Make new node as head of the list
             Head = newNode;
+        }
+
+        public void Print()
+        {
+            SllNode<T> current = Head;
+            while (current != null)
+            {
+                Console.Write(current.Data);
+                Console.Write("->");
+                current = current.Next;
+            }
+            Console.WriteLine();
+        }
+
+        public SllNode<T> DeleteHeadNode()
+        {
+            return DeleteNode(this.Head);
+        }
+
+        public SllNode<T> DeleteNode(SllNode<T> node)
+        {
+            if (this.Head == node)
+            {
+                SllNode<T> nextNode = this.Head.Next;
+                this.Head.Next = null;
+                this.Head = nextNode;
+            }
+            else
+            {
+                SllNode<T> current = this.Head;
+                while (current.Next != node)
+                {
+                    current = current.Next;
+                }
+                current.Next = node.Next;
+            }
+
+            return node;
+        }
+
+        public void DeleteNodeTricky(SllNode<T> node)
+        {
+            if (node.Next != null)
+            {
+                //Trick works only if its not last node
+                SllNode<T> nextNode = node.Next;
+                if (nextNode != null)
+                {
+                    node.Data = nextNode.Data;
+                    node.Next = nextNode.Next;
+                    nextNode.Next = null;//Garbage collector will delete it
+                }
+            }
+            else if (node == this.Head)
+            {
+                this.Head = null;
+            }
+            else
+            {
+                SllNode<T> current = this.Head;
+                while (current.Next != node)
+                {
+                    current = current.Next;
+                }
+                current.Next = node.Next; //always null
+            }
+
+        }
+
+        public SllNode<T> GetMiddleNode()
+        {
+            SllNode<T> prevToMiddleNode = null;
+            return this.GetMiddleNode(out prevToMiddleNode);
+        }
+
+        public SllNode<T> GetMiddleNode(out SllNode<T> prevToMiddleNode)
+        {
+            return GetMiddleNode(this.Head, out prevToMiddleNode);
+        }
+
+        private SllNode<T> GetMiddleNode(SllNode<T> startOfList, out SllNode<T> prevToMiddleNode)
+        {
+            SllNode<T> fastPointer = startOfList;
+            SllNode<T> slowPointer = startOfList;
+            prevToMiddleNode = null;
+
+            while (fastPointer != null && fastPointer.Next != null && fastPointer.Next.Next != null)
+            {
+                fastPointer = fastPointer.Next.Next;
+                prevToMiddleNode = slowPointer;
+                slowPointer = slowPointer.Next;
+            }
+
+            return slowPointer;
         }
 
         public void AlternateSplitOfNodes(out SinglyLinkedList<T> firstList, out SinglyLinkedList<T> secondList)
@@ -131,17 +237,7 @@ namespace LinkedList
             DeleteNodesAtDistanceRecursiveInternalUtil(currentHead,distance);
         }
 
-        public int GetCount()
-        {
-            SllNode<T> current = Head;
-            int count = 0;
-            while(current!=null)
-            {
-                count++;
-                current = current.Next;
-            }
-            return count;
-        }
+        
         public SinglyLinkedList<T> SortedIntersectionRecursive(SinglyLinkedList<T> otherList)
         {
             SllNode<T> mergedListHead = SortedIntersectionRecursiveInternalUtil(this.Head,otherList.Head);
@@ -276,87 +372,6 @@ namespace LinkedList
             return null; // not found, index > length of sll
         }
 
-        public SllNode<T> DeleteHeadNode()
-        {
-            return DeleteNode(this.Head);
-        }
-
-        public SllNode<T> DeleteNode(SllNode<T> node)
-        {
-            if(this.Head==node)
-            {
-                SllNode<T> nextNode = this.Head.Next;
-                this.Head.Next = null;
-                this.Head = nextNode;
-            }
-            else
-            {
-                SllNode<T> current = this.Head;
-                while (current.Next != node)
-                {
-                    current = current.Next;
-                }
-                current.Next = node.Next;
-            }
-            
-            return node;
-        }
-
-        public void DeleteNodeTricky(SllNode<T> node)
-        {
-            if(node.Next!=null)
-            {
-                //Trick works only if its not last node
-                SllNode<T> nextNode = node.Next;
-                if (nextNode != null)
-                {
-                    node.Data = nextNode.Data;
-                    node.Next = nextNode.Next;
-                    nextNode.Next = null;//Garbage collector will delete it
-                }
-            }
-            else if(node == this.Head)
-            {
-                this.Head = null;
-            }
-            else
-            {
-                SllNode<T> current = this.Head;
-                while (current.Next != node)
-                {
-                    current = current.Next;
-                }
-                current.Next = node.Next; //always null
-            }
-            
-        }
-
-        public SllNode<T> GetMiddleNode()
-        {
-            SllNode<T> prevToMiddleNode = null;
-            return this.GetMiddleNode(out prevToMiddleNode);
-        }
-
-        public SllNode<T> GetMiddleNode(out SllNode<T> prevToMiddleNode)
-        {
-            return GetMiddleNode(this.Head, out prevToMiddleNode);
-        }
-
-        private SllNode<T> GetMiddleNode(SllNode<T> startOfList,out SllNode<T> prevToMiddleNode)
-        {
-            SllNode<T> fastPointer = startOfList;
-            SllNode<T> slowPointer = startOfList;
-            prevToMiddleNode = null;
-
-            while (fastPointer != null && fastPointer.Next != null && fastPointer.Next.Next != null)
-            {
-                fastPointer = fastPointer.Next.Next;
-                prevToMiddleNode = slowPointer;
-                slowPointer = slowPointer.Next;
-            }
-
-            return slowPointer;
-        }
 
         public void ReverseListWithGroupSizeRecursive(int size)
         {
@@ -744,17 +759,6 @@ namespace LinkedList
             inner.Data = tempData;
         }
 
-        public void Print()
-        {
-            SllNode<T> current = Head;
-            while(current!=null)
-            {
-                Console.Write(current.Data);
-                Console.Write("->");
-                current = current.Next;
-            }
-            Console.WriteLine();
-        }
 
         public bool IsSameDataList(SinglyLinkedList<T> otherList)
         {
