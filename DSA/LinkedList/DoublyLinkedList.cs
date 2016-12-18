@@ -34,6 +34,8 @@ namespace LinkedList
             newNode.Next = Head;
             newNode.Prev = null;
 
+            if(Head!=null)
+                Head.Prev = newNode;
             //Make new node as head of the list
             Head = newNode;
         }
@@ -42,6 +44,9 @@ namespace LinkedList
         {
             //Append whole list behind new node
             newNode.Next = Head;
+
+            if (Head != null)
+                Head.Prev = newNode;
 
             //Make new node as head of the list
             Head = newNode;

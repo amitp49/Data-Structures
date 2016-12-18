@@ -37,9 +37,13 @@ namespace Stacks
             Console.WriteLine("---------");
             DllStack<int> dllStack = new DllStack<int>(); //no need of any capacity
             dllStack.Push(1);
+            Console.WriteLine("Middle:"+dllStack.GetMiddleNodeData());
             dllStack.Push(2);
+            Console.WriteLine("Middle:" + dllStack.GetMiddleNodeData());
             dllStack.Push(3);
+            Console.WriteLine("Middle:" + dllStack.GetMiddleNodeData());
             dllStack.Push(4);
+            Console.WriteLine("Middle:" + dllStack.GetMiddleNodeData());
 
             foreach (var item in dllStack)
             {
