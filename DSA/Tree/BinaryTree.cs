@@ -93,6 +93,40 @@ namespace Tree
             return 1+ Math.Max(leftTreeDepth, rightTreeDepth);
         }
 
+        public void PrintRootToLeafPaths()
+        {
+            T[] arr = new T[this.MaxDepth()]; // to get max length of path
+            PrintRootToLeafPathsInternalUtil(this.Root,arr, 0);
+        }
+
+        private void PrintRootToLeafPathsInternalUtil(BinaryTreeNode<T> currentRoot,T[] arr, int currentDepth)
+        {
+            if (currentRoot == null)
+                return;
+
+            arr[currentDepth] = currentRoot.Data;
+
+            if(IsLeaf(currentRoot))
+            {
+                //Print path accumlated till now
+                PrintPath(arr, currentDepth);
+            }
+            else
+            {
+                PrintRootToLeafPathsInternalUtil(currentRoot.Left, arr, currentDepth + 1);
+                PrintRootToLeafPathsInternalUtil(currentRoot.Right, arr, currentDepth + 1);
+            }
+        }
+
+        private void PrintPath(T[] arr, int length)
+        {
+            for (int i = 0; i <= length; i++)
+            {
+                Console.Write(arr[i] + ", ");
+            }
+            Console.WriteLine();
+        }
+
         public void MirrorTree()
         {
             MirrorTreeInternalUtil(this.Root);

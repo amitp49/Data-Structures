@@ -17,6 +17,7 @@ namespace Tree
             btree.Root.Right = new BinaryTreeNode<int>(3);
 
             btree.Root.Left.Left = new BinaryTreeNode<int>(4);
+
             btree.Root.Right.Right = new BinaryTreeNode<int>(5);
 
             btree.Root.Left.Left.Right = new BinaryTreeNode<int>(6);
@@ -57,10 +58,10 @@ namespace Tree
             Console.WriteLine("Tree contains 5: " + btree.Contains(5));
             Console.WriteLine("Tree contains 10: " + btree.Contains(10));
 
-            btree.MirrorTree();
+            //btree.MirrorTree();
+            //btree.PrintLevelOrderTranversal();
 
-            btree.PrintLevelOrderTranversal();
-
+            btree.PrintRootToLeafPaths();
             Console.ReadLine();
         }
     }
