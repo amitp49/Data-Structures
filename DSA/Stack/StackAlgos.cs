@@ -109,5 +109,44 @@ namespace Stacks
                 Console.WriteLine("For item " + myStack.Pop() + ", next greater is: " + "NOT-FOUND");
             }
         }
+
+        /// <summary>
+        /// This prints greater element on left side. If no grater found, then Ith index is its span
+        /// </summary>
+        public static void PrintStockSpan(int[] arr)
+        {
+            if (arr.Length == 0)
+                return;
+
+            MyStack<int> myStack = new SllStack<int>();
+            myStack.Push(arr.Length-1); // Pushing index, not the element
+            for (int i = arr.Length-2; i >=0; i--)
+            {
+                int currentItem = arr[i];
+                if (!myStack.IsEmpty())
+                {
+                    int peekedItem = arr[myStack.Peek()];
+                    while (currentItem > peekedItem) //we found greter on left for some item
+                    {
+                        Console.WriteLine("For item " + peekedItem + ", stock span is: " + (myStack.Peek() - i));
+                        myStack.Pop(); //Remove that processed item
+
+                        if (!myStack.IsEmpty())
+                            peekedItem = arr[myStack.Peek()]; //there can be many small than current item in stack
+                        else
+                            break;
+                    }
+                }
+                //Add current item index to stack
+                myStack.Push(i);
+            }
+
+            //Once we are done with this, all items in stack doesn't have greater on right.
+            while (!myStack.IsEmpty())
+            {
+                Console.WriteLine("For item " + arr[myStack.Peek()] + ", stock span last is: " + (myStack.Peek()+1));
+                myStack.Pop();
+            }
+        }
     }
 }

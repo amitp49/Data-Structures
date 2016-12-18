@@ -59,7 +59,11 @@ namespace Stacks
             }
             Console.WriteLine("---------");
 
-            StackAlgos.PrintNextGreaterElementInRightSideForAll(new int[] { 11,13,21,3 });
+            StackAlgos.PrintNextGreaterElementInRightSideForAll(new int[] {10, 4, 5, 90, 120, 80 });
+            Console.WriteLine("---------");
+
+            StackAlgos.PrintStockSpan(new int[] { 10, 4, 5, 90, 120, 80 });
+
             Console.WriteLine("---------");
 
             Console.ReadKey();

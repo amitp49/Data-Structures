@@ -43,7 +43,7 @@ namespace Queues
 
         public bool IsFull()
         {
-            return (this.Count == (this.capacity-1));
+            return (this.Count == (this.capacity-1)); //This is critical. One space would be wasted always
         }
 
         public void EnQueue(T data)

@@ -24,10 +24,10 @@ namespace DSA
             //btRunner.Run();
 
             IRunner stackRunner = new StackRunner();
-            //stackRunner.Run();
+            stackRunner.Run();
 
             IRunner queueRunner = new QueueRunner();
-            queueRunner.Run();
+            //queueRunner.Run();
 
             IRunner arrayRunner = new ArrayRunner();
             //arrayRunner.Run();
