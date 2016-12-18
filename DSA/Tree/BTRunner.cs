@@ -31,6 +31,8 @@ namespace Tree
             btree.PostOrderTraversalIterative();
             btree.PreOrderTraversalIterative();
             btree.InorderTraversalIterative();
+
+            btree.PrintLevelOrderTranversal();
             Console.ReadLine();
         }
     }

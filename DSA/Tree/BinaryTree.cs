@@ -34,7 +34,31 @@ namespace Tree
 
         public void PrintLevelOrderTranversal()
         {
-            
+            List<BinaryTreeNode<T>> listOfNodes = new List<BinaryTreeNode<T>>();
+            Queue<BinaryTreeNode<T>> queue = new Queue<BinaryTreeNode<T>>();
+            queue.Enqueue(this.Root);
+
+            while (queue.Count>0)
+            {
+                BinaryTreeNode<T> current = queue.Dequeue();
+                listOfNodes.Add(current);
+
+                if(current.Left!=null)
+                {
+                    queue.Enqueue(current.Left);
+                }
+                if (current.Right != null)
+                {
+                    queue.Enqueue(current.Right);
+                }
+            }
+
+            //Print all
+            foreach (var item in listOfNodes)
+            {
+                Console.Write(item.Data + ", ");
+            }
+            Console.WriteLine();
         }
 
         public void PreorderTraversalRecursive()
@@ -164,7 +188,7 @@ namespace Tree
             Console.WriteLine();
         }
 
-        private static bool IsLeaf(BinaryTreeNode<T> current)
+        private bool IsLeaf(BinaryTreeNode<T> current)
         {
             return (current.Right == null && current.Left == null);
         }
