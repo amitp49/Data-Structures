@@ -113,7 +113,7 @@ namespace Stacks
         }
 
         /// <summary>
-        /// This prints greater element on left side. If no grater found, then Ith index is its span
+        /// This prints greater element distance on left side. If no grater found, then Ith index is its span
         /// </summary>
         public static void PrintStockSpan(int[] arr)
         {
@@ -149,6 +149,73 @@ namespace Stacks
                 Console.WriteLine("For item " + arr[myStack.Peek()] + ", stock span last is: " + (myStack.Peek()+1));
                 myStack.Pop();
             }
+        }
+
+        /// <summary>
+        /// This gives max area of rectangle from histogram by maintaining left min and right min for each value bar
+        /// </summary>
+        /// <param name="arr"></param>
+        public static void MaxAreaRectangleFromHistogram(int[] arr)
+        {
+            if (arr == null)
+                return;
+
+            int runningMaxArea = 0;
+            Stack<int> stack = new Stack<int>();
+            int i = 0;
+
+            while( i < arr.Length ) //This is while, not for, because we dont want to increment in else part
+            {
+                if(stack.Count==0 || arr[i] >= arr[stack.Peek()] )
+                {
+                    stack.Push(i); //pushing index (not element) if its greater than what is on top
+                    i++;
+                }
+                else
+                {
+                    //Current element 'I' is its(top of the stacks) right min
+                    int maxAreaForTopStackBar = CalculateAreaForBarOnTop(arr, stack, i);
+
+                    //update running max if required
+                    if (runningMaxArea < maxAreaForTopStackBar)
+                    {
+                        runningMaxArea = maxAreaForTopStackBar;
+                    }
+                }
+            }
+
+            //For remainng element on stack
+            while (stack.Count>0)
+            {
+                int maxAreaForTopStackBar = CalculateAreaForBarOnTop(arr, stack, arr.Length);
+                //update running max if required
+                if (runningMaxArea < maxAreaForTopStackBar)
+                {
+                    runningMaxArea = maxAreaForTopStackBar;
+                }
+            }
+
+            Console.WriteLine("Max area:" + runningMaxArea);
+        }
+
+        private static int CalculateAreaForBarOnTop(int[] arr, Stack<int> stack, int rightMinIndex)
+        {
+            int stackTopIndex = stack.Peek();
+            int stackTopData = arr[stackTopIndex];
+            stack.Pop(); // removing bar for which we are calculating area
+
+            int maxAreaForTopStackBar = 0;
+            if (stack.Count != 0)
+            {
+                int leftMinIndex = stack.Peek(); //Critical, previous element would be its left min
+                maxAreaForTopStackBar = stackTopData * (rightMinIndex - leftMinIndex - 1);
+            }
+            else
+            {
+                maxAreaForTopStackBar = stackTopData * (rightMinIndex);
+            }
+
+            return maxAreaForTopStackBar;
         }
     }
 }

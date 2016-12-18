@@ -65,7 +65,10 @@ namespace Stacks
             StackAlgos.PrintStockSpan(new int[] { 10, 4, 5, 90, 120, 80 });
 
             Console.WriteLine("---------");
-            
+
+            StackAlgos.MaxAreaRectangleFromHistogram(new int[] { 6, 2, 5, 4, 5, 1, 6 });
+            Console.WriteLine("---------");
+
             Console.ReadKey();
         }
     }
