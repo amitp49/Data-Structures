@@ -53,6 +53,10 @@ namespace Tree
             Console.WriteLine("Are identical: " + btree.AreIdentical(btreeOther));
 
             Console.WriteLine("Max depth of tree: " + btree.MaxDepth());
+
+            Console.WriteLine("Tree contains 5: " + btree.Contains(5));
+            Console.WriteLine("Tree contains 10: " + btree.Contains(10));
+
             Console.ReadLine();
         }
     }

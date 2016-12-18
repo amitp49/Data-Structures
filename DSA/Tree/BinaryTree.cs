@@ -29,7 +29,36 @@ namespace Tree
 
         public bool Contains(T data)
         {
-            return false;
+            return ContainsInternalUtil(this.Root,data);
+        }
+
+        private bool ContainsInternalUtil(BinaryTreeNode<T> binaryTreeNode, T data)
+        {
+            if (binaryTreeNode == null)
+                return false;
+
+            if (binaryTreeNode.Data.CompareTo(data) == 0)
+                return true;
+
+            return (ContainsInternalUtil(binaryTreeNode.Left, data) == true) ||
+                (ContainsInternalUtil(binaryTreeNode.Right, data) == true);
+        }
+
+        public void DeleteTree()
+        {
+            DeleteNode(this.Root);
+            return;
+        }
+
+        private void DeleteNode(BinaryTreeNode<T> binaryTreeNode)
+        {
+            if (binaryTreeNode == null)
+                return;
+
+            DeleteNode(binaryTreeNode.Left);
+            DeleteNode(binaryTreeNode.Right);
+
+            binaryTreeNode = null;
         }
 
         public int GetSizeOfTree()
