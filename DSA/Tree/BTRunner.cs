@@ -64,6 +64,20 @@ namespace Tree
             btree.PrintRootToLeafPaths();
 
             Console.WriteLine("LCA for binary tree: " + btree.FindLowestCommonAncestor(7, 6).Data);
+
+            Console.WriteLine("----------------BST----------------");
+
+            BinarySearchTree<int> binarySearchTree = new BinarySearchTree<int>();
+            binarySearchTree.Insert(50);
+            binarySearchTree.Insert(30);
+            binarySearchTree.Insert(20);
+            binarySearchTree.Insert(40);
+            binarySearchTree.Insert(70);
+            binarySearchTree.Insert(60);
+            binarySearchTree.Insert(80);
+
+            binarySearchTree.InorderTraversalRecursive();
+
             Console.ReadLine();
         }
     }

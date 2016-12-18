@@ -93,7 +93,7 @@ namespace Tree
             return 1+ Math.Max(leftTreeDepth, rightTreeDepth);
         }
 
-        public BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
+        public virtual BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
         {
             return FindLowestCommonAncestorInternalUtil(this.Root,data1,data2);
         }
