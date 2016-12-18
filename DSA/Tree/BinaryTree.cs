@@ -27,7 +27,7 @@ namespace Tree
             this.Root = root;
         }
 
-        public bool Contains(T data)
+        public virtual bool Contains(T data)
         {
             return ContainsInternalUtil(this.Root,data);
         }

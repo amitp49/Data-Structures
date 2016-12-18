@@ -38,6 +38,26 @@ namespace Tree
             return currentRoot;
         }
 
+        public override bool Contains(T data)
+        {
+            return ContainsInternalUtil(this.Root,data);
+        }
+
+        private bool ContainsInternalUtil(BinaryTreeNode<T> currentRoot, T data)
+        {
+            if (currentRoot == null)
+                return false;
+
+            if (currentRoot.Data.CompareTo(data) == 0)
+                return true;
+            else if (currentRoot.Data.CompareTo(data) > 0)
+                return ContainsInternalUtil(currentRoot.Left,data);
+            else if (currentRoot.Data.CompareTo(data) < 0)
+                return ContainsInternalUtil(currentRoot.Right, data);
+
+            return false;
+        }
+
         public override BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
         {
             return FindLowestCommonAncestorInternalUtil(this.Root, data1, data2);
