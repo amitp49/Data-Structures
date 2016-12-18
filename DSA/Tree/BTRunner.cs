@@ -57,6 +57,10 @@ namespace Tree
             Console.WriteLine("Tree contains 5: " + btree.Contains(5));
             Console.WriteLine("Tree contains 10: " + btree.Contains(10));
 
+            btree.MirrorTree();
+
+            btree.PrintLevelOrderTranversal();
+
             Console.ReadLine();
         }
     }

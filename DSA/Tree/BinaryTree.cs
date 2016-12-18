@@ -93,6 +93,26 @@ namespace Tree
             return 1+ Math.Max(leftTreeDepth, rightTreeDepth);
         }
 
+        public void MirrorTree()
+        {
+            MirrorTreeInternalUtil(this.Root);
+            return;
+        }
+
+        private void MirrorTreeInternalUtil(BinaryTreeNode<T> binaryTreeNode)
+        {
+            if (binaryTreeNode == null)
+                return;
+
+            MirrorTreeInternalUtil(binaryTreeNode.Left);
+            MirrorTreeInternalUtil(binaryTreeNode.Right);
+
+            //Process node
+            BinaryTreeNode<T> temp = binaryTreeNode.Left;
+            binaryTreeNode.Left = binaryTreeNode.Right;
+            binaryTreeNode.Right = temp;
+        }
+
         public bool AreIdentical(BinaryTree<T> other)
         {
             return AreIdenticalInternalRecursiveUtil(this.Root,other.Root);
