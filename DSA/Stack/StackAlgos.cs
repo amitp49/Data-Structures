@@ -48,6 +48,51 @@ namespace Stacks
             return (myStack.Count == 0);
         }
 
+        /// <summary>
+        /// Min number of reversal needed to make exp valid
+        /// </summary>
+        /// <param name="exp"></param>
+        /// <returns>Exp contains only '{' or '}'</returns>
+        public static int MinNumberOfReversalNeededToMakeExpressionValid(string exp)
+        {
+            int count = 0;
+
+            //remove already valid part from exp
+            Stack<char> stack = new Stack<char>();
+            for (int i = 0; i < exp.Length; i++)
+            {
+                if (stack.Count == 0 || 
+                    exp[i].Equals('{') || 
+                    (exp[i].Equals('}') && stack.Peek().Equals('}')) )
+                {
+                    stack.Push(exp[i]);
+                } 
+                else //if(exp[i].Equals('}') && stack.Peek().Equals('{'))
+                {
+                    stack.Pop(); //discard matching start and current I
+                }
+            }
+
+            //stack would cotain starting and ending breackets only in order
+            int startingBracketAtEnd = 0;
+            while (stack.Count!=0 && stack.Peek().Equals('{'))
+            {
+                startingBracketAtEnd++;
+                stack.Pop();
+            }
+
+            int endingBracketAtEnd = 0;
+            while (stack.Count != 0 && stack.Peek().Equals('}'))
+            {
+                endingBracketAtEnd++;
+                stack.Pop();
+            }
+
+            count = (int) (Math.Ceiling(startingBracketAtEnd / 2.0) + 
+                Math.Ceiling(endingBracketAtEnd/2.0));
+            return count;
+        }
+
         public static void ReverseStackUsingStackOperationsOnly(MyStack<int> myStack)
         {
             RecursiveReverseInternalUtil(myStack);

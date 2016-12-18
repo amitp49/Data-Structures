@@ -85,6 +85,10 @@ namespace Stacks
             StackAlgos.MaxAreaRectangleFromHistogram(new int[] { 6, 2, 5, 4, 5, 1, 6 });
             Console.WriteLine("---------");
 
+            int count = StackAlgos.MinNumberOfReversalNeededToMakeExpressionValid("}{{}}{{{");
+            Console.WriteLine("Number of reversal nedded:" + count);
+            Console.WriteLine("---------");
+
             Console.ReadKey();
         }
     }
