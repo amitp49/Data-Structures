@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stacks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -84,6 +85,56 @@ namespace Tree
                 Console.Write(current.Data + ", ");
                 InorderTraversalInternalUtil(current.Right);
             }
+        }
+
+        public void PostOrderTraversalIterative()
+        {
+            Stack<BinaryTreeNode<T>> myStack = new Stack<BinaryTreeNode<T>>();
+            BinaryTreeNode<T> prev = null;
+
+            List<BinaryTreeNode<T>> listOfNodes = new List<BinaryTreeNode<T>>();
+
+            myStack.Push(this.Root);
+
+            while (myStack.Count > 0)
+            {
+                BinaryTreeNode<T> current = myStack.Peek();
+
+                if (IsLeaf(current) || 
+                    current.Right == prev || 
+                    (current.Right==null && current.Left==prev))
+                {
+                    //leaf or upward  - Process it
+                    myStack.Pop();
+                    listOfNodes.Add(current);
+                }
+                else
+                {
+                    //Sibling or downwards flow
+                    if (current.Right != null)
+                    {
+                        myStack.Push(current.Right);
+                    }
+                    if (current.Left != null)
+                    {
+                        myStack.Push(current.Left);
+                    }
+                }
+
+                prev = current;
+            }
+
+            //Print list
+            foreach (var item in listOfNodes)
+            {
+                Console.Write(item.Data + ", ");
+            }
+            Console.WriteLine();
+        }
+
+        private static bool IsLeaf(BinaryTreeNode<T> current)
+        {
+            return (current.Right == null && current.Left == null);
         }
     }
 }

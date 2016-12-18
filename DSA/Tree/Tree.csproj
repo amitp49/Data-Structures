@@ -52,6 +52,10 @@
       <Project>{5f720dfa-4f40-451e-a7b0-5ef6d3fecaae}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Stack\Stacks.csproj">
+      <Project>{b0b7994b-761f-41ab-8af6-487534eff02f}</Project>
+      <Name>Stacks</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

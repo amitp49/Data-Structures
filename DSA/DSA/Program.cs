@@ -21,10 +21,10 @@ namespace DSA
             //sllRunner.Run();
 
             IRunner btRunner = new BTRunner();
-            //btRunner.Run();
+            btRunner.Run();
 
             IRunner stackRunner = new StackRunner();
-            stackRunner.Run();
+            //stackRunner.Run();
 
             IRunner queueRunner = new QueueRunner();
             //queueRunner.Run();
