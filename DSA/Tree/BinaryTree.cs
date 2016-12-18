@@ -32,6 +32,19 @@ namespace Tree
             return false;
         }
 
+        public int GetSizeOfTree()
+        {
+            return GetSizeOfNode(this.Root);
+        }
+
+        public int GetSizeOfNode(BinaryTreeNode<T> currentRoot)
+        {
+            return ( 1+
+                (currentRoot.Left != null ? GetSizeOfNode(currentRoot.Left) : 0) +
+                (currentRoot.Right != null ? GetSizeOfNode(currentRoot.Right) : 0)
+                );
+        }
+
         public void PrintLevelOrderTranversal()
         {
             List<BinaryTreeNode<T>> listOfNodes = new List<BinaryTreeNode<T>>();

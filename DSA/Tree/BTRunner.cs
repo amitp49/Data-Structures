@@ -33,6 +33,7 @@ namespace Tree
             btree.InorderTraversalIterative();
 
             btree.PrintLevelOrderTranversal();
+            Console.WriteLine("Size of tree:" + btree.GetSizeOfTree());
             Console.ReadLine();
         }
     }
