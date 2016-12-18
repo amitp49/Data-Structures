@@ -171,7 +171,42 @@ namespace Tree
 
         public void InorderTraversalIterative()
         {
-            throw new NotImplementedException();
+            Stack<BinaryTreeNode<T>> myStack = new Stack<BinaryTreeNode<T>>();
+            BinaryTreeNode<T> current = this.Root;
+
+            List<BinaryTreeNode<T>> listOfNodes = new List<BinaryTreeNode<T>>();
+
+            //Go to left most node which needs to be processed first
+            while (current!=null)
+            {
+                myStack.Push(current);
+                current = current.Left;
+            }
+
+            while (myStack.Count > 0)
+            {
+                //Process and discard as it would be left most
+                BinaryTreeNode<T> currentStackItem = myStack.Peek();
+                listOfNodes.Add(currentStackItem);
+                myStack.Pop();
+
+                if (currentStackItem.Right != null)
+                {
+                    BinaryTreeNode<T> rightSideLeftNodes = currentStackItem.Right;
+                    while (rightSideLeftNodes != null)
+                    {
+                        myStack.Push(rightSideLeftNodes);
+                        rightSideLeftNodes = rightSideLeftNodes.Left;
+                    }
+                }
+            }
+
+            //Print list
+            foreach (var item in listOfNodes)
+            {
+                Console.Write(item.Data + ", ");
+            }
+            Console.WriteLine();
         }
     }
 }
