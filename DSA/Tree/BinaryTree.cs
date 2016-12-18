@@ -39,10 +39,37 @@ namespace Tree
 
         public int GetSizeOfNode(BinaryTreeNode<T> currentRoot)
         {
-            return ( 1+
+            if (currentRoot == null)
+                return 0;
+
+            return ( 1 +
                 (currentRoot.Left != null ? GetSizeOfNode(currentRoot.Left) : 0) +
                 (currentRoot.Right != null ? GetSizeOfNode(currentRoot.Right) : 0)
                 );
+        }
+
+        public bool AreIdentical(BinaryTree<T> other)
+        {
+            return AreIdenticalInternalRecursiveUtil(this.Root,other.Root);
+        }
+
+        private bool AreIdenticalInternalRecursiveUtil(BinaryTreeNode<T> binaryTreeNode1, BinaryTreeNode<T> binaryTreeNode2)
+        {
+            if(binaryTreeNode1==null && binaryTreeNode2==null)
+            {
+                return true;
+            }
+            else if(binaryTreeNode1==null || binaryTreeNode2==null)
+            {
+                return false;
+            }
+            else
+            {
+                return ( binaryTreeNode1.Data.CompareTo(binaryTreeNode2.Data) == 0  && 
+                    AreIdenticalInternalRecursiveUtil(binaryTreeNode1.Left, binaryTreeNode2.Left) &&
+                    AreIdenticalInternalRecursiveUtil(binaryTreeNode1.Right,binaryTreeNode2.Right)
+                    );
+            }
         }
 
         public void PrintLevelOrderTranversal()
