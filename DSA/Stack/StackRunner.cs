@@ -65,7 +65,7 @@ namespace Stacks
             StackAlgos.PrintStockSpan(new int[] { 10, 4, 5, 90, 120, 80 });
 
             Console.WriteLine("---------");
-
+            
             Console.ReadKey();
         }
     }

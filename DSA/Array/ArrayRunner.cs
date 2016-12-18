@@ -39,6 +39,18 @@ namespace Arrays
                 {false,false,false,false}
             };
             ArrayAlgos.PrintCelebrity(knows);
+
+            List<Interval> listOfIntervals = new List<Interval>();
+            listOfIntervals.Add(new Interval(6, 8));
+            listOfIntervals.Add(new Interval(1, 9));
+            listOfIntervals.Add(new Interval(2, 4));
+            listOfIntervals.Add(new Interval(4, 7));
+
+            List<Interval> listOfMergedIntervals = ArrayAlgos.GetOverLappingIntervals(listOfIntervals);
+            foreach (var item in listOfMergedIntervals)
+            {
+                Console.WriteLine("(" + item.Start + "," + item.End + ")");
+            }
             Console.ReadLine();
 
             

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,27 @@ namespace Arrays
 {
     public class ArrayAlgos
     {
+        public static List<Interval> GetOverLappingIntervals(List<Interval> listOfIntervals)
+        {
+            List<Interval> listOfMergedInterval = new List<Interval>();
+
+            listOfIntervals.Sort();
+            listOfMergedInterval.Add(listOfIntervals[0]);
+
+            for (int i = 1; i < listOfIntervals.Count; i++)
+            {
+                if (listOfIntervals[i].Start < listOfMergedInterval[listOfMergedInterval.Count - 1].End)
+                {
+                    listOfMergedInterval[listOfMergedInterval.Count - 1].End = listOfIntervals[i].End;
+                }
+                else
+                {
+                    listOfMergedInterval.Add(listOfIntervals[i]);
+                }
+            }
+
+            return listOfMergedInterval;
+        }
         /// <summary>
         /// It should give person who doesn't know anybody, but all others knows him
         /// </summary>
