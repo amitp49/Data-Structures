@@ -104,6 +104,9 @@ namespace Tree
 
             int[] arr = binarySearchTree.GetInorderTraversal();
 
+            BinarySearchTree<int> mergeBst = BinarySearchTree<int>.GetMergeTree(bstFromSll,bstFromArray);
+            mergeBst.InorderTraversalRecursive();
+
             Console.ReadLine();
         }
     }

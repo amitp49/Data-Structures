@@ -209,6 +209,59 @@ namespace Tree
             return current;
         }
 
+        public BinarySearchTree<T> GetMergeTree( BinarySearchTree<T> other)
+        {
+            return GetMergeTree(this,other);
+        }
+        public static BinarySearchTree<T> GetMergeTree(BinarySearchTree<T> first, BinarySearchTree<T> second)
+        {
+            T[] firstInorder = first.GetInorderTraversal();
+            T[] secondInorder = second.GetInorderTraversal();
+
+            T[] mergedArr = MergeSortedArray(firstInorder, secondInorder);
+
+            return GetBstFromSortedArray(mergedArr);
+        }
+
+        private static T[] MergeSortedArray(T[] firstInorder, T[] secondInorder)
+        {
+            
+            int n=firstInorder.Length,m=secondInorder.Length;
+            int i = 0, j = 0, k = 0;
+
+            T[] mergeArray = new T[n + m];
+
+            while (i<n && j<m)
+            {
+                if(firstInorder[i].CompareTo(secondInorder[j]) <= 0)
+                {
+                    mergeArray[k] = firstInorder[i];
+                    i++;
+                }
+                else if (firstInorder[i].CompareTo(secondInorder[j]) > 0)
+                {
+                    mergeArray[k] = secondInorder[j];
+                    j++;
+                }
+                k++;
+            }
+
+            while (i<n)
+            {
+                 mergeArray[k] = firstInorder[i];
+                 i++;
+                 k++;
+            }
+
+            while (j < m)
+            {
+                mergeArray[k] = firstInorder[j];
+                j++;
+                k++;
+            }
+            return mergeArray;
+        }
+
         public override BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
         {
             return FindLowestCommonAncestorInternalUtil(this.Root, data1, data2);
