@@ -38,6 +38,18 @@ namespace Tree
             return currentRoot;
         }
 
+        public T MinValue()
+        {
+            BinaryTreeNode<T> current = this.Root;
+
+            while (current.Left!=null)
+            {
+                current = current.Left;
+            }
+
+            return current.Data;
+        }
+
         public override bool Contains(T data)
         {
             return ContainsInternalUtil(this.Root,data);
