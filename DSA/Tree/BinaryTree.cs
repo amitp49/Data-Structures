@@ -93,6 +93,46 @@ namespace Tree
             return 1+ Math.Max(leftTreeDepth, rightTreeDepth);
         }
 
+        public int LargestBstSubtree()
+        {
+            int size = 0;
+            //Use reflection to get min and max value
+            bool isBst = LargestBstSubtreeInternalUtil(this.Root,
+                (T)typeof(T).GetField("MinValue").GetValue(null),
+                (T)typeof(T).GetField("MaxValue").GetValue(null),
+                ref size);
+            return size;
+        }
+
+        private bool LargestBstSubtreeInternalUtil(BinaryTreeNode<T> currentRoot, T minValueAllowd, T maxValueAllowed, ref int maxBstSubtreeSize)
+        {
+            if (currentRoot == null)
+                return true;
+
+            int leftTreeSize = 0;
+            bool isLeftTreeBst = LargestBstSubtreeInternalUtil(currentRoot.Left, minValueAllowd, currentRoot.Data, ref leftTreeSize);
+
+            int rightTreeSize = 0;
+            bool isRightTreeBst = LargestBstSubtreeInternalUtil(currentRoot.Right, currentRoot.Data, maxValueAllowed, ref rightTreeSize);
+
+            bool currentNodeSatisfyBstCondition = (currentRoot.Data.CompareTo(minValueAllowd) > 0 &&
+                currentRoot.Data.CompareTo(maxValueAllowed) < 0);
+
+            if (isLeftTreeBst == true && maxBstSubtreeSize < leftTreeSize)
+            {
+                maxBstSubtreeSize = leftTreeSize;
+            }
+            if (isRightTreeBst == true && maxBstSubtreeSize < rightTreeSize)
+            {
+                maxBstSubtreeSize = rightTreeSize;
+            }
+            if (currentNodeSatisfyBstCondition == true)
+            {
+                maxBstSubtreeSize = leftTreeSize + rightTreeSize + 1;
+            }
+            return (currentNodeSatisfyBstCondition == true && isLeftTreeBst == true && isRightTreeBst == true);
+        }
+
         public virtual BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
         {
             return FindLowestCommonAncestorInternalUtil(this.Root,data1,data2);

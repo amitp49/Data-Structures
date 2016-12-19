@@ -65,6 +65,7 @@ namespace Tree
             btree.PrintRootToLeafPaths();
 
             Console.WriteLine("LCA for binary tree: " + btree.FindLowestCommonAncestor(7, 6).Data);
+            Console.WriteLine("Largest BST subtree size: " + btree.LargestBstSubtree());
 
             Console.WriteLine("----------------BST----------------");
 
@@ -85,6 +86,7 @@ namespace Tree
             Console.WriteLine("Is BST: " + binarySearchTree.IsBst());
             Console.WriteLine("InOrderSuccessor of root(50): " + binarySearchTree.InOrderSuccessor(binarySearchTree.Root).Data);
             Console.WriteLine("5th node: " + binarySearchTree.KthSmallestNode(5).Data);
+            Console.WriteLine("Largest BST subtree size: " + binarySearchTree.LargestBstSubtree());
 
             SinglyLinkedList<int> sortedLinkedList = new SinglyLinkedList<int>();
             sortedLinkedList.PushToHead(7);
@@ -100,6 +102,7 @@ namespace Tree
             int[] sortedArray = new int[7] {1,2,3,4,5,6,7};
             BinarySearchTree<int> bstFromArray = BinarySearchTree<int>.GetBstFromSortedArray(sortedArray);
             bstFromArray.InorderTraversalRecursive();
+
 
             Console.ReadLine();
         }
