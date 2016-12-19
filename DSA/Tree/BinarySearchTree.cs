@@ -107,6 +107,29 @@ namespace Tree
             return successor;
         }
 
+        public BinaryTreeNode<T> KthSmallestNode(int k)
+        {
+            int count = 0; //To maintain processed count
+            return KthSmallestNodeInternalUtil(this.Root, k, ref count);
+        }
+
+        private BinaryTreeNode<T> KthSmallestNodeInternalUtil(BinaryTreeNode<T> currentRoot, int k, ref int count)
+        {
+            if (currentRoot == null)
+                return null;
+
+            BinaryTreeNode<T> leftSideSearchResult = KthSmallestNodeInternalUtil(currentRoot.Left, k, ref count);
+            if (leftSideSearchResult != null)
+                return leftSideSearchResult;
+
+            count++;
+            //Inorder processing
+            if (count == k)
+                return currentRoot;
+
+            return KthSmallestNodeInternalUtil(currentRoot.Right, k, ref count);
+        }
+
         public T MinValue()
         {
             BinaryTreeNode<T> current = this.Root;

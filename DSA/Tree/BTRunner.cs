@@ -83,6 +83,7 @@ namespace Tree
 
             Console.WriteLine("Is BST: " + binarySearchTree.IsBst());
             Console.WriteLine("InOrderSuccessor of root(50): " + binarySearchTree.InOrderSuccessor(binarySearchTree.Root).Data);
+            Console.WriteLine("5th node: " + binarySearchTree.KthSmallestNode(5).Data);
             Console.ReadLine();
         }
     }
