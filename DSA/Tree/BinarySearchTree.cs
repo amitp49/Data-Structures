@@ -38,6 +38,26 @@ namespace Tree
             return currentRoot;
         }
 
+        public bool IsBst()
+        {
+            //Use reflection to get min and max value
+            return IsBstInternalUtil(this.Root, 
+                (T) typeof(T).GetField("MinValue").GetValue(null),
+                (T) typeof(T).GetField("MaxValue").GetValue(null));
+        }
+
+        private bool IsBstInternalUtil(BinaryTreeNode<T> currentRoot, T minValueAllowd, T maxValueAllowed)
+        {
+            if (currentRoot == null)
+                return true;
+
+            return (currentRoot.Data.CompareTo(minValueAllowd) > 0 &&
+                currentRoot.Data.CompareTo(maxValueAllowed) < 0 &&
+                IsBstInternalUtil(currentRoot.Left, minValueAllowd, currentRoot.Data) &&
+                IsBstInternalUtil(currentRoot.Right,currentRoot.Data,maxValueAllowed)
+                );
+        }
+
         public T MinValue()
         {
             BinaryTreeNode<T> current = this.Root;

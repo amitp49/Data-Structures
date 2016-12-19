@@ -80,6 +80,8 @@ namespace Tree
             Console.WriteLine("BST contain 60 : "+ binarySearchTree.Contains(60));
             Console.WriteLine("BST contain 66 : " + binarySearchTree.Contains(66));
             Console.WriteLine("MinValue in BST: " + binarySearchTree.MinValue());
+
+            Console.WriteLine("Is BST: " + binarySearchTree.IsBst());
             Console.ReadLine();
         }
     }
