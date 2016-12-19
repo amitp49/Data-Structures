@@ -40,7 +40,6 @@ namespace Tree
 
             btreeOther.Root.Right.Right.Right.Right = new BinaryTreeNode<int>(8);
 
-
             btree.PostorderTraversalRecursive();
             btree.PreorderTraversalRecursive();
             btree.InorderTraversalRecursive();
@@ -103,6 +102,7 @@ namespace Tree
             BinarySearchTree<int> bstFromArray = BinarySearchTree<int>.GetBstFromSortedArray(sortedArray);
             bstFromArray.InorderTraversalRecursive();
 
+            int[] arr = binarySearchTree.GetInorderTraversal();
 
             Console.ReadLine();
         }

@@ -301,20 +301,36 @@ namespace Tree
             }
         }
 
-        public void InorderTraversalRecursive()
+        public T[] GetInorderTraversal()
         {
-            InorderTraversalInternalUtil(this.Root);
-            Console.WriteLine();
-
+            int index = 0;
+            int treeSize = this.GetSizeOfTree();
+            T[] arr = new T[treeSize];
+            InorderTraversalInternalUtil(this.Root, arr, ref index);
+            return arr;
         }
 
-        private void InorderTraversalInternalUtil(BinaryTreeNode<T> current)
+        public void InorderTraversalRecursive()
+        {
+            int index = 0;
+            int treeSize = this.GetSizeOfTree();
+            T[] arr = new T[treeSize];
+            InorderTraversalInternalUtil(this.Root,arr,ref index);
+            for (int i = 0; i < treeSize; i++)
+            {
+                Console.Write(arr[i] + ", ");
+            }
+            Console.WriteLine();
+        }
+
+        private void InorderTraversalInternalUtil(BinaryTreeNode<T> current, T[] arr,ref int index)
         {
             if (current != null)
             {
-                InorderTraversalInternalUtil(current.Left);
-                Console.Write(current.Data + ", ");
-                InorderTraversalInternalUtil(current.Right);
+                InorderTraversalInternalUtil(current.Left, arr, ref index);
+                arr[index] = current.Data;
+                index++;
+                InorderTraversalInternalUtil(current.Right, arr, ref index);
             }
         }
 
