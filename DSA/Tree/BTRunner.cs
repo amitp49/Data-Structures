@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using LinkedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,6 +85,18 @@ namespace Tree
             Console.WriteLine("Is BST: " + binarySearchTree.IsBst());
             Console.WriteLine("InOrderSuccessor of root(50): " + binarySearchTree.InOrderSuccessor(binarySearchTree.Root).Data);
             Console.WriteLine("5th node: " + binarySearchTree.KthSmallestNode(5).Data);
+
+            SinglyLinkedList<int> sortedLinkedList = new SinglyLinkedList<int>();
+            sortedLinkedList.PushToHead(7);
+            sortedLinkedList.PushToHead(6);
+            sortedLinkedList.PushToHead(5);
+            sortedLinkedList.PushToHead(4);
+            sortedLinkedList.PushToHead(3);
+            sortedLinkedList.PushToHead(2);
+            sortedLinkedList.PushToHead(1);
+            BinarySearchTree<int> bstFromSll = BinarySearchTree<int>.GetBstFromSortedList(sortedLinkedList);
+            bstFromSll.InorderTraversalRecursive();
+
             Console.ReadLine();
         }
     }

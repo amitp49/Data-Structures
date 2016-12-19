@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinkedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,46 @@ namespace Tree
 {
     public class BinarySearchTree<T> : BinaryTree<T> where T : IComparable
     {
+        public BinarySearchTree()
+        {
+
+        }
+
+        public BinarySearchTree(BinaryTreeNode<T> root): base(root)
+        {
+
+        }
+
+        public static BinarySearchTree<T> GetBstFromSortedList(SinglyLinkedList<T> sortedList)
+        {
+            int n = sortedList.GetCount();
+            SllNode<T> head = sortedList.Head;
+            BinaryTreeNode<T> root = BinarySearchTree<T>.GetBstFromSortedListInternalUtil(ref head, n);
+            return new BinarySearchTree<T>(root);
+        }
+
+        private static BinaryTreeNode<T> GetBstFromSortedListInternalUtil(ref SllNode<T> currentSllNode, int n)
+        {
+            if (n <= 0)
+                return null;
+
+            //Convert n/2 nodes to left side tree
+            BinaryTreeNode<T> leftRoot = GetBstFromSortedListInternalUtil(ref currentSllNode, n / 2);
+
+            //Make current node as root - ASSUME recursion would have incremented pointer in list
+            BinaryTreeNode<T> root = new BinaryTreeNode<T>(currentSllNode.Data);
+            root.Left = leftRoot;
+
+            //Critical - move ahead in sortedlist
+            currentSllNode = currentSllNode.Next;
+
+             //Convert n/2 nodes to left side tree
+            BinaryTreeNode<T> rightRoot = GetBstFromSortedListInternalUtil(ref currentSllNode, n - n / 2 - 1);
+            root.Right = rightRoot;
+
+            return root;
+        }
+
         public BinaryTreeNode<T> Insert(T newData)
         {
             BinaryTreeNode<T> newNode = new BinaryTreeNode<T>(newData);
