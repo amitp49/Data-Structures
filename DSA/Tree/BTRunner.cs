@@ -97,6 +97,10 @@ namespace Tree
             BinarySearchTree<int> bstFromSll = BinarySearchTree<int>.GetBstFromSortedList(sortedLinkedList);
             bstFromSll.InorderTraversalRecursive();
 
+            int[] sortedArray = new int[7] {1,2,3,4,5,6,7};
+            BinarySearchTree<int> bstFromArray = BinarySearchTree<int>.GetBstFromSortedArray(sortedArray);
+            bstFromArray.InorderTraversalRecursive();
+
             Console.ReadLine();
         }
     }

@@ -19,6 +19,27 @@ namespace Tree
 
         }
 
+        public static BinarySearchTree<T> GetBstFromSortedArray(T[] sortedArray)
+        {
+            int n = sortedArray.Length;
+            BinaryTreeNode<T> root = BinarySearchTree<T>.GetBstFromSortedArrayInternalUtil(sortedArray, 0, n-1);
+            return new BinarySearchTree<T>(root);
+        }
+
+        private static BinaryTreeNode<T> GetBstFromSortedArrayInternalUtil(T[] sortedArray, int start, int end)
+        {
+            if (start > end)
+                return null;
+
+            int mid = start + (end - start) / 2;
+            BinaryTreeNode<T> root = new BinaryTreeNode<T>(sortedArray[mid]);
+
+            root.Left = GetBstFromSortedArrayInternalUtil(sortedArray, start, mid - 1);
+            root.Right = GetBstFromSortedArrayInternalUtil(sortedArray, mid+1, end);
+
+            return root;
+        }
+
         public static BinarySearchTree<T> GetBstFromSortedList(SinglyLinkedList<T> sortedList)
         {
             int n = sortedList.GetCount();
