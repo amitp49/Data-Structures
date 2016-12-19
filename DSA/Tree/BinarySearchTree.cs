@@ -58,18 +58,6 @@ namespace Tree
                 );
         }
 
-        public T MinValue()
-        {
-            BinaryTreeNode<T> current = this.Root;
-
-            while (current.Left!=null)
-            {
-                current = current.Left;
-            }
-
-            return current.Data;
-        }
-
         public override bool Contains(T data)
         {
             return ContainsInternalUtil(this.Root,data);
@@ -88,6 +76,52 @@ namespace Tree
                 return ContainsInternalUtil(currentRoot.Right, data);
 
             return false;
+        }
+
+        public BinaryTreeNode<T> InOrderSuccessor(BinaryTreeNode<T> node)
+        {
+            //Case-1: If node has right child
+            BinaryTreeNode<T> rightChild = node.Right;
+            if (rightChild != null)
+            {
+                return MinValue(rightChild);
+            }
+
+            //Case-2: if it doesn't have right child, and we doesn't have parent pointer to up the ladder from node
+            BinaryTreeNode<T> successor = null;
+            BinaryTreeNode<T> current = this.Root;
+
+            while (current!=null && current!=node)
+            {
+                if(current.Data.CompareTo(node.Data) > 0) // we will take left route
+                {
+                    successor = current; //Maintain left turns
+                    current = current.Left;
+                }
+                else // we will take right roor
+                {
+                    current = current.Right;
+                }
+            }
+
+            return successor;
+        }
+
+        public T MinValue()
+        {
+            BinaryTreeNode<T> current = this.Root;
+            return MinValue(current).Data;
+            
+        }
+
+        private BinaryTreeNode<T> MinValue(BinaryTreeNode<T> current)
+        {
+            while (current.Left != null)
+            {
+                current = current.Left;
+            }
+
+            return current;
         }
 
         public override BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
