@@ -95,6 +95,8 @@ namespace Tree
             Console.WriteLine("InOrderSuccessor of root(50): " + binarySearchTree.InOrderSuccessor(binarySearchTree.Root).Data);
             Console.WriteLine("5th node: " + binarySearchTree.KthSmallestNode(5).Data);
             Console.WriteLine("Largest BST subtree size: " + binarySearchTree.LargestBstSubtree());
+            Console.WriteLine("Ceil for 50:" + binarySearchTree.Ceil(50));
+            Console.WriteLine("CeilIterative for 51:" + binarySearchTree.CeilIterative(51));
 
             SinglyLinkedList<int> sortedLinkedList = new SinglyLinkedList<int>();
             sortedLinkedList.PushToHead(7);

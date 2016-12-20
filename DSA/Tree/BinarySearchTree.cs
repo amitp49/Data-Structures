@@ -289,6 +289,66 @@ namespace Tree
             }
             return true;
         }
+        public T CeilIterative(T data)
+        {
+            BinaryTreeNode<T> current = this.Root;
+            BinaryTreeNode<T> ceilingNode = null;
+
+            while (current!=null)
+            {
+                if(current.Data.CompareTo(data)==0)
+                {
+                    return current.Data;
+                }
+                else if (current.Data.CompareTo(data) < 0)
+                {
+                    current = current.Right;
+                } 
+                else if(current.Data.CompareTo(data) > 0)
+                {
+                    ceilingNode = current; //while taking left turn, store
+                    current = current.Left;
+                }
+            }
+            if (ceilingNode != null)
+                return ceilingNode.Data;
+
+            return default(T);
+        }
+
+        public T Ceil(T data)
+        {
+             BinaryTreeNode<T> ceilingNode =  CeilInternalUtil(this.Root, data);
+             if (ceilingNode != null)
+                 return ceilingNode.Data;
+
+             return default(T);
+        }
+
+        private BinaryTreeNode<T> CeilInternalUtil(BinaryTreeNode<T> currentRoot, T data)
+        {
+            if (currentRoot == null)
+                return null;
+
+            if(currentRoot.Data.CompareTo(data)==0)
+            {
+                return currentRoot;
+            }
+
+            if (currentRoot.Data.CompareTo(data) < 0)
+                return CeilInternalUtil(currentRoot.Right, data); //go to right first as we want ceil, and root cann't be ceiling if root is less
+
+            BinaryTreeNode<T> ceilingNode = CeilInternalUtil(currentRoot.Left, data);
+            if(ceilingNode!=null)
+            {
+                return ceilingNode;
+            }
+            else
+            {
+                //return root as we couldn't find ceiling in left side
+                return currentRoot;
+            }
+        }
 
         public void CorrectBst()
         {
