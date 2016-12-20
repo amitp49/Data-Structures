@@ -98,7 +98,8 @@ namespace Tree
             Console.WriteLine("Ceil for 50:" + binarySearchTree.Ceil(50));
             Console.WriteLine("CeilIterative for 51:" + binarySearchTree.CeilIterative(51));
             Console.WriteLine("FloorIterative for 49:" + binarySearchTree.FloorIterative(49));
-
+            binarySearchTree.AddGreaterNodeSum();
+            binarySearchTree.InorderTraversalRecursive();
 
             SinglyLinkedList<int> sortedLinkedList = new SinglyLinkedList<int>();
             sortedLinkedList.PushToHead(7);

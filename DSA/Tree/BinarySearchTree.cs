@@ -289,6 +289,27 @@ namespace Tree
             }
             return true;
         }
+
+        /// <summary>
+        /// Will work only for int
+        /// </summary>
+        public void AddGreaterNodeSum()
+        {
+            int sum = 0;
+            AddGreaterNodeSumInternalUtil(this.Root,ref sum); 
+        }
+
+        private void AddGreaterNodeSumInternalUtil(BinaryTreeNode<T> current, ref int sum)
+        {
+            if (current == null)
+                return;
+            //Do reverse inorder , right - node - left
+            AddGreaterNodeSumInternalUtil(current.Right, ref sum);
+            sum += (int)(object)current.Data;
+            current.Data = (T)(object)sum;
+            AddGreaterNodeSumInternalUtil(current.Left, ref sum);
+        }
+
         public T CeilIterative(T data)
         {
             BinaryTreeNode<T> current = this.Root;
