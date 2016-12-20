@@ -316,6 +316,33 @@ namespace Tree
             return default(T);
         }
 
+        public T FloorIterative(T data)
+        {
+            BinaryTreeNode<T> current = this.Root;
+            BinaryTreeNode<T> floorNode = null;
+
+            while (current != null)
+            {
+                if (current.Data.CompareTo(data) == 0)
+                {
+                    return current.Data;
+                }
+                else if (current.Data.CompareTo(data) < 0)
+                {
+                    floorNode = current; //while taking right turn, store
+                    current = current.Right;
+                }
+                else if (current.Data.CompareTo(data) > 0)
+                {
+                    current = current.Left;
+                }
+            }
+            if (floorNode != null)
+                return floorNode.Data;
+
+            return default(T);
+        }
+
         public T Ceil(T data)
         {
              BinaryTreeNode<T> ceilingNode =  CeilInternalUtil(this.Root, data);
