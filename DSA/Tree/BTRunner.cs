@@ -77,6 +77,15 @@ namespace Tree
             binarySearchTree.Insert(60);
             binarySearchTree.Insert(80);
 
+            int temp = binarySearchTree.Root.Left.Data;
+            binarySearchTree.Root.Left.Data = binarySearchTree.Root.Right.Data;
+            binarySearchTree.Root.Right.Data = temp;
+
+            binarySearchTree.InorderTraversalRecursive();
+            binarySearchTree.CorrectBst();
+            binarySearchTree.InorderTraversalRecursive();
+
+
             binarySearchTree.InorderTraversalRecursive();
             Console.WriteLine("BST contain 60 : "+ binarySearchTree.Contains(60));
             Console.WriteLine("BST contain 66 : " + binarySearchTree.Contains(66));

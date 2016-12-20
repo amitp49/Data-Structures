@@ -290,6 +290,64 @@ namespace Tree
             return true;
         }
 
+        public void CorrectBst()
+        {
+            BinaryTreeNode<T> prevToCurrent = null;
+            BinaryTreeNode<T> prevToFirstPointInViolation = null;
+            BinaryTreeNode<T> firstPointInViolation = null;
+            BinaryTreeNode<T> secondPointInViolation = null;
+
+            CorrectBstInorderInternalUtil(this.Root, ref prevToCurrent,ref prevToFirstPointInViolation,ref firstPointInViolation,ref secondPointInViolation);
+
+            //fix tree based on violations
+            if(firstPointInViolation!=null && secondPointInViolation!=null) //misplaced nodes are not adjecent
+            {
+                SwapData(prevToFirstPointInViolation, secondPointInViolation);
+            }
+            else if(firstPointInViolation!=null && prevToFirstPointInViolation!=null && secondPointInViolation==null) //misplaced nodes are adjecent
+            {
+                SwapData(prevToFirstPointInViolation, firstPointInViolation);
+            }
+        }
+
+        private void SwapData(BinaryTreeNode<T> node1, BinaryTreeNode<T> node2)
+        {
+            T temp = node1.Data;
+            node1.Data = node2.Data;
+            node2.Data = temp;
+        }
+
+        private void CorrectBstInorderInternalUtil(BinaryTreeNode<T> currentRoot, ref BinaryTreeNode<T> prevToCurrent, ref BinaryTreeNode<T> prevToFirstPointInViolation, ref BinaryTreeNode<T> firstPointInViolation, ref BinaryTreeNode<T> secondPointInViolation)
+        {
+            if (currentRoot == null)
+                return;
+
+            //Recurse on left
+            CorrectBstInorderInternalUtil(currentRoot.Left, ref prevToCurrent, ref prevToFirstPointInViolation, ref firstPointInViolation, ref secondPointInViolation);
+
+            //Process
+            if(prevToCurrent!=null && prevToCurrent.Data.CompareTo(currentRoot.Data) > 0 ) //violation of bst sorted inorder
+            {
+                if (firstPointInViolation==null)
+                {
+                    prevToFirstPointInViolation = prevToCurrent;
+                    firstPointInViolation = currentRoot;
+                }
+                else if (secondPointInViolation==null)
+                {
+                    secondPointInViolation = currentRoot;
+                }
+                else
+                {
+                    //more than two violation. can't fix
+                }
+            }
+            prevToCurrent = currentRoot;
+
+            //Recurse on right
+            CorrectBstInorderInternalUtil(currentRoot.Right, ref prevToCurrent, ref prevToFirstPointInViolation, ref firstPointInViolation, ref secondPointInViolation);
+        }
+
         public override BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
         {
             return FindLowestCommonAncestorInternalUtil(this.Root, data1, data2);
