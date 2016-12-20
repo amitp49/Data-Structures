@@ -119,7 +119,13 @@ namespace Tree
             int[] preOrderOfSomeTreeWithOnlyONeChildAtEachNode = new int[] { 20, 10, 11, 13, 12 };
             Console.WriteLine("preOrderOfSomeTreeWithOnlyONeChildAtEachNode:" + 
                 BinarySearchTree<int>.IsPreOrderWithOnlyOneChildSatisfyBstProperty(preOrderOfSomeTreeWithOnlyONeChildAtEachNode));
+
+            int[] preOrderOfTree = new int[] { 10, 5, 1, 7, 40, 50 };
+            BinarySearchTree<int> bstFromPreOrder = BinarySearchTree<int>.ConstructBstFromPreOrder(preOrderOfTree);
+            bstFromPreOrder.InorderTraversalRecursive();
+
             Console.ReadLine();
         }
+
     }
 }

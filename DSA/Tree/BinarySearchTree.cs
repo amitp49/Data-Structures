@@ -370,5 +370,32 @@ namespace Tree
 
             return currentRoot;
         }
+
+        public static BinarySearchTree<T> ConstructBstFromPreOrder(T[] preOrderOfTree)
+        {
+            int currentIndex = 0;
+            T min = (T) typeof(T).GetField("MinValue").GetValue(null);
+            T max = (T) typeof(T).GetField("MaxValue").GetValue(null);
+            BinaryTreeNode<T> root = ConstructBstFromPreOrderInternalUtil(preOrderOfTree,ref currentIndex,min,max);
+            return new BinarySearchTree<T>(root);
+        }
+
+        private static BinaryTreeNode<T> ConstructBstFromPreOrderInternalUtil(T[] preOrderOfTree, ref int currentIndex, T minValueAllowed, T maxValueAllowed)
+        {
+            if (currentIndex >= preOrderOfTree.Length)
+                return null;
+
+            BinaryTreeNode<T> newNode = null;
+            T currentKey = preOrderOfTree[currentIndex];
+            if ((currentKey.CompareTo(minValueAllowed) > 0) &&
+                (currentKey.CompareTo(maxValueAllowed) < 0))
+            {
+                newNode = new BinaryTreeNode<T>(currentKey);
+                currentIndex++;
+                newNode.Left = ConstructBstFromPreOrderInternalUtil(preOrderOfTree, ref currentIndex, minValueAllowed, currentKey);
+                newNode.Right = ConstructBstFromPreOrderInternalUtil(preOrderOfTree, ref currentIndex, currentKey, maxValueAllowed);
+            }
+            return newNode;
+        }
     }
 }
