@@ -107,6 +107,9 @@ namespace Tree
             BinarySearchTree<int> mergeBst = BinarySearchTree<int>.GetMergeTree(bstFromSll,bstFromArray);
             mergeBst.InorderTraversalRecursive();
 
+            int[] preOrderOfSomeTreeWithOnlyONeChildAtEachNode = new int[] { 20, 10, 11, 13, 12 };
+            Console.WriteLine("preOrderOfSomeTreeWithOnlyONeChildAtEachNode:" + 
+                BinarySearchTree<int>.IsPreOrderWithOnlyOneChildSatisfyBstProperty(preOrderOfSomeTreeWithOnlyONeChildAtEachNode));
             Console.ReadLine();
         }
     }

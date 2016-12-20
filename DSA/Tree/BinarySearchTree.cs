@@ -262,6 +262,34 @@ namespace Tree
             return mergeArray;
         }
 
+        public static bool IsPreOrderWithOnlyOneChildSatisfyBstProperty(T[] preOrder)
+        {
+            T min = (T) typeof(T).GetField("MinValue").GetValue(null);
+            T max = (T) typeof(T).GetField("MaxValue").GetValue(null);
+
+            if (preOrder.Length <= 2)
+                return true;
+
+            for (int i = 0; i < preOrder.Length - 2; i++)
+            {
+                if(preOrder[i].CompareTo(max) < 0 && preOrder[i].CompareTo(min)>0)
+                {
+                    if( preOrder[i].CompareTo(preOrder[i+1]) > 0) //we found new max limit
+                    {
+                        max = preOrder[i];
+                    } else if (preOrder[i].CompareTo(preOrder[i + 1]) < 0) //we found new max limit
+                    {
+                        min = preOrder[i];
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public override BinaryTreeNode<T> FindLowestCommonAncestor(T data1, T data2)
         {
             return FindLowestCommonAncestorInternalUtil(this.Root, data1, data2);
