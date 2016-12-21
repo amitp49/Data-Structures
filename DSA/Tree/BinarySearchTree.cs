@@ -134,10 +134,11 @@ namespace Tree
             if (currentRoot == null)
                 return null;
 
+            //TODO: Need to complete this.
             //DllNode<T> convertedNode = (DllNode<T>) currentRoot;
-            DoublyLinkedList<T> dll = new DoublyLinkedList<T>();
+            //DoublyLinkedList<T> dll = new DoublyLinkedList<T>();
 
-            return dll;
+            return null;
         }
 
         public override bool Contains(T data)

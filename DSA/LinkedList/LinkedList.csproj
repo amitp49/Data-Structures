@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DllNode.cs" />
     <Compile Include="DoublyLinkedList.cs" />
     <Compile Include="SinglyLinkedList.cs" />
     <Compile Include="SllNode.cs" />
