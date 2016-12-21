@@ -125,13 +125,14 @@ namespace Tree
             Console.WriteLine("preOrderOfSomeTreeWithOnlyONeChildAtEachNode:" + 
                 BinarySearchTree<int>.IsPreOrderWithOnlyOneChildSatisfyBstProperty(preOrderOfSomeTreeWithOnlyONeChildAtEachNode));
 
-            int[] preOrderOfTree = new int[] { 10, 5, 1, 7, 40, 50 };
+            int[] preOrderOfTree = new int[] { 8,10,12,15,16,20,25 };
             BinarySearchTree<int> bstFromPreOrder = BinarySearchTree<int>.ConstructBstFromPreOrder(preOrderOfTree);
             bstFromPreOrder.InorderTraversalRecursive();
 
-            bstFromPreOrder.BstToDll();
+            //bstFromPreOrder.BstToDll();
             //dll.Print();
 
+            BinarySearchTree<int>.FindPairWithSumAs(bstFromPreOrder.Root, 33);
             Console.ReadLine();
         }
 

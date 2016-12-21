@@ -545,5 +545,53 @@ namespace Tree
             }
             return newNode;
         }
+
+        public static void FindPairWithSumAs(BinaryTreeNode<int> root, int sum)
+        {
+            //Idea is to do parallel inorder and reverse inorder traversals
+            FindPairWithSumAsInternalUtil(root, root, sum);
+        }
+
+        private static void FindPairWithSumAsInternalUtil(BinaryTreeNode<int> forward, BinaryTreeNode<int> reverse, int sum)
+        {
+            if (forward == null && reverse == null)
+                return;
+
+            if (forward.Left != null && reverse.Right!=null)
+            {
+                FindPairWithSumAsInternalUtil(forward.Left, reverse.Right, sum);
+            }
+            else if (forward.Left != null)
+            {
+                FindPairWithSumAsInternalUtil(forward.Left, reverse, sum);
+            }
+            else if (reverse.Right != null)
+            {
+                FindPairWithSumAsInternalUtil(forward, reverse.Right, sum);
+            }
+            //Process - forward is starting from start, reverse is starting from end
+            if (forward.Data + reverse.Data == sum)
+            {
+                Console.WriteLine("Pair: " + forward.Data + " + " + reverse.Data + " = " + sum);
+            }
+            else if (forward.Data + reverse.Data > sum)
+            {
+                if (reverse.Left != null)
+                {
+                    FindPairWithSumAsInternalUtil(forward, reverse.Left, sum);
+                }
+            }
+            else if (forward.Data + reverse.Data < sum)
+            {
+                if (forward.Right != null)
+                {
+                    FindPairWithSumAsInternalUtil(forward.Right, reverse, sum);
+                }
+            }
+            if (forward.Right!=null && reverse.Left != null)
+            {
+                FindPairWithSumAsInternalUtil(forward.Right, reverse.Left, sum);
+            }
+        }
     }
 }
