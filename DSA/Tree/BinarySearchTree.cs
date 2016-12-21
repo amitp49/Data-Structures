@@ -121,24 +121,43 @@ namespace Tree
                 );
         }
 
-        public DoublyLinkedList<T> BstToDll()
+        public BinarySearchTree<T> BstToDll()
         {
-            DllNode<T> head = null;
-            DllNode<T> tail = null;
+            BinaryTreeNode<T> head = null;
+            BinaryTreeNode<T> tail = null;
 
-            return BstToDllInternalUtil(this.Root);
+            BstToDllInternalUtil(this.Root,ref head, ref tail);
+            return null;
         }
 
-        private DoublyLinkedList<T> BstToDllInternalUtil(BinaryTreeNode<T> currentRoot)
+        private void BstToDllInternalUtil(BinaryTreeNode<T> currentRoot,ref BinaryTreeNode<T> head,ref BinaryTreeNode<T> tail)
         {
             if (currentRoot == null)
-                return null;
+                return;
 
             //TODO: Need to complete this.
             //DllNode<T> convertedNode = (DllNode<T>) currentRoot;
             //DoublyLinkedList<T> dll = new DoublyLinkedList<T>();
 
-            return null;
+            BstToDllInternalUtil(currentRoot.Left,ref head,ref tail);
+
+            currentRoot.Left = tail;
+
+            if(head==null)
+            {
+                head = currentRoot;
+            }
+
+            if(tail!=null)
+            {
+                tail.Right = currentRoot;
+            }
+           
+            tail = currentRoot;
+
+            BstToDllInternalUtil(currentRoot.Right, ref head, ref tail);
+
+            return;
         }
 
         public override bool Contains(T data)

@@ -129,8 +129,8 @@ namespace Tree
             BinarySearchTree<int> bstFromPreOrder = BinarySearchTree<int>.ConstructBstFromPreOrder(preOrderOfTree);
             bstFromPreOrder.InorderTraversalRecursive();
 
-            DoublyLinkedList<int> dll = bstFromPreOrder.BstToDll();
-            dll.Print();
+            bstFromPreOrder.BstToDll();
+            //dll.Print();
 
             Console.ReadLine();
         }
