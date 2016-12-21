@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tree
+namespace Interfaces
 {
     public class NodeList<T> : Collection<TreeNode<T>> where T: IComparable
     {

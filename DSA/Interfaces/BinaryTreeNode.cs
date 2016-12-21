@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tree
+namespace Interfaces
 {
     public class BinaryTreeNode<T> : TreeNode<T> where T : IComparable
     {

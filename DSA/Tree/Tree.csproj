@@ -41,10 +41,7 @@
   <ItemGroup>
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="BinaryTree.cs" />
-    <Compile Include="BinaryTreeNode.cs" />
     <Compile Include="BTRunner.cs" />
-    <Compile Include="NodeList.cs" />
-    <Compile Include="TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

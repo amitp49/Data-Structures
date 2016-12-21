@@ -1,4 +1,5 @@
-﻿using LinkedList;
+﻿using Interfaces;
+using LinkedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -122,8 +123,21 @@ namespace Tree
 
         public DoublyLinkedList<T> BstToDll()
         {
-            return null;
-            //return BstToDllInternalUtil(this.Root);
+            DllNode<T> head = null;
+            DllNode<T> tail = null;
+
+            return BstToDllInternalUtil(this.Root);
+        }
+
+        private DoublyLinkedList<T> BstToDllInternalUtil(BinaryTreeNode<T> currentRoot)
+        {
+            if (currentRoot == null)
+                return null;
+
+            //DllNode<T> convertedNode = (DllNode<T>) currentRoot;
+            DoublyLinkedList<T> dll = new DoublyLinkedList<T>();
+
+            return dll;
         }
 
         public override bool Contains(T data)
