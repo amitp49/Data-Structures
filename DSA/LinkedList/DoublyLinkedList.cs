@@ -15,29 +15,24 @@ namespace LinkedList
             private set {head = value;}
         }
 
+        public DllNode<T> Tail { get; set; }
         public DoublyLinkedList()
         {
             this.Head = null;
+            this.Tail = null;
         }
 
-        public DoublyLinkedList(DllNode<T> someHeadOfOtherList)
+        public DoublyLinkedList(DllNode<T> someHeadOfOtherList,DllNode<T> tailOfOtherList)
         {
             this.Head = someHeadOfOtherList;
+            this.Tail = tailOfOtherList;
         }
 
         public void PushToHead(T data)
         {
             //Allocate new node
             DllNode<T> newNode = new DllNode<T>(data);
-
-            //Append whole list behind new node
-            newNode.Next = Head;
-            newNode.Prev = null;
-
-            if(Head!=null)
-                Head.Prev = newNode;
-            //Make new node as head of the list
-            Head = newNode;
+            this.PushToHead(newNode);
         }
 
         public void PushToHead(DllNode<T> newNode)
@@ -45,8 +40,15 @@ namespace LinkedList
             //Append whole list behind new node
             newNode.Next = Head;
 
+            if (this.Tail == null)
+            {
+                this.Tail = newNode;
+            }
+
             if (Head != null)
+            {
                 Head.Prev = newNode;
+            }
 
             //Make new node as head of the list
             Head = newNode;
@@ -77,7 +79,7 @@ namespace LinkedList
 
             if (prevNode==null) //node to be deleted is head
             {
-                this.Head = nextNode;
+                this.Head = null;
             }
             else
             {
@@ -88,7 +90,10 @@ namespace LinkedList
             {
                 nextNode.Prev = prevNode;
             }
-
+            else //if(nextNode==null) //node to be deleted is last node
+            {
+                this.Tail = null;
+            }
             return node;
         }
     }
