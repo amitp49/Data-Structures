@@ -51,9 +51,12 @@ namespace Arrays
             {
                 Console.WriteLine("(" + item.Start + "," + item.End + ")");
             }
+
+            int[] arr = new int[] {1, 4, 45, 6, 10, 8};
+            ArrayAlgos.FindTripletsHavingSumAs(arr,22);
+
             Console.ReadLine();
 
-            
         }
     }
 }

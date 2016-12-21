@@ -21,7 +21,7 @@ namespace DSA
             //linkedListRunner.Run();
 
             IRunner btRunner = new BTRunner();
-            btRunner.Run();
+            //btRunner.Run();
 
             IRunner stackRunner = new StackRunner();
             //stackRunner.Run();
@@ -30,7 +30,7 @@ namespace DSA
             //queueRunner.Run();
 
             IRunner arrayRunner = new ArrayRunner();
-            //arrayRunner.Run();
+            arrayRunner.Run();
 
             IRunner stringRunner = new StringRunner();
             stringRunner.Run();

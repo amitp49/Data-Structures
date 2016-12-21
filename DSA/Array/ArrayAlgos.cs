@@ -9,6 +9,37 @@ namespace Arrays
 {
     public class ArrayAlgos
     {
+        public static void FindTripletsHavingSumAs(int[] arr, int Sum)
+        {
+            Array.Sort(arr);
+            int size = arr.Length;
+
+            for (int index = 0; index < size-2; index++)
+            {
+                int current = arr[index];
+                int remaining = Sum - current;
+                int i = index + 1;
+                int j = size - 1;
+
+                while (i < j)
+                {
+                    if(arr[i]+arr[j]==remaining)
+                    {
+                        Console.WriteLine("Triplet: " + arr[i] + " + " + arr[j] + " + " + current + " = " + Sum );
+                        i++;
+                        j--;
+                    }
+                    else if(arr[i]+arr[j] < remaining)
+                    {
+                        i++;
+                    }
+                    else // if(arr[i]+arr[j] > remaining)
+                    {
+                        j--;
+                    }
+                }
+            }
+        }
         public static List<Interval> GetOverLappingIntervals(List<Interval> listOfIntervals)
         {
             List<Interval> listOfMergedInterval = new List<Interval>();
