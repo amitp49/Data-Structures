@@ -133,6 +133,9 @@ namespace Tree
             //dll.Print();
 
             BinarySearchTree<int>.FindPairWithSumAs(bstFromPreOrder.Root, 33);
+
+            bstFromPreOrder.RemoveOutsideRangeNodes(10,18);
+            bstFromPreOrder.InorderTraversalRecursive();
             Console.ReadLine();
         }
 

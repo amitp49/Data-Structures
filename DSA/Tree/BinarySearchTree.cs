@@ -546,6 +546,40 @@ namespace Tree
             return newNode;
         }
 
+        public void RemoveOutsideRangeNodes(T min, T max)
+        {
+            this.Root = RemoveOutsideRangeNodesInternalUtil(this.Root,min,max);
+        }
+
+        private BinaryTreeNode<T> RemoveOutsideRangeNodesInternalUtil(BinaryTreeNode<T> current, T min, T max)
+        {
+            if (current == null)
+                return null;
+
+            //User post order
+
+            current.Left = RemoveOutsideRangeNodesInternalUtil(current.Left, min, max);
+            current.Right = RemoveOutsideRangeNodesInternalUtil(current.Right, min, max);
+
+            //Process
+            if(current.Data.CompareTo(min) < 0)
+            {
+                //remove lesser than min
+                return current.Right;
+            }
+            else if (current.Data.CompareTo(max) > 0)
+            {
+                //remove greater than max
+                return current.Left;
+
+            }
+            else // if (current.Data.CompareTo(min) == 0)
+            {
+                //no processing needed
+                return current;
+            }
+        }
+
         public static void FindPairWithSumAs(BinaryTreeNode<int> root, int sum)
         {
             //Idea is to do parallel inorder and reverse inorder traversals
