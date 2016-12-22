@@ -59,5 +59,34 @@ namespace Tree
             }
         }
 
+        public BinaryTreeNode<T> KthSmallestNodeInOrderOfHeightTime(int k)
+        {
+            return KthSmallestNodeInOrderOfHeightTimeInternalUtil(this.Root, k);
+        }
+
+        private BinaryTreeNode<T> KthSmallestNodeInOrderOfHeightTimeInternalUtil(BinaryTreeNode<T> currentRoot, int k)
+        {
+            if (currentRoot == null)
+                return null;
+
+            //Inorder processing
+            if ( (currentRoot.AddOns!=null && currentRoot.AddOns[0] == k-1) ||
+                (k==1))
+            {
+                return currentRoot;
+            }
+            else if ( (currentRoot.AddOns != null &&  currentRoot.AddOns[0] > k - 1) ||
+                (1 > k))
+            {
+                return KthSmallestNodeInOrderOfHeightTimeInternalUtil(currentRoot.Left, k);
+            }
+            else if ( (currentRoot.AddOns != null &&  currentRoot.AddOns[0] < k - 1) ||
+            (1< k))
+            {
+                return KthSmallestNodeInOrderOfHeightTimeInternalUtil(currentRoot.Right, k - (currentRoot.AddOns[0] + 1)); //left subtree + root counted
+            }
+
+            return null;
+        }
     }
 }

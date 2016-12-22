@@ -147,7 +147,7 @@ namespace Tree
             augmentedBst.Insert(80);
 
             augmentedBst.InorderTraversalRecursive();
-
+            Console.WriteLine("2nd element: " + augmentedBst.KthSmallestNodeInOrderOfHeightTime(5).Data);
             Console.ReadLine();
         }
 
