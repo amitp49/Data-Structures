@@ -71,13 +71,13 @@ namespace Tree
             return root;
         }
 
-        public BinaryTreeNode<T> Insert(T newData)
+        public virtual BinaryTreeNode<T> Insert(T newData)
         {
             BinaryTreeNode<T> newNode = new BinaryTreeNode<T>(newData);
             return this.Insert(newNode);
         }
 
-        public BinaryTreeNode<T> Insert(BinaryTreeNode<T> newNode)
+        public virtual BinaryTreeNode<T> Insert(BinaryTreeNode<T> newNode)
         {
             this.Root = this.InsertInternalUtil(this.Root, newNode); //Citical .. root can change
             return newNode;
@@ -91,14 +91,26 @@ namespace Tree
             }
             else if(currentRoot.Data.CompareTo(newNode.Data) > 0) //go to left
             {
+                BranchingToLeftAddOnHook(currentRoot,newNode);
                 currentRoot.Left = InsertInternalUtil(currentRoot.Left, newNode);
             }
             else if (currentRoot.Data.CompareTo(newNode.Data) < 0) //go to right
             {
+                BranchingToRightAddOnHook(currentRoot, newNode);
                 currentRoot.Right = InsertInternalUtil(currentRoot.Right, newNode);
             }
 
             return currentRoot;
+        }
+
+        public virtual void BranchingToRightAddOnHook(BinaryTreeNode<T> currentRoot, BinaryTreeNode<T> newNode)
+        {
+            //Allow child classes to do extra logic if they want on right branching
+        }
+
+        public virtual void BranchingToLeftAddOnHook(BinaryTreeNode<T> currentRoot, BinaryTreeNode<T> newNode)
+        {
+            //Allow child classes to do extra logic if they want on left branching
         }
 
         public bool IsBst()
@@ -526,6 +538,32 @@ namespace Tree
             T max = (T) typeof(T).GetField("MaxValue").GetValue(null);
             BinaryTreeNode<T> root = ConstructBstFromPreOrderInternalUtil(preOrderOfTree,ref currentIndex,min,max);
             return new BinarySearchTree<T>(root);
+        }
+
+        public BinaryTreeNode<T> KthLargestElement(int K)
+        {
+            int count = 0;
+            BinaryTreeNode<T> kthNode = KthLargestElementInternalUtil(this.Root, K, ref count);
+            return kthNode;
+        }
+
+        private BinaryTreeNode<T> KthLargestElementInternalUtil(BinaryTreeNode<T> current, int K, ref int count)
+        {
+            if (current == null)
+                return null;
+
+            //Reverse in order
+            BinaryTreeNode<T> leftReturnNode = KthLargestElementInternalUtil(current, K, ref count);
+
+            if(leftReturnNode!=null)
+            {
+                return leftReturnNode;
+            }
+            count++;
+            if (K == count)
+                return current;
+
+            return KthLargestElementInternalUtil(current, K, ref count);
         }
 
         private static BinaryTreeNode<T> ConstructBstFromPreOrderInternalUtil(T[] preOrderOfTree, ref int currentIndex, T minValueAllowed, T maxValueAllowed)

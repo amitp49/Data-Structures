@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AugmentedBtNode.cs" />
     <Compile Include="BinaryTreeNode.cs" />
+    <Compile Include="DataList.cs" />
     <Compile Include="DllNode.cs" />
     <Compile Include="Interval.cs" />
     <Compile Include="IRunner.cs" />

@@ -10,6 +10,7 @@ namespace Interfaces
     {
         private T data;
         private NodeList<T> neighbors;
+        private DataList addOns;
 
         public T Data
         {
@@ -22,16 +23,32 @@ namespace Interfaces
             get { return neighbors; } 
             set{neighbors = value;}
         }
+
+        public DataList AddOns
+        {
+            get { return addOns; }
+            set { addOns = value; }
+        }
+
         public TreeNode(T data)
         {
             this.Data = data;
             this.Neighbors = null;
+            this.AddOns = null;
         }
 
         public TreeNode(T data, NodeList<T> neighbors)
         {
             this.Data = data;
             this.Neighbors = neighbors;
+            this.AddOns = null;
+        }
+
+        public TreeNode(T data, NodeList<T> neighbors, DataList addOns)
+        {
+            this.Data = data;
+            this.Neighbors = neighbors;
+            this.AddOns = addOns;
         }
     }
 }

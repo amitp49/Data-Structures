@@ -136,6 +136,18 @@ namespace Tree
 
             bstFromPreOrder.RemoveOutsideRangeNodes(10,18);
             bstFromPreOrder.InorderTraversalRecursive();
+
+            AugmentedBst<int> augmentedBst = new AugmentedBst<int>();
+            augmentedBst.Insert(50);
+            augmentedBst.Insert(30);
+            augmentedBst.Insert(20);
+            augmentedBst.Insert(40);
+            augmentedBst.Insert(70);
+            augmentedBst.Insert(60);
+            augmentedBst.Insert(80);
+
+            augmentedBst.InorderTraversalRecursive();
+
             Console.ReadLine();
         }
 
