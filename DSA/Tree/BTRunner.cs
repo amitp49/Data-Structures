@@ -98,19 +98,23 @@ namespace Tree
             Console.WriteLine("Ceil for 50:" + binarySearchTree.Ceil(50));
             Console.WriteLine("CeilIterative for 51:" + binarySearchTree.CeilIterative(51));
             Console.WriteLine("FloorIterative for 49:" + binarySearchTree.FloorIterative(49));
+            
+            SinglyLinkedList<int> sortedLinkedList = new SinglyLinkedList<int>();
+            sortedLinkedList.PushToHead(70);
+            sortedLinkedList.PushToHead(60);
+            sortedLinkedList.PushToHead(50);
+            sortedLinkedList.PushToHead(40);
+            sortedLinkedList.PushToHead(30);
+            sortedLinkedList.PushToHead(20);
+            sortedLinkedList.PushToHead(10);
+            BinarySearchTree<int> bstFromSll = BinarySearchTree<int>.GetBstFromSortedList(sortedLinkedList);
+            bstFromSll.InorderTraversalRecursive();
+
+            BinarySearchTree<int>.PrintCommonNodes(binarySearchTree, bstFromSll);
+
             binarySearchTree.AddGreaterNodeSum();
             binarySearchTree.InorderTraversalRecursive();
 
-            SinglyLinkedList<int> sortedLinkedList = new SinglyLinkedList<int>();
-            sortedLinkedList.PushToHead(7);
-            sortedLinkedList.PushToHead(6);
-            sortedLinkedList.PushToHead(5);
-            sortedLinkedList.PushToHead(4);
-            sortedLinkedList.PushToHead(3);
-            sortedLinkedList.PushToHead(2);
-            sortedLinkedList.PushToHead(1);
-            BinarySearchTree<int> bstFromSll = BinarySearchTree<int>.GetBstFromSortedList(sortedLinkedList);
-            bstFromSll.InorderTraversalRecursive();
 
             int[] sortedArray = new int[7] {1,2,3,4,5,6,7};
             BinarySearchTree<int> bstFromArray = BinarySearchTree<int>.GetBstFromSortedArray(sortedArray);
@@ -134,7 +138,7 @@ namespace Tree
 
             BinarySearchTree<int>.FindPairWithSumAs(bstFromPreOrder.Root, 33);
 
-            bstFromPreOrder.RemoveOutsideRangeNodes(10,18);
+            bstFromPreOrder.RemoveOutsideRangeNodes(10,26);
             bstFromPreOrder.InorderTraversalRecursive();
 
             AugmentedBst<int> augmentedBst = new AugmentedBst<int>();
@@ -147,7 +151,9 @@ namespace Tree
             augmentedBst.Insert(80);
 
             augmentedBst.InorderTraversalRecursive();
-            Console.WriteLine("2nd element: " + augmentedBst.KthSmallestNodeInOrderOfHeightTime(5).Data);
+            Console.WriteLine("5th element: " + augmentedBst.KthSmallestNodeInOrderOfHeightTime(5).Data);
+
+
             Console.ReadLine();
         }
 

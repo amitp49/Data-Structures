@@ -618,6 +618,57 @@ namespace Tree
             }
         }
 
+        public static void PrintCommonNodes(BinarySearchTree<T> first, BinarySearchTree<T> second)
+        {
+            PrintCommonNodesIntenalUtil(first.Root, second.Root);
+        }
+        //TODO: Not working
+        private static void PrintCommonNodesIntenalUtil(BinaryTreeNode<T> binaryTreeNode1, BinaryTreeNode<T> binaryTreeNode2)
+        {
+            //Base
+            if (binaryTreeNode1 == null && binaryTreeNode2 == null)
+                return;
+
+            //Left
+            if (binaryTreeNode1.Left != null && binaryTreeNode2.Left != null)
+            {
+                PrintCommonNodesIntenalUtil(binaryTreeNode1.Left, binaryTreeNode2.Left);
+            }
+            else if (binaryTreeNode1.Left != null)
+            {
+                PrintCommonNodesIntenalUtil(binaryTreeNode1.Left, binaryTreeNode2);
+            }
+            else if (binaryTreeNode2.Left != null)
+            {
+                PrintCommonNodesIntenalUtil(binaryTreeNode1, binaryTreeNode2.Left);
+            }
+
+            //Process
+            if (binaryTreeNode1.Data.CompareTo(binaryTreeNode2.Data) == 0)
+            {
+                Console.WriteLine("Common: " + binaryTreeNode1.Data);
+                //right
+                //if (binaryTreeNode1.Right != null && binaryTreeNode2.Right != null)
+                {
+                    PrintCommonNodesIntenalUtil(binaryTreeNode1.Right, binaryTreeNode2.Right);
+                }
+            }
+            else if (binaryTreeNode1.Data.CompareTo(binaryTreeNode2.Data) > 0)
+            {
+                //if (binaryTreeNode2.Right != null)
+                {
+                    PrintCommonNodesIntenalUtil(binaryTreeNode1, binaryTreeNode2.Right);
+                }
+            }
+            else if (binaryTreeNode1.Data.CompareTo(binaryTreeNode2.Data) < 0)
+            {
+                //if (binaryTreeNode1.Right != null)
+                {
+                    PrintCommonNodesIntenalUtil(binaryTreeNode1.Right, binaryTreeNode2);
+                }
+            }
+        }
+
         public static void FindPairWithSumAs(BinaryTreeNode<int> root, int sum)
         {
             //Idea is to do parallel inorder and reverse inorder traversals
