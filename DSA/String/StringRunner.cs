@@ -11,6 +11,8 @@ namespace String
     {
         public void Run()
         {
+            StringAlgos.PrintAllPermutations("ACB");
+            Console.ReadKey();
         }
     }
 }
