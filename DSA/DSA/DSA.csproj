@@ -76,6 +76,10 @@
       <Project>{d3fbedae-0c9f-4162-87da-8bd3bcfc0046}</Project>
       <Name>Tree</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Graphs\Graphs.csproj">
+      <Project>{CCBD689A-F3A5-4938-A8D9-64CDFF17DAD6}</Project>
+      <Name>Graphs</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

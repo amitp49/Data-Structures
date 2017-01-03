@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tree;
+using Graphs;
 
 namespace DSA
 {
@@ -30,11 +31,13 @@ namespace DSA
             //queueRunner.Run();
 
             IRunner arrayRunner = new ArrayRunner();
-            arrayRunner.Run();
+            //arrayRunner.Run();
 
             IRunner stringRunner = new StringRunner();
             //stringRunner.Run();
 
-        }
+			IRunner graphRunner = new GraphRunner();
+			graphRunner.Run();
+		}
     }
 }
