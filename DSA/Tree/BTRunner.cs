@@ -120,7 +120,7 @@ namespace Tree
             BinarySearchTree<int> bstFromArray = BinarySearchTree<int>.GetBstFromSortedArray(sortedArray);
             bstFromArray.InorderTraversalRecursive();
 
-            int[] arr = binarySearchTree.GetInorderTraversal();
+            binarySearchTree.GetInorderTraversal();
 
             BinarySearchTree<int> mergeBst = BinarySearchTree<int>.GetMergeTree(bstFromSll,bstFromArray);
             mergeBst.InorderTraversalRecursive();

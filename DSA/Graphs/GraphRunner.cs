@@ -50,19 +50,26 @@ namespace Graphs
 			Console.WriteLine("Connected component count: {0}",graph.GetConnectedComponentCountUsingDFSLogic());
 			Console.WriteLine("-------------------");
 
-			GraphAdj cyclicGraph = new GraphAdj(4);
-			cyclicGraph.AddDirectedEdge(0, 1);
-			cyclicGraph.AddDirectedEdge(0, 2);
-			cyclicGraph.AddDirectedEdge(1, 2);
-			cyclicGraph.AddDirectedEdge(2, 0);
-			cyclicGraph.AddDirectedEdge(2, 3);
-			cyclicGraph.AddDirectedEdge(3, 3);
-			bool isCyclic = cyclicGraph.IsCyclicUsingDFSTraversalLogic();
+			bool isCyclic = graph.IsCyclicUsingDFSTraversalLogic();
 
 			if (isCyclic == true)
 			{
 				Console.WriteLine("Graph is cyclic...");
 			}
+			Console.WriteLine("-------------------");
+
+			GraphAdj undirectedGraph = new GraphAdj(4);
+			undirectedGraph.AddUnDirectedEdge(0, 1);
+			undirectedGraph.AddUnDirectedEdge(1, 2);
+			undirectedGraph.AddUnDirectedEdge(2, 0);
+
+			bool isCyclicUndirected = graph.IsCyclicUsingUnionFind();
+
+			if (isCyclicUndirected == true)
+			{
+				Console.WriteLine("Undirected Graph is cyclic using union find...");
+			}
+
 			Console.ReadKey();
 		}
 	}

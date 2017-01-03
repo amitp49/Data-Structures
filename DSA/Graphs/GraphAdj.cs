@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Security.Cryptography;
+using UnionFind;
+
 namespace Graphs
 {
 	public class GraphAdj
@@ -73,7 +75,7 @@ namespace Graphs
 		{
 			if (startNode >= V)
 				return;
-
+			
 			Queue<int> queue = new Queue<int>();
 			queue.Enqueue(startNode);
 			visited[startNode] = true; // mark as visited while enqueu, not dequeue to avoid infinite loop due to self loop 
@@ -253,6 +255,30 @@ namespace Graphs
 			}
 
 			stillInProgressAndPresentInRecurionStack[currentVertex] = false; // mark it black - completed
+			return false;
+		}
+
+		public bool IsCyclicUsingUnionFind()
+		{
+			UnionFindDs unionFind = new UnionFindDs(this.V);
+
+			for (int fromVertex = 0; fromVertex < this.V; fromVertex++)
+			{
+				foreach (var adjacentVertex in adj[fromVertex])
+				{
+					//for each edge , we are running it
+					int x = unionFind.Find(fromVertex);
+					int y = unionFind.Find(adjacentVertex);
+					if (x == y) // in same group
+					{
+						return true; //cycle found
+					}
+					else
+					{
+						unionFind.Union(fromVertex,adjacentVertex);
+					}
+				}
+			}
 			return false;
 		}
 	}

@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CCBD689A-F3A5-4938-A8D9-64CDFF17DAD6}</ProjectGuid>
+    <ProjectGuid>{7132C10C-274D-443C-BDD8-EE9C75039952}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Graphs</RootNamespace>
-    <AssemblyName>Graphs</AssemblyName>
+    <RootNamespace>UnionFind</RootNamespace>
+    <AssemblyName>UnionFind</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,19 +30,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GraphAdj.cs" />
+    <Compile Include="UnionFindDs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GraphRunner.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
-      <Project>{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}</Project>
-      <Name>Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UnionFind\UnionFind.csproj">
-      <Project>{7132C10C-274D-443C-BDD8-EE9C75039952}</Project>
-      <Name>UnionFind</Name>
-    </ProjectReference>
+    <Compile Include="Group.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

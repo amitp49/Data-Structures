@@ -98,7 +98,7 @@ namespace Tree
         {
             int size = 0;
             //Use reflection to get min and max value
-            bool isBst = LargestBstSubtreeInternalUtil(this.Root,
+            LargestBstSubtreeInternalUtil(this.Root,
                 (T)typeof(T).GetField("MinValue").GetValue(null),
                 (T)typeof(T).GetField("MaxValue").GetValue(null),
                 ref size);
