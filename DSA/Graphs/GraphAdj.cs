@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Security.Cryptography;
 namespace Graphs
 {
 	public class GraphAdj
@@ -91,6 +92,36 @@ namespace Graphs
 					DFSTraversalInternalUtil(adj[currentVertex][i], visited, dfsTraversalList);
 				}
 			}
+		}
+
+		public bool IsReachableUsingDFSLogic(int from, int to)
+		{
+			bool[] visited = new bool[this.V];
+			bool isReachable = IsReachableUsingDFSLogicInternalUtil(from,to,visited);
+			return isReachable;
+		}
+
+		private bool IsReachableUsingDFSLogicInternalUtil(int currentVertex, int targetedVertex, bool[] visited)
+		{
+			if (visited[currentVertex] == true)
+				return false;
+			
+			if (currentVertex == targetedVertex)
+				return true;
+			
+			visited[currentVertex] = true;
+
+			foreach (var adjacentVertex in adj[currentVertex])
+			{
+				if (visited[adjacentVertex] == false)
+				{
+					bool isReachable = IsReachableUsingDFSLogicInternalUtil(adjacentVertex,targetedVertex,visited);
+					if (isReachable == true)
+						return true;
+				}
+			}
+
+			return false;
 		}
 
 		public bool IsCyclicUsingDFSTraversalLogic()

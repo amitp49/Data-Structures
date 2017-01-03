@@ -25,6 +25,15 @@ namespace Graphs
 			{
 				Console.WriteLine(dfsList[i] + ", ");
 			}
+
+			int from = 1;
+			int to = 3;
+			bool isReachable = graph.IsReachableUsingDFSLogic(from, to);
+			if (isReachable == true)
+			{
+				Console.WriteLine("{0} is reachable from {1}",to, from);
+			}
+
 			Console.WriteLine("-------------------");
 
 
