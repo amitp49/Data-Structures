@@ -12,13 +12,14 @@ namespace Graphs
 
 		public void Run()
 		{
-			GraphAdj graph = new GraphAdj(4);
+			GraphAdj graph = new GraphAdj(6);
 			graph.AddDirectedEdge(0, 1);
 			graph.AddDirectedEdge(0, 2);
 			graph.AddDirectedEdge(1, 2);
 			graph.AddDirectedEdge(2, 0);
 			graph.AddDirectedEdge(2, 3);
 			graph.AddDirectedEdge(3, 3);
+			graph.AddDirectedEdge(4, 5);
 			List<int> dfsList = graph.DFSTraversal(2);
 
 			for (int i = 0; i < dfsList.Count; i++)
@@ -36,7 +37,6 @@ namespace Graphs
 			{
 				Console.WriteLine("{0} is reachable from {1}",to, from);
 			}
-
 			Console.WriteLine("-------------------");
 
 			List<int> bfsList = graph.BFSTraversal(2);
@@ -45,9 +45,10 @@ namespace Graphs
 			{
 				Console.WriteLine(bfsList[i] + ", ");
 			}
-
 			Console.WriteLine("-------------------");
 
+			Console.WriteLine("Connected component count: {0}",graph.GetConnectedComponentCountUsingDFSLogic());
+			Console.WriteLine("-------------------");
 
 			GraphAdj cyclicGraph = new GraphAdj(4);
 			cyclicGraph.AddDirectedEdge(0, 1);

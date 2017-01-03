@@ -51,11 +51,28 @@ namespace Graphs
 
 		public List<int> BFSTraversal(int startNode)
 		{
-			if (startNode >= V)
-				return null;
-
-			List<int> bfsTraversalList = new List<int>();
 			bool[] visited = new bool[this.V];
+			List<int> bfsTraversalList = new List<int>();
+
+			BFSTraversalInternalIterative(startNode, visited, bfsTraversalList);
+
+			for (int i = 0; i < this.V; i++)
+			{
+				if (i != startNode) // don't process tree having start node again
+				{
+					if (visited[i] == false)
+					{
+						BFSTraversalInternalIterative(i,visited,bfsTraversalList);
+					}
+				}
+			}
+			return bfsTraversalList;
+		}
+
+		public void BFSTraversalInternalIterative(int startNode,bool[] visited, List<int> bfsTraversalList)
+		{
+			if (startNode >= V)
+				return;
 
 			Queue<int> queue = new Queue<int>();
 			queue.Enqueue(startNode);
@@ -75,7 +92,6 @@ namespace Graphs
 					}
 				}
 			}
-			return bfsTraversalList;
 		}
 
 		public List<int> DFSTraversal()
@@ -124,6 +140,43 @@ namespace Graphs
 				if (visited[adjacentVertex]  == false) //not visited yet
 				{
 					DFSTraversalInternalUtil(adj[currentVertex][i], visited, dfsTraversalList);
+				}
+			}
+		}
+
+		public int GetConnectedComponentCountUsingDFSLogic()
+		{
+			int count = 0;
+			bool[] visited = new bool[this.V];
+
+			//loop over all vertex in case if there are disconnected trees, we want to increment components
+
+			for (int i = 0; i < this.V; i++)
+			{
+				if (visited[i] == false)
+				{
+					count++;
+					GetConnectedComponentCountUsingDFSLogicInternalUtil(i, visited);
+				}
+			}
+
+			return count;
+		}
+
+		private void GetConnectedComponentCountUsingDFSLogicInternalUtil(int currentVertex, bool[] visited)
+		{
+			if (visited[currentVertex] == true)
+				return;
+
+			visited[currentVertex] = true;
+
+			for (int i = 0; i < adj[currentVertex].Count; i++)
+			{
+				int adjacentVertex = adj[currentVertex][i];
+
+				if (visited[adjacentVertex] == false) //not visited yet
+				{
+					GetConnectedComponentCountUsingDFSLogicInternalUtil(adj[currentVertex][i], visited);
 				}
 			}
 		}
