@@ -26,12 +26,24 @@ namespace Graphs
 				Console.WriteLine(dfsList[i] + ", ");
 			}
 
+			Console.WriteLine("-------------------");
+
+
 			int from = 1;
 			int to = 3;
 			bool isReachable = graph.IsReachableUsingDFSLogic(from, to);
 			if (isReachable == true)
 			{
 				Console.WriteLine("{0} is reachable from {1}",to, from);
+			}
+
+			Console.WriteLine("-------------------");
+
+			List<int> bfsList = graph.BFSTraversal(2);
+
+			for (int i = 0; i < bfsList.Count; i++)
+			{
+				Console.WriteLine(bfsList[i] + ", ");
 			}
 
 			Console.WriteLine("-------------------");

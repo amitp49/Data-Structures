@@ -44,6 +44,40 @@ namespace Graphs
 			adj[to].Add(from);
 		}
 
+		public List<int> BFSTraversal()
+		{
+			return BFSTraversal(0);
+		}
+
+		public List<int> BFSTraversal(int startNode)
+		{
+			if (startNode >= V)
+				return null;
+
+			List<int> bfsTraversalList = new List<int>();
+			bool[] visited = new bool[this.V];
+
+			Queue<int> queue = new Queue<int>();
+			queue.Enqueue(startNode);
+			visited[startNode] = true; // mark as visited while enqueu, not dequeue to avoid infinite loop due to self loop 
+
+			while (queue.Count>0)
+			{
+				int currentVertex = queue.Dequeue();
+				bfsTraversalList.Add(currentVertex);
+
+				foreach (var adjacentVertex in adj[currentVertex])
+				{
+					if (visited[adjacentVertex] == false)
+					{
+						queue.Enqueue(adjacentVertex);
+						visited[adjacentVertex] = true; //to avoid self loops, mark it as visited
+					}
+				}
+			}
+			return bfsTraversalList;
+		}
+
 		public List<int> DFSTraversal()
 		{
 			return DFSTraversal(0); //start from zero by default
