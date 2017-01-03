@@ -25,7 +25,22 @@ namespace Graphs
 			{
 				Console.WriteLine(dfsList[i] + ", ");
 			}
+			Console.WriteLine("-------------------");
 
+
+			GraphAdj cyclicGraph = new GraphAdj(4);
+			cyclicGraph.AddDirectedEdge(0, 1);
+			cyclicGraph.AddDirectedEdge(0, 2);
+			cyclicGraph.AddDirectedEdge(1, 2);
+			cyclicGraph.AddDirectedEdge(2, 0);
+			cyclicGraph.AddDirectedEdge(2, 3);
+			cyclicGraph.AddDirectedEdge(3, 3);
+			bool isCyclic = cyclicGraph.IsCyclicUsingDFSTraversalLogic();
+
+			if (isCyclic == true)
+			{
+				Console.WriteLine("Graph is cyclic...");
+			}
 			Console.ReadKey();
 		}
 	}

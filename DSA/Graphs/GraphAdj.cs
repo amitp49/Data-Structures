@@ -93,6 +93,50 @@ namespace Graphs
 			}
 		}
 
+		public bool IsCyclicUsingDFSTraversalLogic()
+		{
+			bool[] visited = new bool[this.V];
+			bool[] stillInProgressAndPresentInRecurionStack = new bool[this.V];
+
+			for (int i = 0; i < this.V; i++)
+			{
+				bool cycleInThisSubtree = IsCyclicUsingDFSTraversalLogicInternalUtil(i, visited, stillInProgressAndPresentInRecurionStack); //start from 0
+				if (cycleInThisSubtree == true)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private bool IsCyclicUsingDFSTraversalLogicInternalUtil(int currentVertex, bool[] visited, bool[] stillInProgressAndPresentInRecurionStack)
+		{
+			if (visited[currentVertex] == true)
+				return false;
+
+			visited[currentVertex] = true;
+			stillInProgressAndPresentInRecurionStack[currentVertex] = true; // mark it gray - in progess
+
+			foreach (var adjacentVertex in adj[currentVertex])
+			{
+				if (visited[adjacentVertex] == false) // still first time encounter - color white
+				{
+					bool isCycleInAnyChild = IsCyclicUsingDFSTraversalLogicInternalUtil(adjacentVertex, visited, stillInProgressAndPresentInRecurionStack);
+					if (isCycleInAnyChild == true)
+					{
+						return true;
+					}
+				}
+				else if (stillInProgressAndPresentInRecurionStack[adjacentVertex]==true) // in progress would always be visited, but not vice versa
+				{
+					return true;
+				}
+			}
+
+			stillInProgressAndPresentInRecurionStack[currentVertex] = false; // mark it black - completed
+			return false;
+		}
 	}
 }
 
