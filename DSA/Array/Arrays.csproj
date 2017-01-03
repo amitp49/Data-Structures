@@ -43,6 +43,7 @@
     <Compile Include="ArrayAlgos.cs" />
     <Compile Include="ArrayRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Heap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">

@@ -9,54 +9,61 @@ namespace Arrays
 {
     public class ArrayRunner : IRunner
     {
-        public void Run()
-        {
-            MyArray<int> myArray = new MyArray<int>(16) 
-            { 
-                Arr = new int[] {12,15,10,11,5,6,2,3,2,2,2,2,2,2,2,2} 
-            };
-            myArray.PrintElementsWhichDoesntHaveAnyHigerOnTheirRight();
+		void IRunner.Run()
+		{
+			Heap heap = new Heap(new int[] { 12, 15, 10, 11, 5, 6, 2 }, HeapType.MinHeap);
+			heap.Sort();
+			foreach (var item in heap.arr)
+			{
+				Console.WriteLine(item + ", ");
+			}
 
-            int sum = 15;
-            //myArray.PrintElementsHavingSumAs(sum);
-            myArray.PrintElementsHavingSumAsUsingDictionary(sum);
+			MyArray<int> myArray = new MyArray<int>(16)
+			{
+				Arr = new int[] { 12, 15, 10, 11, 5, 6, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2 }
+			};
+			myArray.PrintElementsWhichDoesntHaveAnyHigerOnTheirRight();
 
-            Console.WriteLine("Majority element : " +  myArray.FindMajorityElement());
+			int sum = 15;
+			//myArray.PrintElementsHavingSumAs(sum);
+			myArray.PrintElementsHavingSumAsUsingDictionary(sum);
 
-            MyArray<int> myArray2 = new MyArray<int>(9)
-            {
-                Arr = new int[] { 5,5,2,2,2,2,6,6,6 }
-            };
-            Console.WriteLine("Odd occurance from array where all other are even is:" + myArray2.FindOddOccuranceNumberFromEvenArray());
+			Console.WriteLine("Majority element : " + myArray.FindMajorityElement());
 
-            myArray2.LeftRotate(3);
-            myArray2.Print();
+			MyArray<int> myArray2 = new MyArray<int>(9)
+			{
+				Arr = new int[] { 5, 5, 2, 2, 2, 2, 6, 6, 6 }
+			};
+			Console.WriteLine("Odd occurance from array where all other are even is:" + myArray2.FindOddOccuranceNumberFromEvenArray());
 
-            bool[,] knows = new bool[4,4] {
-                {false,false,false,false},
-                {false,false,false,false},
-                {false,false,false,false},
-                {false,false,false,false}
-            };
-            ArrayAlgos.PrintCelebrity(knows);
+			myArray2.LeftRotate(3);
+			myArray2.Print();
 
-            List<Interval> listOfIntervals = new List<Interval>();
-            listOfIntervals.Add(new Interval(6, 8));
-            listOfIntervals.Add(new Interval(1, 9));
-            listOfIntervals.Add(new Interval(2, 4));
-            listOfIntervals.Add(new Interval(4, 7));
+			bool[,] knows = new bool[4, 4] {
+				{false,false,false,false},
+				{false,false,false,false},
+				{false,false,false,false},
+				{false,false,false,false}
+			};
+			ArrayAlgos.PrintCelebrity(knows);
 
-            List<Interval> listOfMergedIntervals = ArrayAlgos.GetOverLappingIntervals(listOfIntervals);
-            foreach (var item in listOfMergedIntervals)
-            {
-                Console.WriteLine("(" + item.Start + "," + item.End + ")");
-            }
+			List<Interval> listOfIntervals = new List<Interval>();
+			listOfIntervals.Add(new Interval(6, 8));
+			listOfIntervals.Add(new Interval(1, 9));
+			listOfIntervals.Add(new Interval(2, 4));
+			listOfIntervals.Add(new Interval(4, 7));
 
-            int[] arr = new int[] {1, 4, 45, 6, 10, 8};
-            ArrayAlgos.FindTripletsHavingSumAs(arr,22);
+			List<Interval> listOfMergedIntervals = ArrayAlgos.GetOverLappingIntervals(listOfIntervals);
+			foreach (var item in listOfMergedIntervals)
+			{
+				Console.WriteLine("(" + item.Start + "," + item.End + ")");
+			}
 
-            Console.ReadLine();
+			int[] arr = new int[] { 1, 4, 45, 6, 10, 8 };
+			ArrayAlgos.FindTripletsHavingSumAs(arr, 22);
 
-        }
-    }
+			Console.ReadLine();
+
+		}
+	}
 }

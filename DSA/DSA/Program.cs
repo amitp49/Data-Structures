@@ -30,10 +30,10 @@ namespace DSA
             //queueRunner.Run();
 
             IRunner arrayRunner = new ArrayRunner();
-            //arrayRunner.Run();
+            arrayRunner.Run();
 
             IRunner stringRunner = new StringRunner();
-            stringRunner.Run();
+            //stringRunner.Run();
 
         }
     }
