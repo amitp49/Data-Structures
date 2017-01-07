@@ -30,9 +30,9 @@ namespace Heaps
 				new VertexNode(6,2)
 			};
 
-			Heap<VertexNode> minHeapOfObj = new Heap<VertexNode>(arr,HeapType.MinHeap);
+			Heap<VertexNode> minHeapOfObj = new Heap<VertexNode>(arr,HeapType.MaxHeap);
 			//minHeapOfObj.Sort();
-			vx.Key = 50;
+			vx.Key = 100;
 			minHeapOfObj.UpdateHeapForChangedPriority(vx);
 
 			foreach (var item in minHeapOfObj.arr)
