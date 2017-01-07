@@ -3,7 +3,7 @@
 // (c) Amit Patel
 // 07-01-2017
 using System;
-namespace Graphs
+namespace Interfaces
 {
 	public class VertexNode : IComparable
 	{

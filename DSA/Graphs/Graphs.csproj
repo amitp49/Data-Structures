@@ -35,7 +35,6 @@
     <Compile Include="GraphRunner.cs" />
     <Compile Include="AdjNode.cs" />
     <Compile Include="Edge.cs" />
-    <Compile Include="VertexNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">

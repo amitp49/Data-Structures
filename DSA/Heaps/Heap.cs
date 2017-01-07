@@ -59,11 +59,11 @@ namespace Heaps
 		{
 			if (heapType == HeapType.MinHeap)
 			{
-				comparer = Comparer.Default;
+				comparer = new ReverseComparer();
 			}
 			else if (heapType == HeapType.MaxHeap)
 			{
-				comparer = new ReverseComparer();
+				comparer = Comparer.Default;
 			}
 		}
 
@@ -144,12 +144,14 @@ namespace Heaps
 			int leftChildIndex = elementIndex * 2 + 1;
 			int rightChildIndex = elementIndex * 2 + 2;
 
-			if (leftChildIndex < this.CurrentSize-1 && comparer.Compare(arr[leftChildIndex], arr[elementIndex]) > 0)
+			//int compareResult1 = comparer.Compare(arr[leftChildIndex], arr[elementIndex]);
+			if (leftChildIndex < this.CurrentSize && comparer.Compare(arr[leftChildIndex], arr[elementIndex]) > 0)
 			{
 				childIndex = leftChildIndex;
 			}
 
-			if (rightChildIndex < this.CurrentSize-1 && comparer.Compare(arr[rightChildIndex], arr[childIndex]) > 0)
+			//int compareResult2 = comparer.Compare(arr[rightChildIndex], arr[childIndex]);
+			if (rightChildIndex < this.CurrentSize && comparer.Compare(arr[rightChildIndex], arr[childIndex]) > 0)
 			{
 				childIndex = rightChildIndex;
 			}
@@ -165,7 +167,7 @@ namespace Heaps
 		{
 			int currentIndex = reverseMapping[node];
 			// We can just call both : percolate up and hepify down. Methods will move it only if required
-			PercolateUp(currentIndex);
+			//PercolateUp(currentIndex);
 			HeapifyDown(currentIndex);
 		}
 
