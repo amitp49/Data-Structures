@@ -103,6 +103,24 @@ namespace Graphs
 			{
 				Console.WriteLine("From:{0}, To:{1}, Weight:{2}",edge.From,edge.To,edge.Weight);
 			}
+
+			Console.WriteLine("-------------------");
+			
+			GraphAdj undirectedGraph3 = new GraphAdj(5);
+			undirectedGraph3.AddUnDirectedEdge(0, 1, 2);
+			undirectedGraph3.AddUnDirectedEdge(0, 3, 6);
+			undirectedGraph3.AddUnDirectedEdge(1, 2, 3);
+			undirectedGraph3.AddUnDirectedEdge(1, 3, 8);
+			undirectedGraph3.AddUnDirectedEdge(1, 4, 5);
+			undirectedGraph3.AddUnDirectedEdge(2, 4, 7);
+			undirectedGraph3.AddUnDirectedEdge(3, 4, 9);
+			
+			List<Edge> resultTree3 = undirectedGraph3.PrimsMST();
+			foreach (var edge in resultTree3)
+			{
+				Console.WriteLine("From:{0}, To:{1}, Weight:{2}", edge.From, edge.To, edge.Weight);
+			}
+
 			Console.ReadKey();
 		}
 	}

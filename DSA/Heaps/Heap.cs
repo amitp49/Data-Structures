@@ -125,9 +125,12 @@ namespace Heaps
 
 		public void RemoveZeroIndexElement()
 		{
-			SwapData(0, this.CurrentSize-1);
-			CurrentSize--;
-			HeapifyDown(0);
+			if (this.CurrentSize > 0)
+			{
+				SwapData(0, this.CurrentSize - 1);
+				CurrentSize--;
+				HeapifyDown(0);
+			}
 		}
 
 		private void BuildHeap(int n)

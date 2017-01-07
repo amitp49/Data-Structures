@@ -355,7 +355,18 @@ namespace Graphs
 			{
 				VertexNode minimumDistanceNode = minHeap.GetZeroIndexElement();
 				minHeap.RemoveZeroIndexElement();
+
+				//Mark it as taken, so we dont need to update its key once taken in output
 				includedMstSet[minimumDistanceNode.Id] = true;
+
+				//For output, add retrieved node with its parent
+				if (minimumDistanceNode.Parent != -1)
+				{
+					minimumSpanningTreeEdges.Add(new Edge(minimumDistanceNode.Parent,
+														  minimumDistanceNode.Id,
+														  false,
+														  minimumDistanceNode.Key));
+				}
 
 				int currentVertex = minimumDistanceNode.Id;
 				foreach (var adjacentVertex in adj[currentVertex])
@@ -369,7 +380,7 @@ namespace Graphs
 						adjacentVertexNode.Parent = currentVertex;
 						adjacentVertexNode.Key = adjacentVertex.EdgeWeight;
 
-						//Need to re heapify
+						//CRITICAL - Need to re heapify
 						minHeap.UpdateHeapForChangedPriority(adjacentVertexNode);
 					}
 				}
