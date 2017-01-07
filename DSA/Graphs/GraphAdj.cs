@@ -300,6 +300,32 @@ namespace Graphs
 			}
 			return false;
 		}
+		public List<Edge> KruskalMST()
+		{
+			List<Edge> minimumSpanningTreeEdges = new List<Edge>();
+			UnionFindDs unionFindDs = new UnionFindDs(this.V);
+
+			//Sort all edges by their weight
+			this.Edges.Sort();
+
+			foreach (var edge in this.Edges)
+			{
+				//If tree is built, all vertex are connected, then no need to check more
+				if (minimumSpanningTreeEdges.Count >= this.V - 1)
+					break;
+
+				int edgeFromEndPointGroup = unionFindDs.Find(edge.From);
+				int edgeToEndPointGroup = unionFindDs.Find(edge.To);
+
+				if (edgeFromEndPointGroup != edgeToEndPointGroup)
+				{
+					minimumSpanningTreeEdges.Add(edge);
+					unionFindDs.Union(edge.From, edge.To);
+				}
+			}
+
+			return minimumSpanningTreeEdges;
+		}
 
 		public int[,] AllPairShortestPaths()
 		{

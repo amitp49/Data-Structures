@@ -90,7 +90,19 @@ namespace Graphs
 			}
 
 			Console.WriteLine("-------------------");
-			
+
+			GraphAdj undirectedGraph2 = new GraphAdj(4);
+			undirectedGraph2.AddUnDirectedEdge(0, 1, 10);
+			undirectedGraph2.AddUnDirectedEdge(0, 2, 6);
+			undirectedGraph2.AddUnDirectedEdge(0, 3, 5);
+			undirectedGraph2.AddUnDirectedEdge(1, 3, 15);
+			undirectedGraph2.AddUnDirectedEdge(2, 3, 4);
+
+			List<Edge> resultTree = undirectedGraph2.KruskalMST();
+			foreach (var edge in resultTree)
+			{
+				Console.WriteLine("From:{0}, To:{1}, Weight:{2}",edge.From,edge.To,edge.Weight);
+			}
 			Console.ReadKey();
 		}
 	}

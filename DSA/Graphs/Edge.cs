@@ -42,7 +42,6 @@ namespace Graphs
 			{
 				var comparingTo = obj as Edge;
 				return this.Weight.CompareTo(comparingTo.Weight);
-				
 			}
 			return 0; //TODO:what should we return?
 		}
