@@ -352,8 +352,8 @@ namespace Graphs
 			//Take v-1 edges, go inside only till v-2
 			while (minimumSpanningTreeEdges.Count < V - 1)
 			{
-				VertexNode minimumDistanceNode = minHeap.GetMin();
-				minHeap.RemoveMin();
+				VertexNode minimumDistanceNode = minHeap.GetZeroIndexElement();
+				minHeap.RemoveZeroIndexElement();
 				includedMstSet[minimumDistanceNode.Id] = true;
 
 				int currentVertex = minimumDistanceNode.Id;
@@ -367,7 +367,9 @@ namespace Graphs
 						//To update parent, we will need node itself, not just id
 						adjacentVertexNode.Parent = currentVertex;
 						adjacentVertexNode.Key = adjacentVertex.EdgeWeight;
-						//TODO: Need to re heapify
+
+						//Need to re heapify
+						minHeap.UpdateHeapForChangedPriority(adjacentVertexNode);
 					}
 				}
 			}
