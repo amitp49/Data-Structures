@@ -5,25 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
-namespace Arrays
+namespace Heaps
 {
-	public enum HeapType
+	public class Heap<T> where T:IComparable
 	{
-		MinHeap,
-		MaxHeap
-	}
-
-	public class ReverseComparer : IComparer
-	{
-		public int Compare(object x, object y)
-		{
-			return Comparer.Default.Compare(y,x);
-		}
-	}
-
-	public class Heap
-	{
-		public int[] arr
+		public T[] arr
 		{
 			get;
 			set;
@@ -31,6 +17,7 @@ namespace Arrays
 
 		private HeapType heapType;
 		private IComparer comparer;
+		private Dictionary<T, int> reverseMapping = new Dictionary<T, int>();
 
 		public int CurrentSize
 		{
@@ -44,27 +31,31 @@ namespace Arrays
 			set;
 		}
 
-		public object Current
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public Heap(int maxSize, HeapType heapType)
+		private Heap(int maxSize, HeapType heapType)
 		{
 			this.MaxSize = maxSize;
 			this.CurrentSize = 0;
 			this.heapType = heapType;
+			this.arr = new T[this.MaxSize];
 		}
 
-		public Heap(int[] arr, HeapType heapType)
+		public Heap(T[] arr, HeapType heapType)
 		{
 			this.arr = arr;
 			this.MaxSize = arr.Length;
 			this.CurrentSize = arr.Length;
 			this.heapType = heapType;
+
+			//Create reverse mapping for allowing external user to change key/pririty at run time, and we will hepify
+			FillReverseMapping();
+		}
+
+		private void FillReverseMapping()
+		{
+			for (int i = 0; i < this.arr.Length; i++)
+			{
+				reverseMapping.Add(this.arr[i],i);
+			}
 		}
 
 		public void Sort()
@@ -80,6 +71,18 @@ namespace Arrays
 			}
 
 			CurrentSize = MaxSize; //restore
+		}
+
+		public T GetMin()
+		{
+			return this.arr[0];
+		}
+
+		public void RemoveMin()
+		{
+			SwapData(0, this.CurrentSize-1);
+			CurrentSize--;
+			HeapifyDown(CurrentSize, 0);
 		}
 
 		private void BuildHeap(int n)
@@ -122,14 +125,30 @@ namespace Arrays
 			}
 		}
 
-		private void SwapData(int childIndex, int elementIndex)
+		public void ChangeKey(T node)
 		{
-			int temp = this.arr[childIndex];
-			this.arr[childIndex] = this.arr[elementIndex];
-			this.arr[elementIndex] = temp;
+			int currentIndex = reverseMapping[node];
+			//TODO: still need to delete and re insert
 		}
 
+		private void SwapData(int a, int b)
+		{
+			T temp = this.arr[a];
+			this.arr[a] = this.arr[b];
+			this.arr[b] = temp;
 
+			//Update Reverse mapping while swapping data
+			UpdateReverseMappingAfterSwap(a, b);
+		}
+
+		private void UpdateReverseMappingAfterSwap(int a, int b)
+		{
+			T firstObject = this.arr[a];
+			T secondObject = this.arr[b];
+
+			reverseMapping[firstObject] = a;
+			reverseMapping[secondObject] = b;
+		}
 	}
 }
 

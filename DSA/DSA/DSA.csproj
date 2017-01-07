@@ -80,6 +80,14 @@
       <Project>{CCBD689A-F3A5-4938-A8D9-64CDFF17DAD6}</Project>
       <Name>Graphs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Heaps\Heaps.csproj">
+      <Project>{4B0EAE37-AD47-449A-A8DF-4456F8C504A5}</Project>
+      <Name>Heaps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnionFind\UnionFind.csproj">
+      <Project>{7132C10C-274D-443C-BDD8-EE9C75039952}</Project>
+      <Name>UnionFind</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

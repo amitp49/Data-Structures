@@ -7,11 +7,12 @@ namespace Graphs
 {
 	public class AdjNode
 	{
-		public int Weight
+		public int EdgeWeight
 		{
 			get;
 			set;
 		}
+
 		public int Id
 		{
 			get;
@@ -21,12 +22,12 @@ namespace Graphs
 		public AdjNode(int id)
 		{
 			this.Id = id;
-			this.Weight = 0;
+			this.EdgeWeight = 0;
 		}
 		public AdjNode(int id, int weight)
 		{
 			this.Id = id;
-			this.Weight = weight;
+			this.EdgeWeight = weight;
 		}
 	}
 }

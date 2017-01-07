@@ -11,12 +11,6 @@ namespace Arrays
     {
 		void IRunner.Run()
 		{
-			Heap heap = new Heap(new int[] { 12, 15, 10, 11, 5, 6, 2 }, HeapType.MinHeap);
-			heap.Sort();
-			foreach (var item in heap.arr)
-			{
-				Console.WriteLine(item + ", ");
-			}
 
 			MyArray<int> myArray = new MyArray<int>(16)
 			{

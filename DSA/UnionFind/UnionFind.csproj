@@ -33,6 +33,13 @@
     <Compile Include="UnionFindDs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Group.cs" />
+    <Compile Include="UnionFindRunner.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{5F720DFA-4F40-451E-A7B0-5EF6D3FECAAE}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Tree;
 using Graphs;
+using Heaps;
+using UnionFind;
 
 namespace DSA
 {
@@ -35,6 +37,12 @@ namespace DSA
 
             IRunner stringRunner = new StringRunner();
             //stringRunner.Run();
+
+			IRunner heapRunner = new HeapRunner();
+			//heapRunner.Run();
+
+			IRunner unionFindRunner = new UnionFindRunner();
+			//unionFindRunner.Run();
 
 			IRunner graphRunner = new GraphRunner();
 			graphRunner.Run();

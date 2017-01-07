@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Security.Cryptography;
 using UnionFind;
+using Heaps;
 
 namespace Graphs
 {
@@ -327,6 +328,53 @@ namespace Graphs
 			return minimumSpanningTreeEdges;
 		}
 
+		public List<Edge> PrimsMST()
+		{
+			List<Edge> minimumSpanningTreeEdges = new List<Edge>();
+			Boolean[] includedMstSet = new Boolean[this.V];
+
+			VertexNode[] vertexDistanceKeyTracker = new VertexNode[this.V];
+			Dictionary<int, VertexNode> hashTable = new Dictionary<int, VertexNode>();
+
+			vertexDistanceKeyTracker[0] = new VertexNode(0, 0, -1); //start node distance key = zero, parent -1
+			hashTable.Add(0,vertexDistanceKeyTracker[0]);
+
+			//For others, make it infinite
+			for (int i = 1; i < this.V; i++)
+			{
+				vertexDistanceKeyTracker[i] = new VertexNode(i, Int32.MaxValue, 0);
+				hashTable.Add(i, vertexDistanceKeyTracker[i]);
+			}
+
+			//create new min heap to get minimum of all adjacent
+			Heap<VertexNode> minHeap = new Heap<VertexNode>(vertexDistanceKeyTracker, HeapType.MinHeap);
+
+			//Take v-1 edges, go inside only till v-2
+			while (minimumSpanningTreeEdges.Count < V - 1)
+			{
+				VertexNode minimumDistanceNode = minHeap.GetMin();
+				minHeap.RemoveMin();
+				includedMstSet[minimumDistanceNode.Id] = true;
+
+				int currentVertex = minimumDistanceNode.Id;
+				foreach (var adjacentVertex in adj[currentVertex])
+				{
+					VertexNode adjacentVertexNode = hashTable[adjacentVertex.Id];
+					
+					if (includedMstSet[adjacentVertex.Id] == false &&
+					    adjacentVertex.EdgeWeight < adjacentVertexNode.Key)
+					{
+						//To update parent, we will need node itself, not just id
+						adjacentVertexNode.Parent = currentVertex;
+						adjacentVertexNode.Key = adjacentVertex.EdgeWeight;
+						//TODO: Need to re heapify
+					}
+				}
+			}
+
+			return minimumSpanningTreeEdges;
+		}
+
 		public int[,] AllPairShortestPaths()
 		{
 			int[,] solution = new int[this.V, this.V];
@@ -347,7 +395,7 @@ namespace Graphs
 			{
 				foreach (var adjacentVertex in adj[currentVertex])
 				{
-					solution[currentVertex, adjacentVertex.Id] = adjacentVertex.Weight;
+					solution[currentVertex, adjacentVertex.Id] = adjacentVertex.EdgeWeight;
 				}
 			}
 
