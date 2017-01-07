@@ -33,6 +33,7 @@
     <Compile Include="GraphAdj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GraphRunner.cs" />
+    <Compile Include="AdjNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">

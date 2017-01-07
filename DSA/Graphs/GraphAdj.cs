@@ -10,6 +10,7 @@ using UnionFind;
 
 namespace Graphs
 {
+	
 	public class GraphAdj
 	{
 		
@@ -19,7 +20,7 @@ namespace Graphs
 			set;
 		}
 
-		public List<int>[] adj
+		public List<AdjNode>[] adj
 		{
 			get;
 			set;
@@ -28,22 +29,22 @@ namespace Graphs
 		public GraphAdj(int v)
 		{
 			this.V = v;
-			adj = new List<int>[this.V];
+			adj = new List<AdjNode>[this.V];
 			for (int i = 0; i < this.V; i++)
 			{
-				adj[i] = new List<int>(); //allocate actual memory
+				adj[i] = new List<AdjNode>(); //allocate actual memory
 			}
 		}
 
 		public void AddDirectedEdge(int from, int to)
 		{
-			adj[from].Add(to);
+			adj[from].Add(new AdjNode(to));
 		}
 
 		public void AddUnDirectedEdge(int from, int to)
 		{
-			adj[from].Add(to);
-			adj[to].Add(from);
+			adj[from].Add(new AdjNode(to));
+			adj[to].Add(new AdjNode(from));
 		}
 
 		public List<int> BFSTraversal()
@@ -87,10 +88,10 @@ namespace Graphs
 
 				foreach (var adjacentVertex in adj[currentVertex])
 				{
-					if (visited[adjacentVertex] == false)
+					if (visited[adjacentVertex.Id] == false)
 					{
-						queue.Enqueue(adjacentVertex);
-						visited[adjacentVertex] = true; //to avoid self loops, mark it as visited
+						queue.Enqueue(adjacentVertex.Id);
+						visited[adjacentVertex.Id] = true; //to avoid self loops, mark it as visited
 					}
 				}
 			}
@@ -135,13 +136,11 @@ namespace Graphs
 			visited[currentVertex] = true;
 			dfsTraversalList.Add(currentVertex);
 
-			for (int i = 0; i < adj[currentVertex].Count; i++)
+			foreach (var adjacentVertex in adj[currentVertex])
 			{
-				int adjacentVertex = adj[currentVertex][i];
-
-				if (visited[adjacentVertex]  == false) //not visited yet
+				if (visited[adjacentVertex.Id]  == false) //not visited yet
 				{
-					DFSTraversalInternalUtil(adj[currentVertex][i], visited, dfsTraversalList);
+					DFSTraversalInternalUtil(adjacentVertex.Id, visited, dfsTraversalList);
 				}
 			}
 		}
@@ -172,13 +171,11 @@ namespace Graphs
 
 			visited[currentVertex] = true;
 
-			for (int i = 0; i < adj[currentVertex].Count; i++)
+			foreach (var adjacentVertex in adj[currentVertex])
 			{
-				int adjacentVertex = adj[currentVertex][i];
-
-				if (visited[adjacentVertex] == false) //not visited yet
+				if (visited[adjacentVertex.Id] == false) //not visited yet
 				{
-					GetConnectedComponentCountUsingDFSLogicInternalUtil(adj[currentVertex][i], visited);
+					GetConnectedComponentCountUsingDFSLogicInternalUtil(adjacentVertex.Id, visited);
 				}
 			}
 		}
@@ -202,9 +199,9 @@ namespace Graphs
 
 			foreach (var adjacentVertex in adj[currentVertex])
 			{
-				if (visited[adjacentVertex] == false)
+				if (visited[adjacentVertex.Id] == false)
 				{
-					bool isReachable = IsReachableUsingDFSLogicInternalUtil(adjacentVertex,targetedVertex,visited);
+					bool isReachable = IsReachableUsingDFSLogicInternalUtil(adjacentVertex.Id,targetedVertex,visited);
 					if (isReachable == true)
 						return true;
 				}
@@ -240,15 +237,15 @@ namespace Graphs
 
 			foreach (var adjacentVertex in adj[currentVertex])
 			{
-				if (visited[adjacentVertex] == false) // still first time encounter - color white
+				if (visited[adjacentVertex.Id] == false) // still first time encounter - color white
 				{
-					bool isCycleInAnyChild = IsCyclicUsingDFSTraversalLogicInternalUtil(adjacentVertex, visited, stillInProgressAndPresentInRecurionStack);
+					bool isCycleInAnyChild = IsCyclicUsingDFSTraversalLogicInternalUtil(adjacentVertex.Id, visited, stillInProgressAndPresentInRecurionStack);
 					if (isCycleInAnyChild == true)
 					{
 						return true;
 					}
 				}
-				else if (stillInProgressAndPresentInRecurionStack[adjacentVertex]==true) // in progress would always be visited, but not vice versa
+				else if (stillInProgressAndPresentInRecurionStack[adjacentVertex.Id]==true) // in progress would always be visited, but not vice versa
 				{
 					return true;
 				}
@@ -268,19 +265,32 @@ namespace Graphs
 				{
 					//for each edge , we are running it
 					int x = unionFind.Find(fromVertex);
-					int y = unionFind.Find(adjacentVertex);
+					int y = unionFind.Find(adjacentVertex.Id);
 					if (x == y) // in same group
 					{
 						return true; //cycle found
 					}
 					else
 					{
-						unionFind.Union(fromVertex,adjacentVertex);
+						unionFind.Union(fromVertex,adjacentVertex.Id);
 					}
 				}
 			}
 			return false;
 		}
+
+		/*public int[,] AllPairShortestPaths()
+		{
+			int[,] solution = new int[this.V,this.V];
+
+			//Assign current graph layout to solution in matrix form
+			foreach (var currentVertex in this.adj)
+			{
+				solution[currentVertex,]
+			}
+
+			return solution;
+		}*/
 	}
 }
 
