@@ -55,6 +55,11 @@ namespace Heaps
 			BuildHeap(arr.Length);
 		}
 
+		public bool IsEmpty()
+		{
+			return (this.CurrentSize == 0);
+		}
+
 		private void AssignComparer()
 		{
 			if (heapType == HeapType.MinHeap)
@@ -65,6 +70,11 @@ namespace Heaps
 			{
 				comparer = new ReverseComparer();
 			}
+		}
+
+		public bool IsInHeap(T data)
+		{
+			return reverseMapping.ContainsKey(data);
 		}
 
 		private void FillReverseMapping()

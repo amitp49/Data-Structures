@@ -121,7 +121,33 @@ namespace Graphs
 				Console.WriteLine("From:{0}, To:{1}, Weight:{2}", edge.From, edge.To, edge.Weight);
 			}
 
+			Console.WriteLine("-------------------");
+			
+			GraphAdj undirectedGraph4 = new GraphAdj(9);
+			undirectedGraph4.AddUnDirectedEdge(0,1,4);
+			undirectedGraph4.AddUnDirectedEdge(0,7,8);
+			undirectedGraph4.AddUnDirectedEdge(1,2,8);
+			undirectedGraph4.AddUnDirectedEdge(1,7,11);
+			undirectedGraph4.AddUnDirectedEdge(2,3,7);
+			undirectedGraph4.AddUnDirectedEdge(2,8,2);
+			undirectedGraph4.AddUnDirectedEdge(2,5,4);
+			undirectedGraph4.AddUnDirectedEdge(3,4,9);
+			undirectedGraph4.AddUnDirectedEdge(3,5,14);
+			undirectedGraph4.AddUnDirectedEdge(4,5,10);
+			undirectedGraph4.AddUnDirectedEdge(5,6,2);
+			undirectedGraph4.AddUnDirectedEdge(6,7,1);
+			undirectedGraph4.AddUnDirectedEdge(6,8,6);
+			undirectedGraph4.AddUnDirectedEdge(7,8,7);
+
+			Dictionary<int, int> vertexToShortestDistance = undirectedGraph4.DijkstraShortestPathFromSource(0);
+			Console.WriteLine("Source --> distance");
+
+			foreach (var item in vertexToShortestDistance)
+			{
+				Console.WriteLine("{0} --> {1}",item.Key,item.Value);
+			}
 			Console.ReadKey();
+
 		}
 	}
 }

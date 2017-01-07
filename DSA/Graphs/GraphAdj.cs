@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using UnionFind;
 using Heaps;
 using Interfaces;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Graphs
 {
@@ -331,33 +332,29 @@ namespace Graphs
 
 		public List<Edge> PrimsMST()
 		{
-			List<Edge> minimumSpanningTreeEdges = new List<Edge>();
-			Boolean[] includedMstSet = new Boolean[this.V];
+			List<Edge> minimumSpanningTreeEdges = new List<Edge>(); // for output
 
 			VertexNode[] vertexDistanceKeyTracker = new VertexNode[this.V];
 			Dictionary<int, VertexNode> hashTable = new Dictionary<int, VertexNode>();
 
-			vertexDistanceKeyTracker[0] = new VertexNode(0, 0, -1); //start node distance key = zero, parent -1
-			hashTable.Add(0,vertexDistanceKeyTracker[0]);
-
 			//For others, make it infinite
-			for (int i = 1; i < this.V; i++)
+			for (int i = 0; i < this.V; i++)
 			{
 				vertexDistanceKeyTracker[i] = new VertexNode(i, Int32.MaxValue, 0);
 				hashTable.Add(i, vertexDistanceKeyTracker[i]);
 			}
 
+			vertexDistanceKeyTracker[0].Key = 0;
+			vertexDistanceKeyTracker[0].Parent = -1; //start node distance key = zero, parent -1
+
 			//create new min heap to get minimum of all adjacent
 			Heap<VertexNode> minHeap = new Heap<VertexNode>(vertexDistanceKeyTracker, HeapType.MinHeap);
 
-			//Take v-1 edges, go inside only till v-2
-			while (minimumSpanningTreeEdges.Count < V - 1)
+			//Take v-1 edges, or v vertex
+			while (!minHeap.IsEmpty())
 			{
 				VertexNode minimumDistanceNode = minHeap.GetZeroIndexElement();
 				minHeap.RemoveZeroIndexElement();
-
-				//Mark it as taken, so we dont need to update its key once taken in output
-				includedMstSet[minimumDistanceNode.Id] = true;
 
 				//For output, add retrieved node with its parent
 				if (minimumDistanceNode.Parent != -1)
@@ -373,12 +370,12 @@ namespace Graphs
 				{
 					VertexNode adjacentVertexNode = hashTable[adjacentVertex.Id];
 					
-					if (includedMstSet[adjacentVertex.Id] == false &&
+					if (minHeap.IsInHeap(adjacentVertexNode) &&
 					    adjacentVertex.EdgeWeight < adjacentVertexNode.Key)
 					{
 						//To update parent, we will need node itself, not just id
 						adjacentVertexNode.Parent = currentVertex;
-						adjacentVertexNode.Key = adjacentVertex.EdgeWeight;
+						adjacentVertexNode.Key = adjacentVertex.EdgeWeight; // only equal
 
 						//CRITICAL - Need to re heapify
 						minHeap.UpdateHeapForChangedPriority(adjacentVertexNode);
@@ -387,6 +384,54 @@ namespace Graphs
 			}
 
 			return minimumSpanningTreeEdges;
+		}
+
+		public Dictionary<int, int> DijkstraShortestPathFromSource(int source)
+		{
+			Dictionary<int, int> vertexToShortestDistance = new Dictionary<int, int>();
+
+			VertexNode[] vertexDistanceKeyTracker = new VertexNode[this.V];
+			Dictionary<int, VertexNode> hashTable = new Dictionary<int, VertexNode>();
+
+			//For others, make it infinite
+			for (int i = 0; i < this.V; i++)
+			{
+				vertexDistanceKeyTracker[i] = new VertexNode(i, 999, 0);
+				hashTable.Add(i, vertexDistanceKeyTracker[i]);
+			}
+
+			vertexDistanceKeyTracker[source].Key = 0;
+
+			//create new min heap to get minimum of all adjacent
+			Heap<VertexNode> minHeap = new Heap<VertexNode>(vertexDistanceKeyTracker, HeapType.MinHeap);
+
+			while (!minHeap.IsEmpty())
+			{
+				VertexNode minimumDistanceNode = minHeap.GetZeroIndexElement();
+				minHeap.RemoveZeroIndexElement();
+
+				//For output
+				vertexToShortestDistance.Add(minimumDistanceNode.Id,minimumDistanceNode.Key);
+
+				int currentVertex = minimumDistanceNode.Id;
+				VertexNode currentVertexNode = hashTable[currentVertex];
+					
+				foreach (var adjacentVertex in adj[currentVertex])
+				{
+					VertexNode adjacentVertexNode = hashTable[adjacentVertex.Id];
+
+					if (minHeap.IsInHeap(adjacentVertexNode) &&
+					    currentVertexNode.Key != 999 &&
+						currentVertexNode.Key + adjacentVertex.EdgeWeight < adjacentVertexNode.Key) //change in condition
+					{
+						adjacentVertexNode.Key = currentVertexNode.Key + adjacentVertex.EdgeWeight; // plus current
+
+						//CRITICAL - Need to re heapify
+						minHeap.UpdateHeapForChangedPriority(adjacentVertexNode);
+					}
+				}
+			}
+			return vertexToShortestDistance;
 		}
 
 		public int[,] AllPairShortestPaths()
