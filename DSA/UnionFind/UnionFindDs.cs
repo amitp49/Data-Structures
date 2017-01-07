@@ -18,7 +18,7 @@ namespace UnionFind
 			this.group = new Group[this.size];
 			for (int i = 0; i < this.size; i++)
 			{
-				this.group[i] = new Group(-1,1); // leader/parent itself, and size equals 1
+				this.group[i] = new Group(i,1); // leader/parent itself, and size equals 1
 			}
 		}
 
@@ -45,7 +45,7 @@ namespace UnionFind
 		public int Find(int a)
 		{
 			int groupLeader = this.group[a].Parent;
-			if (groupLeader == -1) // memeber is along in group. member itself is leader
+			if (groupLeader == a) // memeber is along in group. member itself is leader
 			{
 				return groupLeader;
 			}

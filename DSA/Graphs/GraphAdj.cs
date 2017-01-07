@@ -41,10 +41,21 @@ namespace Graphs
 			adj[from].Add(new AdjNode(to));
 		}
 
+		public void AddDirectedEdge(int from, int to, int weight)
+		{
+			adj[from].Add(new AdjNode(to,weight));
+		}
+
 		public void AddUnDirectedEdge(int from, int to)
 		{
 			adj[from].Add(new AdjNode(to));
 			adj[to].Add(new AdjNode(from));
+		}
+
+		public void AddUnDirectedEdge(int from, int to, int weight)
+		{
+			adj[from].Add(new AdjNode(to,weight));
+			adj[to].Add(new AdjNode(from,weight));
 		}
 
 		public List<int> BFSTraversal()
@@ -266,7 +277,7 @@ namespace Graphs
 					//for each edge , we are running it
 					int x = unionFind.Find(fromVertex);
 					int y = unionFind.Find(adjacentVertex.Id);
-					if (x == y) // in same group
+					if (x == y) // in same group (only if both are not -1)
 					{
 						return true; //cycle found
 					}
@@ -279,18 +290,55 @@ namespace Graphs
 			return false;
 		}
 
-		/*public int[,] AllPairShortestPaths()
+		public int[,] AllPairShortestPaths()
 		{
-			int[,] solution = new int[this.V,this.V];
+			int[,] solution = new int[this.V, this.V];
+
+			//Initlize all as INF/MAX
+			for (int i = 0; i < this.V; i++)
+			{
+				for (int j = 0; j < this.V; j++)
+				{
+					if(i!=j)
+						solution[i, j] = Int32.MaxValue;
+				}
+			}
 
 			//Assign current graph layout to solution in matrix form
-			foreach (var currentVertex in this.adj)
+
+			for (int currentVertex= 0; currentVertex < this.V; currentVertex++)
 			{
-				solution[currentVertex,]
+				foreach (var adjacentVertex in adj[currentVertex])
+				{
+					solution[currentVertex, adjacentVertex.Id] = adjacentVertex.Weight;
+				}
+			}
+
+			//Iterate through all vertex as intermediate path
+			for (int intermediateVertex = 0; intermediateVertex < this.V; intermediateVertex++)
+			{
+				for (int fromVertex = 0; fromVertex < this.V; fromVertex++)
+				{
+					for (int toVertex = 0; toVertex < this.V; toVertex++)
+					{
+						int currentDirectDistance = solution[fromVertex, toVertex];
+						int distanceUsingIntermediate = Int32.MaxValue;
+
+						//To avoid interger overflow when summing to max values
+						if(solution[fromVertex, intermediateVertex] < Int32.MaxValue/2 &&
+						   solution[intermediateVertex, toVertex] < Int32.MaxValue/2)
+						 	distanceUsingIntermediate = solution[fromVertex, intermediateVertex] + solution[intermediateVertex, toVertex];
+						
+						if (distanceUsingIntermediate < currentDirectDistance)
+						{
+							solution[fromVertex, toVertex] = distanceUsingIntermediate;
+						}
+					}
+				}
 			}
 
 			return solution;
-		}*/
+		}
 	}
 }
 

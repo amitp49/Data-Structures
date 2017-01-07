@@ -63,13 +63,34 @@ namespace Graphs
 			undirectedGraph.AddUnDirectedEdge(1, 2);
 			undirectedGraph.AddUnDirectedEdge(2, 0);
 
-			bool isCyclicUndirected = graph.IsCyclicUsingUnionFind();
+			//WE CAN NOT FIND CYCLES IN DIRECTED GRAPH USING UNION FIND
+			bool isCyclicUndirected = undirectedGraph.IsCyclicUsingUnionFind();
 
 			if (isCyclicUndirected == true)
 			{
 				Console.WriteLine("Undirected Graph is cyclic using union find...");
 			}
 
+			Console.WriteLine("-------------------");
+
+			GraphAdj directedGraph = new GraphAdj(4);
+			directedGraph.AddDirectedEdge(0, 1, 5);
+			directedGraph.AddDirectedEdge(1, 2, 3);
+			directedGraph.AddDirectedEdge(2, 3, 1);
+			directedGraph.AddDirectedEdge(0, 3, 10);
+
+			int[,] solution = directedGraph.AllPairShortestPaths();
+			for (int i = 0; i < solution.GetLength(0); i++)
+			{
+				for (int j = 0; j < solution.GetLength(1); j++)
+				{
+					Console.Write(solution[i,j] + " , ");
+				}
+				Console.WriteLine("");
+			}
+
+			Console.WriteLine("-------------------");
+			
 			Console.ReadKey();
 		}
 	}
