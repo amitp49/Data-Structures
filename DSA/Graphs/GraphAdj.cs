@@ -26,36 +26,47 @@ namespace Graphs
 			set;
 		}
 
+		public List<Edge> Edges
+		{
+			get;
+			set;
+		}
+
 		public GraphAdj(int v)
 		{
 			this.V = v;
-			adj = new List<AdjNode>[this.V];
+			this.adj = new List<AdjNode>[this.V];
 			for (int i = 0; i < this.V; i++)
 			{
-				adj[i] = new List<AdjNode>(); //allocate actual memory
+				this.adj[i] = new List<AdjNode>(); //allocate actual memory
 			}
+			this.Edges = new List<Edge>();
 		}
 
 		public void AddDirectedEdge(int from, int to)
 		{
 			adj[from].Add(new AdjNode(to));
+			this.Edges.Add(new Edge(from,to,true));
 		}
 
 		public void AddDirectedEdge(int from, int to, int weight)
 		{
 			adj[from].Add(new AdjNode(to,weight));
+			this.Edges.Add(new Edge(from, to, true, weight));
 		}
 
 		public void AddUnDirectedEdge(int from, int to)
 		{
 			adj[from].Add(new AdjNode(to));
 			adj[to].Add(new AdjNode(from));
+			this.Edges.Add(new Edge(from, to));
 		}
 
 		public void AddUnDirectedEdge(int from, int to, int weight)
 		{
 			adj[from].Add(new AdjNode(to,weight));
 			adj[to].Add(new AdjNode(from,weight));
+			this.Edges.Add(new Edge(from, to, false, weight));
 		}
 
 		public List<int> BFSTraversal()
