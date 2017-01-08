@@ -89,13 +89,28 @@ namespace Graphs
 				Console.WriteLine("");
 			}
 
-			bool[,] rechability = directedGraph.FloydWarshallAllPairReachabilityMatrixOrTransitiveClosure();
+			Console.WriteLine("-------FW------------");
+			
+			bool[,] rechability = directedGraph.TransitiveClosureUsingFloydWarshallAllPairReachabilityMatrix();
 
 			for (int i = 0; i < rechability.GetLength(0); i++)
 			{
 				for (int j = 0; j < rechability.GetLength(1); j++)
 				{
 					Console.Write(rechability[i, j] + " , ");
+				}
+				Console.WriteLine("");
+			}
+
+			Console.WriteLine("-------DFS------------");
+			
+			bool[,] rechabilityDFS = directedGraph.TransitiveClosureReachableUsingDFSForAllPair();
+
+			for (int i = 0; i < rechabilityDFS.GetLength(0); i++)
+			{
+				for (int j = 0; j < rechabilityDFS.GetLength(1); j++)
+				{
+					Console.Write(rechabilityDFS[i, j] + " , ");
 				}
 				Console.WriteLine("");
 			}

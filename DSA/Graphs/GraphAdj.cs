@@ -235,6 +235,34 @@ namespace Graphs
 			return false;
 		}
 
+		public bool[,] TransitiveClosureReachableUsingDFSForAllPair()
+		{
+			//O(n^2) / O(V*(V+E)) solution for less dense graph... floyd warshall takes O(n^3)
+			bool[,] reachable = new bool[this.V, this.V];
+
+			//Every vertex is reachable from itself
+			for (int i = 0; i < this.V; i++)
+			{
+				TransitiveClosureReachableUsingDFSForAllPairInternalRecUtil(reachable,i,i);
+			}
+
+			return reachable;
+		}
+
+		private void TransitiveClosureReachableUsingDFSForAllPairInternalRecUtil(bool[,] reachable, int source, int destination)
+		{
+			reachable[source, destination] = true;
+
+			foreach (var adjacentVertex in this.adj[destination])
+			{
+				if (reachable[source, adjacentVertex.Id] == false)
+				{
+					//recursively mark source to other grand/greate grand childeren as reachable
+					TransitiveClosureReachableUsingDFSForAllPairInternalRecUtil(reachable,source,adjacentVertex.Id);
+				}
+			}
+		}
+
 		public bool IsCyclicUsingDFSTraversalLogic()
 		{
 			bool[] visited = new bool[this.V];
@@ -550,8 +578,9 @@ namespace Graphs
 			return solution;
 		}
 
-		public bool[,] FloydWarshallAllPairReachabilityMatrixOrTransitiveClosure()
+		public bool[,] TransitiveClosureUsingFloydWarshallAllPairReachabilityMatrix()
 		{
+			//O(n^3) solution... DFS takes O(n^2)
 			bool[,] solution = new bool[this.V, this.V];
 
 			//Initlize all as INF/MAX
