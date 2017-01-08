@@ -71,6 +71,32 @@ namespace Graphs
 			this.Edges.Add(new Edge(from, to, false, weight));
 		}
 
+		public void AddEdge(Edge edge)
+		{
+			this.Edges.Add(edge);
+			adj[edge.From].Add(new AdjNode(edge.To, edge.Weight));
+			if (edge.IsDirected == false)
+			{
+				adj[edge.To].Add(new AdjNode(edge.From, edge.Weight));
+			}
+		}
+
+		public GraphAdj GetTransposeGraph()
+		{
+			GraphAdj transposeGraph = new GraphAdj(this.V);
+			transposeGraph.adj = new List<AdjNode>[this.V];
+			for (int i = 0; i < this.V; i++)
+			{
+				transposeGraph.adj[i] = new List<AdjNode>(); //allocate actual memory
+			}
+			transposeGraph.Edges = new List<Edge>();
+			foreach (var edge in this.Edges)
+			{
+				transposeGraph.AddEdge(new Edge(edge.To,edge.From,edge.IsDirected,edge.Weight)); // reverse to and from
+			}
+			return transposeGraph;
+		}
+
 		public List<int> BFSTraversal()
 		{
 			return BFSTraversal(0);
