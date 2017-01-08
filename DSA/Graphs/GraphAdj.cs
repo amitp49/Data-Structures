@@ -531,15 +531,59 @@ namespace Graphs
 						int currentDirectDistance = solution[fromVertex, toVertex];
 						int distanceUsingIntermediate = Int32.MaxValue;
 
-						//To avoid interger overflow when summing to max values
-						if(solution[fromVertex, intermediateVertex] < Int32.MaxValue/2 &&
-						   solution[intermediateVertex, toVertex] < Int32.MaxValue/2)
-						 	distanceUsingIntermediate = solution[fromVertex, intermediateVertex] + solution[intermediateVertex, toVertex];
-						
+						//To avoid interger overflow when summing to max values, count it seperatly
+						if (solution[fromVertex, intermediateVertex] < Int32.MaxValue / 2 &&
+						   solution[intermediateVertex, toVertex] < Int32.MaxValue / 2)
+						{
+							distanceUsingIntermediate = solution[fromVertex, intermediateVertex] + solution[intermediateVertex, toVertex];
+						}
+
+						//Update if needed
 						if (distanceUsingIntermediate < currentDirectDistance)
 						{
 							solution[fromVertex, toVertex] = distanceUsingIntermediate;
 						}
+					}
+				}
+			}
+
+			return solution;
+		}
+
+		public bool[,] FloydWarshallAllPairReachabilityMatrixOrTransitiveClosure()
+		{
+			bool[,] solution = new bool[this.V, this.V];
+
+			//Initlize all as INF/MAX
+			for (int i = 0; i < this.V; i++)
+			{
+				for (int j = 0; j < this.V; j++)
+				{
+					if (i != j)
+						solution[i, j] = false;
+					else
+						solution[i, j] = true;
+				}
+			}
+
+			//Assign current graph layout to solution in matrix form
+			for (int currentVertex = 0; currentVertex < this.V; currentVertex++)
+			{
+				foreach (var adjacentVertex in adj[currentVertex])
+				{
+					solution[currentVertex, adjacentVertex.Id] = true;
+				}
+			}
+
+			//Iterate through all vertex as intermediate path
+			for (int intermediateVertex = 0; intermediateVertex < this.V; intermediateVertex++)
+			{
+				for (int fromVertex = 0; fromVertex < this.V; fromVertex++)
+				{
+					for (int toVertex = 0; toVertex < this.V; toVertex++)
+					{
+						solution[fromVertex, toVertex] = solution[fromVertex, toVertex] ||
+							(solution[fromVertex, intermediateVertex] && solution[intermediateVertex, toVertex]);
 					}
 				}
 			}

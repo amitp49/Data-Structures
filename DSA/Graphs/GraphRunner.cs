@@ -89,6 +89,17 @@ namespace Graphs
 				Console.WriteLine("");
 			}
 
+			bool[,] rechability = directedGraph.FloydWarshallAllPairReachabilityMatrixOrTransitiveClosure();
+
+			for (int i = 0; i < rechability.GetLength(0); i++)
+			{
+				for (int j = 0; j < rechability.GetLength(1); j++)
+				{
+					Console.Write(rechability[i, j] + " , ");
+				}
+				Console.WriteLine("");
+			}
+
 			Console.WriteLine("-------------------");
 
 			GraphAdj undirectedGraph2 = new GraphAdj(4);
