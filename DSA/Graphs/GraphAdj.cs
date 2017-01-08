@@ -230,6 +230,30 @@ namespace Graphs
 			}
 		}
 
+		public List<List<int>> GetStroglyConnectedComponentsUsingDFS()
+		{
+			List<List<int>> stroglyConnectedComponentsList = new List<List<int>>();
+
+			List<int>  dfsOrder = this.DFSTraversal();
+			dfsOrder.Reverse();
+
+			List<int> reverseDfsOrder = dfsOrder;
+
+			GraphAdj transposeGraph = this.GetTransposeGraph();
+
+			bool[] visited = new bool[this.V];
+			foreach (var vertex in reverseDfsOrder)
+			{
+				if (visited[vertex] == false)
+				{
+					List<int> stronglyConnectedComponentDfsOrderList = new List<int>();
+					DFSTraversalInternalUtil(vertex, visited, stronglyConnectedComponentDfsOrderList);
+					stroglyConnectedComponentsList.Add(stronglyConnectedComponentDfsOrderList);
+				}	
+			}
+			return stroglyConnectedComponentsList;
+		}
+
 		public bool IsReachableUsingDFSLogic(int from, int to)
 		{
 			bool[] visited = new bool[this.V];

@@ -255,6 +255,25 @@ namespace Graphs
 			{
 				Console.WriteLine("{0}->{1} ", item.Key,item.Value);
 			}
+			Console.WriteLine("-------SCC----------");
+
+			GraphAdj directedGraph3 = new GraphAdj(5);
+			directedGraph3.AddDirectedEdge(1,0);
+			directedGraph3.AddDirectedEdge(0,2);
+			directedGraph3.AddDirectedEdge(2,1);
+			directedGraph3.AddDirectedEdge(0,3);
+			directedGraph3.AddDirectedEdge(3,4);
+
+			List<List<int>> sccList = directedGraph3.GetStroglyConnectedComponentsUsingDFS();
+
+			foreach (var scc in sccList)
+			{
+				foreach (var vertex in scc)
+				{
+					Console.Write("{0}, ", vertex);
+				}
+				Console.WriteLine("");
+			}
 			Console.WriteLine("-----------------");
 			
 			Console.ReadKey();
