@@ -516,6 +516,11 @@ namespace Graphs
 			return minimumSpanningTreeEdges;
 		}
 
+		/// <summary>
+		/// Dijkstras the shortest path from source for non negative edge weight. It can have positive cycle.
+		/// </summary>
+		/// <returns>The shortest path from source.</returns>
+		/// <param name="source">Source.</param>
 		public Dictionary<int, int> DijkstraShortestPathFromSource(int source)
 		{
 			Dictionary<int, int> vertexToShortestDistance = new Dictionary<int, int>();
@@ -564,6 +569,12 @@ namespace Graphs
 			return vertexToShortestDistance;
 		}
 
+		/// <summary>
+		/// Bellmans the ford shortest path with negative cycles too.
+		/// </summary>
+		/// <returns>The ford shortest path with negative cycles.</returns>
+		/// <param name="source">Source.</param>
+		/// <param name="negativeCycleFlag">If set to <c>true</c> negative cycle flag.</param>
 		public Dictionary<int, int> BellmanFordShortestPathWithNegativeCycles(int source, ref bool negativeCycleFlag)
 		{
 			Dictionary<int, int> vertexToShortestDistance = new Dictionary<int, int>();
@@ -627,6 +638,47 @@ namespace Graphs
 			return false;
 		}
 
+		public Dictionary<int, int> DirectedAcyclicGraphShortestPathFromSourceUsingTopoLogicalSortOrder(int source)
+		{
+			//Get topological order
+			List<int> topologicalOrder = this.TopologicalSortUsingIndegreeAndQueue();
+
+			//only for output
+			Dictionary<int, int> vertexToShortestDistance = new Dictionary<int, int>();
+
+			//track key distance
+			int[] distance = new int[this.V];
+			for (int i = 0; i < this.V; i++)
+			{
+				distance[i] = Int32.MaxValue;
+			}
+			distance[source] = 0;
+
+			//Process each node in order and update adjacent node's distance if less
+			foreach (var currentVertex in topologicalOrder)
+			{
+				foreach (var adjacentVertex in this.adj[currentVertex])
+				{
+					if (distance[currentVertex] != Int32.MaxValue &&
+					   distance[currentVertex] + adjacentVertex.EdgeWeight < distance[adjacentVertex.Id])
+					{
+						distance[adjacentVertex.Id] = distance[currentVertex] + adjacentVertex.EdgeWeight;
+					}
+				}
+			}
+
+			//output in dictionary format
+			for (int i = 0; i < this.V; i++)
+			{
+				vertexToShortestDistance.Add(i,distance[i]);
+			}
+			return vertexToShortestDistance;
+		}
+
+		/// <summary>
+		/// Floyds the warshall all pair shortest paths, not only from source to others. All as source.
+		/// </summary>
+		/// <returns>The warshall all pair shortest paths.</returns>
 		public int[,] FloydWarshallAllPairShortestPaths()
 		{
 			int[,] solution = new int[this.V, this.V];

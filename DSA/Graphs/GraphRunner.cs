@@ -246,6 +246,15 @@ namespace Graphs
 			}
 			Console.WriteLine();
 
+			Console.WriteLine("---------Shortest Distance - DAG--------");
+			int source = 1;
+			Dictionary<int, int> vertexToShortestDistanceTopo = directedAcyclicGraph.DirectedAcyclicGraphShortestPathFromSourceUsingTopoLogicalSortOrder(source);
+			Console.WriteLine("Source --> distance");
+			
+			foreach (var item in vertexToShortestDistanceTopo)
+			{
+				Console.WriteLine("{0}->{1} ", item.Key,item.Value);
+			}
 			Console.WriteLine("-----------------");
 			
 			Console.ReadKey();
