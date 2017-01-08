@@ -79,7 +79,7 @@ namespace Graphs
 			directedGraph.AddDirectedEdge(2, 3, 1);
 			directedGraph.AddDirectedEdge(0, 3, 10);
 
-			int[,] solution = directedGraph.AllPairShortestPaths();
+			int[,] solution = directedGraph.FloydWarshallAllPairShortestPaths();
 			for (int i = 0; i < solution.GetLength(0); i++)
 			{
 				for (int j = 0; j < solution.GetLength(1); j++)
@@ -146,6 +146,35 @@ namespace Graphs
 			{
 				Console.WriteLine("{0} --> {1}",item.Key,item.Value);
 			}
+
+			Console.WriteLine("-------------------");
+
+			GraphAdj directedGraph2 = new GraphAdj(5);
+			directedGraph2.AddDirectedEdge(0, 1, -1);
+			directedGraph2.AddDirectedEdge(0, 2, 4);
+			directedGraph2.AddDirectedEdge(1, 2, 3);
+			directedGraph2.AddDirectedEdge(1, 3, 2);
+			directedGraph2.AddDirectedEdge(1, 4, 2);
+			directedGraph2.AddDirectedEdge(3, 2, 5);
+			directedGraph2.AddDirectedEdge(3, 1, 1);
+			directedGraph2.AddDirectedEdge(4, 3, -3);
+
+			bool negativeCycleFlag = false;
+			Dictionary<int, int> vertexToShortestDistanceBellmanFord = directedGraph2.BellmanFordShortestPathWithNegativeCycles(0, ref negativeCycleFlag);
+			if (negativeCycleFlag == false)
+			{
+				foreach (var item in vertexToShortestDistanceBellmanFord)
+				{
+					Console.WriteLine("{0} --> {1}", item.Key, item.Value);
+				}
+			}
+			else
+			{
+				Console.WriteLine("Negative weight cycle present...");
+			}
+
+			Console.WriteLine("-------------------");
+			
 			Console.ReadKey();
 
 		}

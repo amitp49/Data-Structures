@@ -434,7 +434,70 @@ namespace Graphs
 			return vertexToShortestDistance;
 		}
 
-		public int[,] AllPairShortestPaths()
+		public Dictionary<int, int> BellmanFordShortestPathWithNegativeCycles(int source, ref bool negativeCycleFlag)
+		{
+			Dictionary<int, int> vertexToShortestDistance = new Dictionary<int, int>();
+			int[] distance = new int[this.V];
+
+			for (int i = 0; i < this.V; i++)
+			{
+				distance[i] = Int32.MaxValue;
+			}
+			distance[source] = 0; //initialize source distance as zero
+
+			//Loop for v-1 times, because simple path can have at most v-1 edges
+			for (int i = 0; i < V-1; i++)
+			{
+				for (int edgeNumber = 0; edgeNumber < this.Edges.Count; edgeNumber++)
+				{
+					bool flag = CheckIfDistanceNeedsToBeUpdated(distance,edgeNumber);
+					if (flag == true)
+					{
+						distance[this.Edges[edgeNumber].To] = distance[this.Edges[edgeNumber].From] + 
+																	this.Edges[edgeNumber].Weight;
+					}
+				}
+			}
+
+			//When we have processed edges v-1 times, there should not be any more scope for less distance
+			//If we still find any such less distance, then it would be surely negative cycle.
+			for (int edgeNumber = 0; edgeNumber < this.Edges.Count; edgeNumber++)
+			{
+				bool flag = CheckIfDistanceNeedsToBeUpdated(distance, edgeNumber);
+				if (flag == true)
+				{
+					//FOUND NEGATIVE WEIGHT CYCLE
+					negativeCycleFlag = true;
+				}
+			}
+
+			//Output distance as dictionary
+			if (negativeCycleFlag == false)
+			{
+				for (int i = 0; i < this.V; i++)
+				{
+					vertexToShortestDistance.Add(i,distance[i]);
+				}
+			}
+
+			return vertexToShortestDistance;
+		}
+
+		private bool CheckIfDistanceNeedsToBeUpdated(int[] distance, int edgeNumber)
+		{
+			int source = this.Edges[edgeNumber].From;
+			int destination = this.Edges[edgeNumber].To;
+			int edgeWeight = this.Edges[edgeNumber].Weight;
+
+			if (distance[source] != Int32.MaxValue &&
+			   distance[source] + edgeWeight < distance[destination])
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public int[,] FloydWarshallAllPairShortestPaths()
 		{
 			int[,] solution = new int[this.V, this.V];
 
