@@ -1,5 +1,4 @@
-﻿// /Users/amitp/Documents/dsa/DSA/Graphs/MyClass.cs
-// amitp
+﻿// amitp
 // (c) Amit Patel
 // 03-01-2017
 using System;
@@ -321,6 +320,49 @@ namespace Graphs
 			stack.Push(currentVertex);
 
 			return true;
+		}
+
+		public List<int> TopologicalSortUsingIndegreeAndQueue()
+		{
+			//Assume graph is acyclic 
+
+			List<int> topologicalOrder = new List<int>();
+			Queue<int> queueForVertexHavingZeroIndegree = new Queue<int>();
+
+			int[] inDegree = new int[this.V];
+
+			//Find indgree for each vertex
+			foreach (var item in this.Edges)
+			{
+				inDegree[item.To] += 1;
+			}
+
+			//Find all zero indegree vertex, and push it to queue
+			for (int i = 0; i < this.V; i++)
+			{
+				if (inDegree[i] == 0)
+				{
+					queueForVertexHavingZeroIndegree.Enqueue(i);
+				}
+			}
+
+			//process vertex from queue - O(V^2) if dense graph
+			while (queueForVertexHavingZeroIndegree.Count>0)
+			{
+				int currentVertex = queueForVertexHavingZeroIndegree.Dequeue();
+				topologicalOrder.Add(currentVertex);
+
+				//logical removal of current vertex from graph, decrease in degree for all adjacent vertex of current
+				foreach (var adjacentVertex in this.adj[currentVertex])
+				{
+					inDegree[adjacentVertex.Id]--;
+					if (inDegree[adjacentVertex.Id] == 0)
+					{
+						queueForVertexHavingZeroIndegree.Enqueue(adjacentVertex.Id);
+					}
+				}
+			}
+			return topologicalOrder;
 		}
 
 		public bool IsCyclicUsingDFSTraversalLogic()

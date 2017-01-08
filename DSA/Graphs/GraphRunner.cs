@@ -27,7 +27,7 @@ namespace Graphs
 				Console.WriteLine(dfsList[i] + ", ");
 			}
 
-			Console.WriteLine("-------------------");
+			Console.WriteLine("---------DFS Reachable----------");
 
 
 			int from = 1;
@@ -37,7 +37,7 @@ namespace Graphs
 			{
 				Console.WriteLine("{0} is reachable from {1}",to, from);
 			}
-			Console.WriteLine("-------------------");
+			Console.WriteLine("---------BFS----------");
 
 			List<int> bfsList = graph.BFSTraversal(2);
 
@@ -48,7 +48,7 @@ namespace Graphs
 			Console.WriteLine("-------------------");
 
 			Console.WriteLine("Connected component count: {0}",graph.GetConnectedComponentCountUsingDFSLogic());
-			Console.WriteLine("-------------------");
+			Console.WriteLine("----------Cycle using dfs---------");
 
 			bool isCyclic = graph.IsCyclicUsingDFSTraversalLogic();
 
@@ -56,7 +56,7 @@ namespace Graphs
 			{
 				Console.WriteLine("Graph is cyclic...");
 			}
-			Console.WriteLine("-------------------");
+			Console.WriteLine("--------Cycle using union find-----------");
 
 			GraphAdj undirectedGraph = new GraphAdj(4);
 			undirectedGraph.AddUnDirectedEdge(0, 1);
@@ -71,12 +71,12 @@ namespace Graphs
 				Console.WriteLine("Undirected Graph is cyclic using union find...");
 			}
 
-			Console.WriteLine("-------------------");
+			Console.WriteLine("-------Floyd------------");
 
 			GraphAdj directedGraph = new GraphAdj(4);
 			directedGraph.AddDirectedEdge(0, 1, 5);
-			directedGraph.AddDirectedEdge(1, 2, 3);
-			directedGraph.AddDirectedEdge(2, 3, 1);
+			directedGraph.AddDirectedEdge(1, 3, 3);
+			directedGraph.AddDirectedEdge(3, 2, 1);
 			directedGraph.AddDirectedEdge(0, 3, 10);
 
 			int[,] solution = directedGraph.FloydWarshallAllPairShortestPaths();
@@ -88,6 +88,15 @@ namespace Graphs
 				}
 				Console.WriteLine("");
 			}
+
+			Console.WriteLine("-------TOPO------------");
+			
+			List<int> topologicalOrderForDag2 = directedGraph.TopologicalSortUsingIndegreeAndQueue();
+			foreach (var item in topologicalOrderForDag2)
+			{
+				Console.Write("{0}, ", item);
+			}
+			Console.WriteLine();
 
 			Console.WriteLine("-------FW------------");
 			
@@ -217,7 +226,27 @@ namespace Graphs
 				Console.WriteLine("Cycle found!!! No topological ordering..");
 			}
 
-			Console.WriteLine("-------------------");
+			Console.WriteLine("--------DAG-----------");
+
+			GraphAdj directedAcyclicGraph = new GraphAdj(6);
+			directedAcyclicGraph.AddDirectedEdge(0,1,5);
+			directedAcyclicGraph.AddDirectedEdge(0,2,3);
+			directedAcyclicGraph.AddDirectedEdge(1,3,6);
+			directedAcyclicGraph.AddDirectedEdge(1,2,2);
+			directedAcyclicGraph.AddDirectedEdge(2,4,4);
+			directedAcyclicGraph.AddDirectedEdge(2,5,2);
+			directedAcyclicGraph.AddDirectedEdge(2,3,7);
+			directedAcyclicGraph.AddDirectedEdge(3,4,-1);
+			directedAcyclicGraph.AddDirectedEdge(4,5,-2);
+
+			List<int> topologicalOrderForDag = directedAcyclicGraph.TopologicalSortUsingIndegreeAndQueue();
+			foreach (var item in topologicalOrderForDag)
+			{
+				Console.Write("{0}, ", item);
+			}
+			Console.WriteLine();
+
+			Console.WriteLine("-----------------");
 			
 			Console.ReadKey();
 
