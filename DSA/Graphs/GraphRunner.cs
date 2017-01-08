@@ -147,7 +147,7 @@ namespace Graphs
 				Console.WriteLine("From:{0}, To:{1}, Weight:{2}", edge.From, edge.To, edge.Weight);
 			}
 
-			Console.WriteLine("-------------------");
+			Console.WriteLine("---------Dijkstra----------");
 			
 			GraphAdj undirectedGraph4 = new GraphAdj(9);
 			undirectedGraph4.AddUnDirectedEdge(0,1,4);
@@ -173,7 +173,7 @@ namespace Graphs
 				Console.WriteLine("{0} --> {1}",item.Key,item.Value);
 			}
 
-			Console.WriteLine("-------------------");
+			Console.WriteLine("--------BellmanFord-----------");
 
 			GraphAdj directedGraph2 = new GraphAdj(5);
 			directedGraph2.AddDirectedEdge(0, 1, -1);
@@ -197,6 +197,24 @@ namespace Graphs
 			else
 			{
 				Console.WriteLine("Negative weight cycle present...");
+			}
+
+			Console.WriteLine("---------TOPOLOGICAL SORT----------");
+
+			bool noCycleAndTopoLogicalPossible = false;
+			List<int> topologicalOrder = directedGraph2.TopologicalSortingUsingDFSWithStack(ref noCycleAndTopoLogicalPossible);
+			if (noCycleAndTopoLogicalPossible == true)
+			{
+				foreach (var item in topologicalOrder)
+				{
+					Console.Write("{0}, ", item);
+				}
+				Console.WriteLine();
+				
+			}
+			else
+			{
+				Console.WriteLine("Cycle found!!! No topological ordering..");
 			}
 
 			Console.WriteLine("-------------------");

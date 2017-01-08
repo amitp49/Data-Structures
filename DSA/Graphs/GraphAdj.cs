@@ -263,6 +263,66 @@ namespace Graphs
 			}
 		}
 
+		public List<int> TopologicalSortingUsingDFSWithStack(ref bool noCycleAndTopoLogicalPossible)
+		{
+			List<int> result = new List<int>();
+			Stack<int> stack = new Stack<int>();
+			bool[] visited = new bool[this.V];
+
+			//Starting order doesn't matter, there can be multiple ordering for topological
+			for (int i = 0; i < this.V; i++)
+			{
+				if (visited[i] == false)
+				{
+					bool noCycle = TopologicalSortingUsingDFSWithStackRec(i, visited, stack);
+					if ( noCycle == false)
+					{
+						noCycleAndTopoLogicalPossible = false;
+						return null;
+					}
+				}
+			}
+
+			//Output the stack into list
+			while (stack.Count > 0)
+			{
+				result.Add(stack.Peek());
+				stack.Pop();
+			}
+
+			noCycleAndTopoLogicalPossible = true;
+			return result;
+		}
+
+		private bool TopologicalSortingUsingDFSWithStackRec(int currentVertex, bool[] visited, Stack<int> stack)
+		{
+			visited[currentVertex] = true;
+
+			//Post order for putting current vertex to stack
+			foreach (var adjacentVertex in this.adj[currentVertex])
+			{
+				if (visited[adjacentVertex.Id] == false)
+				{
+					bool noCycle = TopologicalSortingUsingDFSWithStackRec(adjacentVertex.Id, visited, stack);
+					if (noCycle == false)
+						return false;
+				}
+				else // check for cycle
+				{
+					if (!stack.Contains(adjacentVertex.Id)) // not in stack , means in progrss , and encounter again , means cycle, gray node
+					{
+						Console.WriteLine("CYCLE!!!");
+						return false;
+					}
+				}
+			}
+
+			//Now output vertex to stack after all modules which are dependant on current are pushed on to stack
+			stack.Push(currentVertex);
+
+			return true;
+		}
+
 		public bool IsCyclicUsingDFSTraversalLogic()
 		{
 			bool[] visited = new bool[this.V];
