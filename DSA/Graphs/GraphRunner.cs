@@ -156,6 +156,7 @@ namespace Graphs
 				Console.WriteLine("From:{0}, To:{1}, Weight:{2}", edge.From, edge.To, edge.Weight);
 			}
 
+
 			Console.WriteLine("---------Dijkstra----------");
 			
 			GraphAdj undirectedGraph4 = new GraphAdj(9);
@@ -181,6 +182,46 @@ namespace Graphs
 			{
 				Console.WriteLine("{0} --> {1}",item.Key,item.Value);
 			}
+
+			Console.WriteLine("---------Articulation Point----------");
+
+			GraphAdj undirectedGraph5 = new GraphAdj(5);
+			undirectedGraph5.AddUnDirectedEdge(1,0);
+			undirectedGraph5.AddUnDirectedEdge(0,2);
+			undirectedGraph5.AddUnDirectedEdge(2,1);
+			undirectedGraph5.AddUnDirectedEdge(0,3);
+			undirectedGraph5.AddUnDirectedEdge(3,4);
+			
+			List<int> articulationPoints = undirectedGraph5.ArticulationPointsOrCutVerticesUsingDFSLogic();
+
+			foreach (var item in articulationPoints)
+			{
+				Console.Write("{0}, ", item);
+			}
+
+			Console.WriteLine("");
+
+			Console.WriteLine("---------Articulation Point----------");
+			
+			GraphAdj undirectedGraph6 = new GraphAdj(7);
+			undirectedGraph6.AddUnDirectedEdge(0,1);
+			undirectedGraph6.AddUnDirectedEdge(1,2);
+			undirectedGraph6.AddUnDirectedEdge(2,0);
+			undirectedGraph6.AddUnDirectedEdge(1,3);
+			undirectedGraph6.AddUnDirectedEdge(1,4);
+			undirectedGraph6.AddUnDirectedEdge(1,6);
+			undirectedGraph6.AddUnDirectedEdge(3,5);
+			undirectedGraph6.AddUnDirectedEdge(4,5);
+			
+
+			List<int> articulationPoints2 = undirectedGraph6.ArticulationPointsOrCutVerticesUsingDFSLogic();
+
+			foreach (var item in articulationPoints2)
+			{
+				Console.Write("{0}, ", item);
+			}
+
+			Console.WriteLine("");
 
 			Console.WriteLine("--------BellmanFord-----------");
 

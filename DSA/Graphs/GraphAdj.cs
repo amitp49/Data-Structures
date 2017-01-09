@@ -254,6 +254,103 @@ namespace Graphs
 			return stroglyConnectedComponentsList;
 		}
 
+		public List<int> ArticulationPointsOrCutVerticesUsingDFSLogic()
+		{
+			List<int> articulationPoints = new List<int>();
+
+			bool[] isArticulationPoint = new bool[this.V];
+			bool[] visited = new bool[this.V];
+			int[] parent = new int[this.V];
+			int[] children = new int[this.V];
+			int[] dfsDiscoveryTime = new int[this.V];
+			int[] lowestDiscoveryTimeReachableNode = new int[this.V];
+			bool[] inStack = new bool[this.V];
+			int time = 0;
+
+			//Initialize parent with -1
+			for (int i = 0; i < this.V; i++)
+			{
+				parent[i] = -1;
+			}
+
+			//DFS
+			for (int i = 0; i < this.V; i++)
+			{
+				if (visited[i]==false)
+				{
+					ArticulationPointsOrCutVerticesUsingDFSLogicRecUtil(i,
+					                                                    visited,
+					                                                    inStack,
+					                                                    parent,
+					                                                    children,
+					                                                    dfsDiscoveryTime,
+					                                                    lowestDiscoveryTimeReachableNode, 
+					                                                    isArticulationPoint,
+					                                                    ref time);
+					if (parent[i] == -1 && children[i] >= 2)
+					{
+						isArticulationPoint[i] = true; // root of connected component having more than two child!! its like root of tree
+					}
+				}
+			}
+
+
+			//output
+			for (int i = 0; i < this.V; i++)
+			{
+				if (isArticulationPoint[i] == true)
+				{
+					articulationPoints.Add(i);
+				}
+			}
+			return articulationPoints;
+		}
+
+		private void ArticulationPointsOrCutVerticesUsingDFSLogicRecUtil(int currentVertex, 
+		                                                                 bool[] visited, 
+		                                                                 bool[] inStack,
+		                                                                 int[] parent,
+		                                                                 int[] children,
+		                                                                 int[] dfsDiscoveryTime, 
+		                                                                 int[] lowestDiscoveryTimeReachableNode, 
+		                                                                 bool[] isArticulationPoint,
+		                                                                ref int time)
+		{
+			visited[currentVertex] = true;
+			inStack[currentVertex] = true; //processing start - color - gray
+			dfsDiscoveryTime[currentVertex] = time;
+			lowestDiscoveryTimeReachableNode[currentVertex] = time;
+			time++;
+
+			foreach (var adjacentVertex in this.adj[currentVertex])
+			{
+				if (visited[adjacentVertex.Id] == false) //first time, discover color- white
+				{
+					//assign parent if starting visiting this node for first time
+					parent[adjacentVertex.Id] = currentVertex;
+					children[currentVertex]++;
+
+					ArticulationPointsOrCutVerticesUsingDFSLogicRecUtil(adjacentVertex.Id, visited, inStack, parent, children, dfsDiscoveryTime, lowestDiscoveryTimeReachableNode, isArticulationPoint, ref time);
+					lowestDiscoveryTimeReachableNode[currentVertex] = Math.Min(lowestDiscoveryTimeReachableNode[currentVertex],
+																				lowestDiscoveryTimeReachableNode[adjacentVertex.Id]);
+
+					//Check if current vertext is articulation point, due to adjacentVertext which doesn't point to any ancestor
+					if (parent[currentVertex] != -1 &&
+					   lowestDiscoveryTimeReachableNode[adjacentVertex.Id] >= dfsDiscoveryTime[currentVertex])
+					{
+						isArticulationPoint[currentVertex] = true; //this can set itself multiple time
+					}
+				}
+				else if (visited[adjacentVertex.Id] ==true && inStack[adjacentVertex.Id] == true) //gray
+				{
+					lowestDiscoveryTimeReachableNode[currentVertex] = Math.Min(lowestDiscoveryTimeReachableNode[currentVertex],
+					                                                           dfsDiscoveryTime[adjacentVertex.Id]);
+				}
+			}
+
+			inStack[currentVertex] = false; //all processing done - color - black
+		}
+
 		public bool IsReachableUsingDFSLogic(int from, int to)
 		{
 			bool[] visited = new bool[this.V];
