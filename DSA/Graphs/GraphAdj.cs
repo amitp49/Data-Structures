@@ -239,6 +239,7 @@ namespace Graphs
 
 			List<int> reverseDfsOrder = dfsOrder;
 
+			//run dfs on transpose graph
 			GraphAdj transposeGraph = this.GetTransposeGraph();
 
 			bool[] visited = new bool[this.V];
@@ -247,7 +248,7 @@ namespace Graphs
 				if (visited[vertex] == false)
 				{
 					List<int> stronglyConnectedComponentDfsOrderList = new List<int>();
-					DFSTraversalInternalUtil(vertex, visited, stronglyConnectedComponentDfsOrderList);
+					transposeGraph.DFSTraversalInternalUtil(vertex, visited, stronglyConnectedComponentDfsOrderList);
 					stroglyConnectedComponentsList.Add(stronglyConnectedComponentDfsOrderList);
 				}	
 			}
@@ -258,19 +259,22 @@ namespace Graphs
 		{
 			List<int> articulationPoints = new List<int>();
 
-			bool[] isArticulationPoint = new bool[this.V];
-			bool[] visited = new bool[this.V];
-			int[] parent = new int[this.V];
-			int[] children = new int[this.V];
-			int[] dfsDiscoveryTime = new int[this.V];
-			int[] lowestDiscoveryTimeReachableNode = new int[this.V];
-			bool[] inStack = new bool[this.V];
-			int time = 0;
+			VertexNode[] nodes = new VertexNode[this.V];
 
-			//Initialize parent with -1
+			bool[] visited = new bool[this.V];
+			bool[] inStack = new bool[this.V];
+			int time = 1;
+
+			//Initialize dfs parent with -1
 			for (int i = 0; i < this.V; i++)
 			{
-				parent[i] = -1;
+				nodes[i] = new VertexNode(i);
+
+				nodes[i].DFSParent = -1;
+				nodes[i].DFSChildrenCount = 0;
+				nodes[i].DfsDiscoveryTime = 999;
+				nodes[i].LowestDiscoveryTimeReachableNode = 999;
+				nodes[i].IsArticulationPoint = false;
 			}
 
 			//DFS
@@ -281,15 +285,11 @@ namespace Graphs
 					ArticulationPointsOrCutVerticesUsingDFSLogicRecUtil(i,
 					                                                    visited,
 					                                                    inStack,
-					                                                    parent,
-					                                                    children,
-					                                                    dfsDiscoveryTime,
-					                                                    lowestDiscoveryTimeReachableNode, 
-					                                                    isArticulationPoint,
+					                                                    nodes,
 					                                                    ref time);
-					if (parent[i] == -1 && children[i] >= 2)
+					if (nodes[i].DFSParent == -1 && nodes[i].DFSChildrenCount >= 2)
 					{
-						isArticulationPoint[i] = true; // root of connected component having more than two child!! its like root of tree
+						nodes[i].IsArticulationPoint = true; // root of connected component having more than two child!! its like root of tree
 					}
 				}
 			}
@@ -298,7 +298,7 @@ namespace Graphs
 			//output
 			for (int i = 0; i < this.V; i++)
 			{
-				if (isArticulationPoint[i] == true)
+				if (nodes[i].IsArticulationPoint == true)
 				{
 					articulationPoints.Add(i);
 				}
@@ -309,17 +309,13 @@ namespace Graphs
 		private void ArticulationPointsOrCutVerticesUsingDFSLogicRecUtil(int currentVertex, 
 		                                                                 bool[] visited, 
 		                                                                 bool[] inStack,
-		                                                                 int[] parent,
-		                                                                 int[] children,
-		                                                                 int[] dfsDiscoveryTime, 
-		                                                                 int[] lowestDiscoveryTimeReachableNode, 
-		                                                                 bool[] isArticulationPoint,
+		                                                                 VertexNode[] nodes, 
 		                                                                ref int time)
 		{
 			visited[currentVertex] = true;
 			inStack[currentVertex] = true; //processing start - color - gray
-			dfsDiscoveryTime[currentVertex] = time;
-			lowestDiscoveryTimeReachableNode[currentVertex] = time;
+			nodes[currentVertex].DfsDiscoveryTime = time;
+			nodes[currentVertex].LowestDiscoveryTimeReachableNode = time;
 			time++;
 
 			foreach (var adjacentVertex in this.adj[currentVertex])
@@ -327,24 +323,24 @@ namespace Graphs
 				if (visited[adjacentVertex.Id] == false) //first time, discover color- white
 				{
 					//assign parent if starting visiting this node for first time
-					parent[adjacentVertex.Id] = currentVertex;
-					children[currentVertex]++;
+					nodes[adjacentVertex.Id].DFSParent = currentVertex;
+					nodes[currentVertex].DFSChildrenCount++;
 
-					ArticulationPointsOrCutVerticesUsingDFSLogicRecUtil(adjacentVertex.Id, visited, inStack, parent, children, dfsDiscoveryTime, lowestDiscoveryTimeReachableNode, isArticulationPoint, ref time);
-					lowestDiscoveryTimeReachableNode[currentVertex] = Math.Min(lowestDiscoveryTimeReachableNode[currentVertex],
-																				lowestDiscoveryTimeReachableNode[adjacentVertex.Id]);
+					ArticulationPointsOrCutVerticesUsingDFSLogicRecUtil(adjacentVertex.Id, visited, inStack, nodes, ref time);
+					nodes[currentVertex].LowestDiscoveryTimeReachableNode = Math.Min(nodes[currentVertex].LowestDiscoveryTimeReachableNode,
+					                                                                 nodes[adjacentVertex.Id].LowestDiscoveryTimeReachableNode); //lowest time of adj
 
 					//Check if current vertext is articulation point, due to adjacentVertext which doesn't point to any ancestor
-					if (parent[currentVertex] != -1 &&
-					   lowestDiscoveryTimeReachableNode[adjacentVertex.Id] >= dfsDiscoveryTime[currentVertex])
+					if (nodes[currentVertex].DFSParent != -1 &&
+					    nodes[adjacentVertex.Id].LowestDiscoveryTimeReachableNode >= nodes[currentVertex].DfsDiscoveryTime)
 					{
-						isArticulationPoint[currentVertex] = true; //this can set itself multiple time
+						nodes[currentVertex].IsArticulationPoint = true; //this can set itself multiple time
 					}
 				}
 				else if (visited[adjacentVertex.Id] ==true && inStack[adjacentVertex.Id] == true) //gray
 				{
-					lowestDiscoveryTimeReachableNode[currentVertex] = Math.Min(lowestDiscoveryTimeReachableNode[currentVertex],
-					                                                           dfsDiscoveryTime[adjacentVertex.Id]);
+					nodes[currentVertex].LowestDiscoveryTimeReachableNode = Math.Min(nodes[currentVertex].LowestDiscoveryTimeReachableNode,
+					                                                                 nodes[adjacentVertex.Id].DfsDiscoveryTime); //discoivery time of adj
 				}
 			}
 

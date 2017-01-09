@@ -25,6 +25,36 @@ namespace Interfaces
 			set;
 		}
 
+		public bool IsArticulationPoint
+		{
+			get;
+			set;
+		}
+
+		public int DfsDiscoveryTime
+		{
+			get;
+			set;
+		}
+
+		public int LowestDiscoveryTimeReachableNode
+		{
+			get;
+			set;
+		}
+
+		public int DFSParent
+		{
+			get;
+			set;
+		}
+
+		public int DFSChildrenCount
+		{
+			get;
+			set;
+		}
+
 		public VertexNode(int id)
 		{
 			this.Id = id;
