@@ -931,6 +931,80 @@ namespace Graphs
 
 			return solution;
 		}
+
+		public int FordFulkarsonMaximumFlow(int source, int sink)
+		{
+			int maxFlow = 0;
+
+			int[,] residualGraph = this.GetMatrixRepresentation();
+			int[] parent = new int[this.V];
+
+			while (IsSinkNodeReachableUsingBFSFromSource(residualGraph,source,sink,parent))
+			{
+				int flowInCurrentIteration = Int32.MaxValue;
+
+				//Get flow for current iteration
+				int current = sink;
+				while (current != source)
+				{
+					int parentOfCurrent = parent[current];
+
+					flowInCurrentIteration = Math.Min(flowInCurrentIteration,
+					                                  residualGraph[parentOfCurrent,current]); // flow in selected edge
+					//update current
+					current = parentOfCurrent; //reverse linked list from sink to source using parent
+				}
+
+				//update residual graph - keep it seperate
+				current = sink;
+				while (current != source)
+				{
+					int parentOfCurrent = parent[current];
+
+					residualGraph[parentOfCurrent, current] -= flowInCurrentIteration;
+					residualGraph[current, parentOfCurrent] += flowInCurrentIteration; // trickey
+
+					//update current
+					current = parentOfCurrent; //reverse linked list from sink to source using parent
+				}
+				maxFlow += flowInCurrentIteration;
+			}
+			return maxFlow;
+		}
+
+		private bool IsSinkNodeReachableUsingBFSFromSource(int[,] residualGraph, int source, int sink, int[] parent)
+		{
+			bool isReachable = false;
+			bool[] visited = new bool[this.V];
+			Queue<int> queue = new Queue<int>();
+			queue.Enqueue(source);
+			visited[source] = true; // mark as visited while enqueu, not dequeue to avoid infinite loop due to self loop 
+			parent[source] = -1;
+
+			while (queue.Count > 0)
+			{
+				int currentVertex = queue.Dequeue();
+
+				for (int j = 0; j < this.V; j++)
+				{
+					if (visited[j] == false 
+					    && residualGraph[currentVertex, j] > 0) //capacity is higher, means can flow
+					{
+						queue.Enqueue(j);
+						parent[j] = currentVertex;
+						visited[j] = true;
+					}
+				}
+			}
+
+			//output
+			if (visited[sink] == true)
+			{
+				isReachable = true;
+			}
+
+			return isReachable;
+		}
 	}
 }
 

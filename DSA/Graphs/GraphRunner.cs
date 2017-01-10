@@ -316,7 +316,22 @@ namespace Graphs
 				Console.WriteLine("");
 			}
 			Console.WriteLine("-----------------");
-			
+
+			GraphAdj directedGraph4 = new GraphAdj(6);
+			directedGraph4.AddDirectedEdge(0,1,16);
+			directedGraph4.AddDirectedEdge(0,2,13);
+			directedGraph4.AddDirectedEdge(1,2,10);
+			directedGraph4.AddDirectedEdge(1,3,12);
+			directedGraph4.AddDirectedEdge(2,1,4);
+			directedGraph4.AddDirectedEdge(2,4,14);
+			directedGraph4.AddDirectedEdge(3,2,9);
+			directedGraph4.AddDirectedEdge(3,5,20);
+			directedGraph4.AddDirectedEdge(4,3,7);
+			directedGraph4.AddDirectedEdge(4,5,4);
+
+			int maxFlow = directedGraph4.FordFulkarsonMaximumFlow(0,5);
+			Console.WriteLine("Max Flow: {0}",maxFlow);
+
 			Console.ReadKey();
 
 		}
