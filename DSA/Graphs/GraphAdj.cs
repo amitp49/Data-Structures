@@ -97,6 +97,21 @@ namespace Graphs
 			return transposeGraph;
 		}
 
+		public int[,] GetMatrixRepresentation()
+		{
+			int[,] adjMatrix = new int[this.V,this.V];
+
+			for (int i = 0; i < this.V; i++)
+			{
+				foreach (var j in this.adj[i])
+				{
+					adjMatrix[i, j.Id] = j.EdgeWeight;
+				}
+			}
+
+			return adjMatrix;
+		}
+
 		public List<int> BFSTraversal()
 		{
 			return BFSTraversal(0);
