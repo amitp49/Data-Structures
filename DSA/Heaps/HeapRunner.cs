@@ -4,6 +4,7 @@
 // 07-01-2017
 using System;
 using Interfaces;
+using System.Collections.Generic;
 
 namespace Heaps
 {
@@ -39,6 +40,21 @@ namespace Heaps
 			{
 				Console.WriteLine(item.Key + ", ");
 			}
+			Console.WriteLine("---------");
+
+			char[] charr = new char[] { 'a', 'b', 'c', 'd', 'e', 'f' };
+			int[] freq = new int[] { 5, 9, 12, 13, 16, 45 };
+
+			HeapAlgos heapAlgos = new HeapAlgos();
+			Dictionary<char, string> codes = heapAlgos.HuffmanCodes(charr,freq);
+
+			foreach (var item in codes)
+			{
+				Console.WriteLine("Char:{0} , code:{1} ",item.Key,item.Value);
+			}
+
+			Console.WriteLine("---------");
+			
 			Console.ReadLine();
 			
 		}

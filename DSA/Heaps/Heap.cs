@@ -102,16 +102,15 @@ namespace Heaps
 
 		public void Insert(T data)
 		{
-			if (this.MaxSize == this.arr.Length)
+			if (this.CurrentSize+1 == this.arr.Length)
 			{
-				//TODO: Need to resize heap array
+				//TODO: Need to resize heap array before adding
 			}
-			else
-			{
-				this.CurrentSize++;
-				this.arr[CurrentSize - 1] = data;
-				PercolateUp(CurrentSize-1);
-			}
+
+			this.CurrentSize++;
+			this.arr[CurrentSize - 1] = data;
+			PercolateUp(CurrentSize-1);
+
 		}
 
 		private void PercolateUp(int index)
