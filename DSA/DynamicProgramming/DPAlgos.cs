@@ -179,5 +179,52 @@ namespace DynamicProgramming
 			lcsChars.Reverse();
 			return String.Join(String.Empty, lcsChars.ToArray());;
 		}
+
+		/// <summary>
+		/// Edit distance - only first string is allowed to be modified via
+		/// 1. Insert
+		/// 2. Remove
+		/// 3. Replace
+		/// </summary>
+		/// <returns>The distance.</returns>
+		/// <param name="a">String A</param>
+		/// <param name="b">String B</param>
+		public int EditDistance(string a, string b)
+		{
+			int alen = a.Length;
+			int blen = b.Length;
+			int[,] editDistanceTable = new int[alen + 1, blen + 1];
+
+			int INSERTCOST = 1, REMOVECOST = 1, REPLACECOST = 1;
+
+			for (int i = 0; i < alen + 1; i++)
+			{
+				for (int j = 0; j < blen + 1; j++)
+				{
+					if (i == 0) //if string A is empty, then to make targer string B, insert char
+					{
+						editDistanceTable[i, j] = j * INSERTCOST;
+					}
+					else if (j == 0) //if second targeted string is empty, then remove char from string A
+					{
+						editDistanceTable[i, j] = i * REMOVECOST;
+					}
+					else if (a.ElementAt(i - 1) == b.ElementAt(j - 1))
+					{
+						editDistanceTable[i, j] = editDistanceTable[i - 1, j - 1];
+					}
+					else // min of insert/remove/replace
+					{
+						int insert = editDistanceTable[i, j - 1] + INSERTCOST;
+						int remove = editDistanceTable[i - 1, j] + REMOVECOST;
+						int replace = editDistanceTable[i - 1, j - 1] + REPLACECOST;
+
+						editDistanceTable[i, j] = Math.Min(insert,Math.Min(remove,replace));
+					}
+				}
+			}
+
+			return editDistanceTable[alen, blen];
+		}
 	}
 }
