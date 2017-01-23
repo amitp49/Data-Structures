@@ -74,42 +74,52 @@ namespace DynamicProgramming
 		/// Search ceiling index for the given new element in array using binary search.
 		/// </summary>
 		/// <returns>The ceil index.</returns>
-		/// <param name="arr">Arr.</param>
+		/// <param name="array">Arr.</param>
 		/// <param name="left">Left.</param>
 		/// <param name="right">Right.</param>
 		/// <param name="newElement">New element.</param>
-		private int BinarySearchCeilIndex(int[] arr, int left, int right, int newElement)
+		private int BinarySearchCeilIndex(int[] array, int left, int right, int newElement)
 		{
-			while (right > left)
+			while (right >= left)
 			{
 				int mid = left + (right - left) / 2;
 
-				if (arr[mid] >= newElement)
+				if (newElement < array[left])
 				{
-					right = mid;
+					return left;
 				}
-				else if (arr[mid] < newElement)
+				else if (newElement>array[right])
 				{
-					if (left != mid) //avoid infinite loop
-						left = mid;
+					return right+1;
+				}
+				else if(array[mid]==newElement)
+				{
+					return mid;
+				}
+				else if (array[mid] > newElement)
+				{
+					if (mid - 1 >= left && array[mid - 1] < newElement)
+					{
+						return mid; //found ceil
+					}
 					else
-						left = mid+1;
+					{
+						right = mid;
+					}
+				}
+				else if (array[mid] < newElement)
+				{
+					if (mid + 1 <= right && array[mid + 1] >= newElement)
+					{
+						return mid + 1; //found ceil
+					}
+					else
+					{
+						left = mid;
+					}
 				}
 			}
-
-			//only one element
-			if (right == left && arr[right] <= newElement)
-			{
-				return right + 1;
-			}
-			else if (right == left && arr[right] > newElement)
-			{
-				return right;
-			}
-			else
-			{
-				return 0; // should never come
-			}
+			return right; //should never come
 		}
 	}
 }
