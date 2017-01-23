@@ -32,7 +32,15 @@ namespace DynamicProgramming
 			int editDistance = dpAlgos.EditDistance(str1, str2);
 			Console.WriteLine("EDIT DISTANCE: {0}",editDistance);
 			Console.WriteLine("---------");
-			
+
+			int[,] cost = {{1, 2, 3},
+                       {4, 8, 2},
+                       {1, 5, 3}};
+			int minCost = dpAlgos.MinimumCostToReachCell(cost,2,2);
+			Console.WriteLine("MIN COST: {0}",minCost);
+			Console.WriteLine("---------");
+
+
 			Console.ReadKey();
 		}
 	}

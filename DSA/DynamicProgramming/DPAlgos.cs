@@ -226,5 +226,40 @@ namespace DynamicProgramming
 
 			return editDistanceTable[alen, blen];
 		}
+
+		public int MinimumCostToReachCell(int[,] cost, int targetX, int targetY)
+		{
+			int[,] resultTable = new int[cost.Length+1, cost.GetLength(0)+1];
+
+			//fill starting point cost as first cell 0,0
+			resultTable[0, 0] = cost[0,0];
+
+			//fill first row
+			for (int i = 1; i < targetX+1; i++)
+			{
+				resultTable[i, 0] = cost[i,0] + resultTable[i - 1, 0];
+			}
+
+			//fill first column
+			for (int j = 1; j < targetY+1; j++)
+			{
+				resultTable[0, j] = cost[0, j] + resultTable[0, j - 1];
+			}
+
+			//fill remaining table from second row and second column
+			for (int i = 1; i < targetX+1; i++)
+			{
+				for (int j = 1; j < targetY+1; j++)
+				{
+					int top = resultTable[i-1,j];
+					int diagonal = resultTable[i - 1, j - 1];
+					int left = resultTable[i, j - 1];
+
+					resultTable[i, j] = cost[i,j] + Math.Min(top,Math.Min(diagonal,left));
+				}
+			}
+
+			return resultTable[targetX, targetY];
+		}
 	}
 }
