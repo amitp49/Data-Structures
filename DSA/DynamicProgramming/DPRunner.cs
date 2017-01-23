@@ -40,7 +40,11 @@ namespace DynamicProgramming
 			Console.WriteLine("MIN COST: {0}",minCost);
 			Console.WriteLine("---------");
 
-
+			string str = "GEEKSFORGEEKS";
+			string strResult = dpAlgos.LongestNonRepeatingSubString(str);
+			Console.WriteLine("Longest non repeating: {0}",strResult);
+			Console.WriteLine("---------");
+			
 			Console.ReadKey();
 		}
 	}

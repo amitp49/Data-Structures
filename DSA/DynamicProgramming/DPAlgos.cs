@@ -227,6 +227,55 @@ namespace DynamicProgramming
 			return editDistanceTable[alen, blen];
 		}
 
+		public string LongestNonRepeatingSubString(string str)
+		{
+			int n = str.Length;
+			char[] strarr = str.ToCharArray();
+			int startIndex = 0;
+			int endIndex = 0;
+			int maxStartIndex = 0;
+			int maxEndIndex = 0;
+
+			Dictionary<char, int> visitedDictionary = new Dictionary<char, int>();
+			visitedDictionary.Add(strarr[0],0);
+
+			for (int i = 1; i < n; i++)
+			{
+				int previousOccuranceIndex = -1;
+				bool previouslyOccured = visitedDictionary.ContainsKey(strarr[i]);
+				if (previouslyOccured == false)
+				{
+					endIndex = i;
+					//add to dictionary
+					visitedDictionary.Add(strarr[i], i);
+				}
+				else
+				{
+					previousOccuranceIndex = visitedDictionary[strarr[i]];
+					if (startIndex > previousOccuranceIndex)
+					{
+						endIndex = i;
+					}
+					else
+					{
+						//time to update windows size in maxlength
+						if ((endIndex - startIndex + 1) > (maxEndIndex - maxStartIndex + 1))
+						{
+							maxStartIndex = startIndex;
+							maxEndIndex = endIndex;
+						}
+
+						startIndex = previousOccuranceIndex+1;
+					}
+					//update to dictionary
+					visitedDictionary[strarr[i]] = i;
+				}
+
+			}
+
+			return str.Substring(maxStartIndex,maxEndIndex-maxStartIndex+1);
+		}
+
 		public int MinimumCostToReachCell(int[,] cost, int targetX, int targetY)
 		{
 			int[,] resultTable = new int[cost.Length+1, cost.GetLength(0)+1];
