@@ -15,6 +15,10 @@ namespace DynamicProgramming
 			int[] arr = { 10, 22, 9, 33, 21, 50, 41, 60 };
 			int lis = dpAlgos.LIS(arr);
 			Console.WriteLine("LIS: {0}",lis);
+
+			int lisNLogn = dpAlgos.LISinNLogNUsingBinarySearch(arr);
+			Console.WriteLine("LIS NLogN: {0}", lisNLogn);
+			
 			Console.WriteLine("---------");
 
 			Console.ReadKey();
