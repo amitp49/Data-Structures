@@ -88,6 +88,10 @@
       <Project>{7132C10C-274D-443C-BDD8-EE9C75039952}</Project>
       <Name>UnionFind</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DynamicProgramming\DynamicProgramming.csproj">
+      <Project>{06B15D35-C556-45E4-B1AE-94C62FC18EEC}</Project>
+      <Name>DynamicProgramming</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,6 +13,7 @@ using Tree;
 using Graphs;
 using Heaps;
 using UnionFind;
+using DynamicProgramming;
 
 namespace DSA
 {
@@ -39,13 +40,16 @@ namespace DSA
             //stringRunner.Run();
 
 			IRunner heapRunner = new HeapRunner();
-			heapRunner.Run();
+			//heapRunner.Run();
 
 			IRunner unionFindRunner = new UnionFindRunner();
 			//unionFindRunner.Run();
 
 			IRunner graphRunner = new GraphRunner();
 			//graphRunner.Run();
+
+			IRunner dpRunner = new DPRunner();
+			dpRunner.Run();
 		}
     }
 }

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnionFind", "UnionFind\Unio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heaps", "Heaps\Heaps.csproj", "{4B0EAE37-AD47-449A-A8DF-4456F8C504A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicProgramming", "DynamicProgramming\DynamicProgramming.csproj", "{06B15D35-C556-45E4-B1AE-94C62FC18EEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{4B0EAE37-AD47-449A-A8DF-4456F8C504A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B0EAE37-AD47-449A-A8DF-4456F8C504A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B0EAE37-AD47-449A-A8DF-4456F8C504A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06B15D35-C556-45E4-B1AE-94C62FC18EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B15D35-C556-45E4-B1AE-94C62FC18EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B15D35-C556-45E4-B1AE-94C62FC18EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B15D35-C556-45E4-B1AE-94C62FC18EEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
