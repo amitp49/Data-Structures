@@ -21,6 +21,10 @@ namespace DynamicProgramming
 			
 			Console.WriteLine("---------");
 
+			string a = "AGGTAB";
+			string b = "GXTXAYB";
+			string lcs = dpAlgos.LCS(a,b);
+			Console.WriteLine("LCS: {0}, length:{1}",lcs,lcs.Length);
 			Console.ReadKey();
 		}
 	}
