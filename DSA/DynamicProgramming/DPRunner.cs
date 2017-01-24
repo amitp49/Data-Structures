@@ -55,6 +55,14 @@ namespace DynamicProgramming
 			int numberOfWays = dpAlgos.CountWaysToMakeMoneyUsingCoins(make,coinArr);
 			Console.WriteLine("Number of ways for coin: {0}",numberOfWays);
 			Console.WriteLine("---------");
+
+			// 1st matrix: 1 * 2
+			// 2nd matrix: 2 * 3
+			// 3rd matrix: 3 * 4
+			int[] matrixDimention = new int[] { 1, 2, 3, 4 };
+			int minConstToMultiplyMatrix = dpAlgos.MatrixChainMultiplicationCost(matrixDimention);
+			Console.WriteLine("Min Const To Multiply Matrix: {0}",minConstToMultiplyMatrix);
+			Console.WriteLine("---------");
 			
 			Console.ReadKey();
 		}

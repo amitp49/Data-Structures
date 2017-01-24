@@ -330,6 +330,49 @@ namespace DynamicProgramming
 			return table[value,nCoin-1];
 		}
 
+		public int MatrixChainMultiplicationCost(int[] matrixDimention)
+		{
+			int numberOfMatrix = matrixDimention.Length - 1;
+			int[,] minCost = new int[numberOfMatrix+1,numberOfMatrix+1]; // will not use zero index for simplicity
+
+			//for each individual matrix, cost is zero for chain length = 1
+			for (int i = 0; i <= numberOfMatrix; i++)
+			{
+				minCost[i, i] = 0;
+			}
+
+			//fill diagonaly right up for chain legth>2
+
+			for (int chainLength = 2; chainLength <= numberOfMatrix; chainLength++)
+			{
+				for (int row = 1; row <= numberOfMatrix - chainLength + 1; row++)
+				{
+					int col = row + chainLength - 1;
+
+					//if col is out of bound
+					if (col > numberOfMatrix)
+					{
+						continue;
+					}
+
+					minCost[row, col] = Int32.MaxValue;
+
+					for (int partition = row; partition < col; partition++)
+					{
+						int costUsingPartition = minCost[row, partition] +
+												minCost[partition + 1, col] +
+							matrixDimention[row - 1] * matrixDimention[partition] * matrixDimention[col];
+
+						if (costUsingPartition < minCost[row, col])
+						{
+							minCost[row, col] = costUsingPartition;
+						}
+					}
+				}
+			}
+			return minCost[1, numberOfMatrix];
+		}
+
 		public int MinimumCostToReachCell(int[,] cost, int targetX, int targetY)
 		{
 			int[,] resultTable = new int[cost.Length+1, cost.GetLength(0)+1];
