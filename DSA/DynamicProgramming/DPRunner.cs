@@ -63,6 +63,10 @@ namespace DynamicProgramming
 			int minConstToMultiplyMatrix = dpAlgos.MatrixChainMultiplicationCost(matrixDimention);
 			Console.WriteLine("Min Const To Multiply Matrix: {0}",minConstToMultiplyMatrix);
 			Console.WriteLine("---------");
+
+			int n = 5, k = 2;
+			Console.WriteLine("Value of C(" + n + "," + k + ") is " + dpAlgos.BinomialCoeff(n, k));
+			Console.WriteLine("---------");
 			
 			Console.ReadKey();
 		}
