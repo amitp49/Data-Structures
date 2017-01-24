@@ -276,6 +276,35 @@ namespace DynamicProgramming
 			return str.Substring(maxStartIndex,maxEndIndex-maxStartIndex+1);
 		}
 
+		public int MinJumpToReachEnd(int[] jumpArray)
+		{
+			int n = jumpArray.Length;
+			int[] minJumpToReachIndex = new int[n];
+
+			//all other INT.MAX except first
+			for (int i = 1; i < n; i++)
+			{
+				minJumpToReachIndex[i] = Int32.MaxValue;
+			}
+
+			minJumpToReachIndex[0] = 0; // At start, zero jump
+			
+			for (int current = 1; current < n; current++)
+			{
+				for (int exploredIndex = 0; exploredIndex < current; exploredIndex++)
+				{
+					//check if sum doesn't overflow
+					if (minJumpToReachIndex[exploredIndex]!= Int32.MaxValue &&
+						minJumpToReachIndex[exploredIndex] + jumpArray[exploredIndex] >= current &&
+					    minJumpToReachIndex[current] > minJumpToReachIndex[exploredIndex]+1)
+					{
+						minJumpToReachIndex[current] = minJumpToReachIndex[exploredIndex] + 1;
+					}
+				}
+			}
+			return minJumpToReachIndex[n - 1];
+		}
+
 		public int MinimumCostToReachCell(int[,] cost, int targetX, int targetY)
 		{
 			int[,] resultTable = new int[cost.Length+1, cost.GetLength(0)+1];

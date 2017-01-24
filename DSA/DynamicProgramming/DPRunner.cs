@@ -44,6 +44,14 @@ namespace DynamicProgramming
 			string strResult = dpAlgos.LongestNonRepeatingSubString(str);
 			Console.WriteLine("Longest non repeating: {0}",strResult);
 			Console.WriteLine("---------");
+
+			int[] jumparray = { 1, 3, 6, 1, 0, 9 };
+			int minJumpToReachEnd = dpAlgos.MinJumpToReachEnd(jumparray);
+			Console.WriteLine("Min Jump: {0}",minJumpToReachEnd);
+			Console.WriteLine("---------");
+
+
+			Console.WriteLine("---------");
 			
 			Console.ReadKey();
 		}
