@@ -77,6 +77,14 @@ namespace DynamicProgramming
 			int eggs = 2, floors = 36;
 			Console.WriteLine("Minimum number of trials in worst case with " + eggs + "  eggs and " + floors +
 					 " floors is " + dpAlgos.EggDrop(eggs, floors));
+			Console.WriteLine("---------");
+
+			String seq = "BBABCBCAB";
+			Console.WriteLine("The length of the lps is " + dpAlgos.LongestPalindromicSubsequence(seq));
+			Console.WriteLine("---------");
+
+
+			Console.WriteLine("---------");
 			Console.ReadKey();
 		}
 	}

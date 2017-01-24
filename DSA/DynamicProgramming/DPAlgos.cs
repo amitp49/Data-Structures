@@ -373,6 +373,46 @@ namespace DynamicProgramming
 			return minCost[1, numberOfMatrix];
 		}
 
+		public int LongestPalindromicSubsequence(string str)
+		{
+			int n = str.Length;
+			int[,] lpsTable = new int[n,n];
+
+			//for each char, lps size is 1
+			for (int i = 0; i < n; i++)
+			{
+				lpsTable[i, i] = 1;
+			}
+
+			//for each adjacent pair of char, size if two if both of them are equal
+			for (int i = 0; i < n-1; i++)
+			{
+				if (str.ElementAt(i) == str.ElementAt(i+1))
+					lpsTable[i, i + 1] = 2;
+			}
+
+			//chain length >= 3
+			for (int chainLength = 3; chainLength <= n; chainLength++)
+			{
+				for (int start = 0; start < n-chainLength+1; start++)
+				{
+					int end = start + chainLength - 1;
+
+					if (str.ElementAt(start) == str.ElementAt(end))
+					{
+						lpsTable[start, end] = 2 + lpsTable[start + 1, end - 1];
+					}
+					else
+					{
+						int ignoreStartingChar = lpsTable[start + 1 ,end];
+						int ignoreEndingChar = lpsTable[start, end - 1];
+						lpsTable[start, end] = Math.Max(ignoreStartingChar,ignoreEndingChar);
+					}
+				}
+			}
+
+			return lpsTable[0,n-1];
+		}
 
 		/// <summary>
 		/// Binomials the coeff - find C(n,k)
