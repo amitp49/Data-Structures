@@ -67,6 +67,12 @@ namespace DynamicProgramming
 			int n = 5, k = 2;
 			Console.WriteLine("Value of C(" + n + "," + k + ") is " + dpAlgos.BinomialCoeff(n, k));
 			Console.WriteLine("---------");
+
+			int[] val = new int[] { 60, 100, 120 };
+			int[] wt = new int[] { 10, 20, 30 };
+			int W = 50;
+			Console.WriteLine("Max value for knapsack: {0}",dpAlgos.KnapSackZeroOne(W, wt, val));
+			Console.WriteLine("---------");
 			
 			Console.ReadKey();
 		}

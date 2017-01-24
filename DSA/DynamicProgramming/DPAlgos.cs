@@ -397,6 +397,38 @@ namespace DynamicProgramming
 			return C[n, k];
 		}
 
+		public int KnapSackZeroOne(int knapsackCapacity, int[] weight, int[] value)
+		{
+			int n = weight.Length;
+			int[,] score = new int[n + 1, knapsackCapacity + 1];
+
+			for (int item = 0; item <= n; item++)
+			{
+				for (int currentCapacity = 0; currentCapacity <= knapsackCapacity; currentCapacity++)
+				{
+					if (currentCapacity == 0 || item == 0)
+					{
+						score[item, currentCapacity] = 0;
+					}
+					else if (weight[item - 1] <= currentCapacity)
+					{
+						//Include or exclude depending on score - value[item-1] is value of ith item, as value store from 0th index
+						int includeScore = value[item - 1] + score[item - 1, currentCapacity - weight[item-1]];
+						int excludeScore = score[item - 1, currentCapacity];
+						score[item, currentCapacity] = Math.Max(includeScore,excludeScore);
+					}
+					else
+					{
+						//Exclude is the only option as weight is more than current space
+						int excludeScore = score[item - 1, currentCapacity];
+						score[item, currentCapacity] = excludeScore;
+					}
+				}
+			}
+
+			return score[n,knapsackCapacity];
+		}
+
 		public int MinimumCostToReachCell(int[,] cost, int targetX, int targetY)
 		{
 			int[,] resultTable = new int[cost.Length+1, cost.GetLength(0)+1];
