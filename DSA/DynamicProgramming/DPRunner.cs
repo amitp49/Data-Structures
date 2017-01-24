@@ -73,7 +73,10 @@ namespace DynamicProgramming
 			int W = 50;
 			Console.WriteLine("Max value for knapsack: {0}",dpAlgos.KnapSackZeroOne(W, wt, val));
 			Console.WriteLine("---------");
-			
+
+			int eggs = 2, floors = 36;
+			Console.WriteLine("Minimum number of trials in worst case with " + eggs + "  eggs and " + floors +
+					 " floors is " + dpAlgos.EggDrop(eggs, floors));
 			Console.ReadKey();
 		}
 	}

@@ -429,6 +429,49 @@ namespace DynamicProgramming
 			return score[n,knapsackCapacity];
 		}
 
+		public int EggDrop(int totalEggs, int totalFloors)
+		{
+			int[,] minimumTrials = new int[totalEggs+1,totalFloors+1];
+
+			for (int egg = 1; egg <= totalEggs; egg++)
+			{
+				//for zero floor, no trial needed
+				minimumTrials[egg, 0] = 0;
+
+				//for one floor, only one trial needed
+				minimumTrials[egg, 1] = 1;
+			}
+
+			for (int floor = 1; floor <= totalFloors; floor++)
+			{
+				//with one egg, we need trials as many as floors in sequence
+				minimumTrials[1, floor] = floor;
+			}
+
+			//fill rest
+			for (int egg = 2; egg <= totalEggs; egg++)
+			{
+				for (int currentFloor = 2; currentFloor <= totalFloors; currentFloor++)
+				{
+					int runningMinEstimation = Int32.MaxValue;
+					//We need to find MINIMUM estimation of WORST/MAX trials out of each floor beneath
+					for (int beneathFloor = 1; beneathFloor <= currentFloor; beneathFloor++)
+					{
+						//Add one for this trial too
+						int trialsIfEggBreaksFromBeneathFloor = 1 + minimumTrials[egg-1,beneathFloor-1];
+						int trialsIfEggDoesNotBreakFromBeneathFloor = 1 + minimumTrials[egg,currentFloor-beneathFloor];
+						int worstNumberOfTrials = Math.Max(trialsIfEggBreaksFromBeneathFloor,
+						                                      trialsIfEggDoesNotBreakFromBeneathFloor);
+						if (runningMinEstimation > worstNumberOfTrials)
+							runningMinEstimation = worstNumberOfTrials;
+					}
+
+					minimumTrials[egg, currentFloor] = runningMinEstimation;
+				}
+			}
+			return minimumTrials[totalEggs,totalFloors];
+		}
+
 		public int MinimumCostToReachCell(int[,] cost, int targetX, int targetY)
 		{
 			int[,] resultTable = new int[cost.Length+1, cost.GetLength(0)+1];
