@@ -50,7 +50,10 @@ namespace DynamicProgramming
 			Console.WriteLine("Min Jump: {0}",minJumpToReachEnd);
 			Console.WriteLine("---------");
 
-
+			int[] coinArr = { 1, 2, 3 };
+			int make = 4;
+			int numberOfWays = dpAlgos.CountWaysToMakeMoneyUsingCoins(make,coinArr);
+			Console.WriteLine("Number of ways for coin: {0}",numberOfWays);
 			Console.WriteLine("---------");
 			
 			Console.ReadKey();

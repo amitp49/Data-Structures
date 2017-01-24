@@ -305,6 +305,31 @@ namespace DynamicProgramming
 			return minJumpToReachIndex[n - 1];
 		}
 
+		public int CountWaysToMakeMoneyUsingCoins(int value, int[] coinArr)
+		{
+			int nCoin = coinArr.Length;
+			int[,] table = new int[value+1,nCoin];
+
+			//To make 0 value, using any coin there is only one way, DONOT include coin
+			for (int i = 0; i < nCoin; i++)
+			{
+				table[0, i] = 1;
+			}
+
+			//fill other values rows
+			for (int row = 1; row < value+1; row++)
+			{
+				for (int jcoin = 0; jcoin < nCoin; jcoin++)
+				{
+					int waysWhenIncludeCoin = (row - coinArr[jcoin]) >= 0 ? table[row-coinArr[jcoin],jcoin] : 0;
+					int waysWhenDoesntIncludeCoin = (jcoin>=1)?table[row,jcoin-1]:0;
+					table[row, jcoin] = waysWhenIncludeCoin + waysWhenDoesntIncludeCoin;
+				}
+			}
+
+			return table[value,nCoin-1];
+		}
+
 		public int MinimumCostToReachCell(int[,] cost, int targetX, int targetY)
 		{
 			int[,] resultTable = new int[cost.Length+1, cost.GetLength(0)+1];
