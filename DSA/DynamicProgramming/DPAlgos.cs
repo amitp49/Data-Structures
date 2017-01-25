@@ -484,6 +484,60 @@ namespace DynamicProgramming
 			return minCost[1, numberOfMatrix];
 		}
 
+		public int MatrixChainMultiplicationCostOptimize(int[] matrixDimention)
+		{
+			int numberOfMatrix = matrixDimention.Length - 1;
+			int[,] cost = new int[numberOfMatrix + 1, numberOfMatrix + 1]; // will not use zero index for simplicity
+			int[] minCostUptoIndex = new int[numberOfMatrix];
+
+			//for each individual matrix, cost is zero for chain length = 1
+			for (int i = 0; i <= numberOfMatrix; i++)
+			{
+				cost[i, i] = 0;
+			}
+
+			for (int i = 0; i < numberOfMatrix; i++)
+			{
+				cost[i, i + 1] = matrixDimention[i] * matrixDimention[i + 1] * matrixDimention[i+2];
+			}
+
+			//fill diagonaly right up for chain legth>=3
+			for (int chainLength = 3; chainLength <= numberOfMatrix; chainLength++)
+			{
+				for (int row = 1; row <= numberOfMatrix - chainLength + 1; row++)
+				{
+					int col = row + chainLength - 1;
+
+					//if col is out of bound
+					if (col > numberOfMatrix)
+					{
+						continue;
+					}
+					cost[row, col] = matrixDimention[row-1] * matrixDimention[row] * matrixDimention[col] + 
+						cost[row+1,col-1];
+				}
+			}
+
+			//Find min cost
+
+			for (int i = 0; i < numberOfMatrix; i++)
+			{
+				for (int partition = 0; partition < i; partition++)
+				{
+					int costUsingPartition = cost[0, partition] +
+											cost[partition + 1, i] +
+						matrixDimention[0] * matrixDimention[partition] * matrixDimention[i];
+
+					if (costUsingPartition < cost[i, partition])
+					{
+						cost[i, partition] = costUsingPartition;
+					}
+				}
+			}
+
+			return cost[1, numberOfMatrix];
+		}
+
 		public int LongestPalindromicSubsequence(string str)
 		{
 			int n = str.Length;
