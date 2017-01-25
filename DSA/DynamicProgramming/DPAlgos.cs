@@ -484,6 +484,7 @@ namespace DynamicProgramming
 			return minCost[1, numberOfMatrix];
 		}
 
+		//NOT WORKING
 		public int MatrixChainMultiplicationCostOptimize(int[] matrixDimention)
 		{
 			int numberOfMatrix = matrixDimention.Length - 1;
@@ -496,9 +497,9 @@ namespace DynamicProgramming
 				cost[i, i] = 0;
 			}
 
-			for (int i = 0; i < numberOfMatrix; i++)
+			for (int i = 1; i <= numberOfMatrix-1; i++)
 			{
-				cost[i, i + 1] = matrixDimention[i] * matrixDimention[i + 1] * matrixDimention[i+2];
+				cost[i, i + 1] = matrixDimention[i-1] * matrixDimention[i] * matrixDimention[i+1];
 			}
 
 			//fill diagonaly right up for chain legth>=3
@@ -509,28 +510,29 @@ namespace DynamicProgramming
 					int col = row + chainLength - 1;
 
 					//if col is out of bound
-					if (col > numberOfMatrix)
+					if (col > numberOfMatrix || col-2 <0)
 					{
 						continue;
 					}
-					cost[row, col] = matrixDimention[row-1] * matrixDimention[row] * matrixDimention[col] + 
-						cost[row+1,col-1];
+					cost[row, col] = cost[row + 1, col - 1] +
+						matrixDimention[row - 1] * matrixDimention[row] * matrixDimention[row + 1] +
+						matrixDimention[col - 2] * matrixDimention[col - 1] * matrixDimention[col];
 				}
 			}
 
 			//Find min cost
 
-			for (int i = 0; i < numberOfMatrix; i++)
+			for (int i = 1; i <= numberOfMatrix; i++)
 			{
-				for (int partition = 0; partition < i; partition++)
+				for (int j = 1; j < i; j++)
 				{
-					int costUsingPartition = cost[0, partition] +
-											cost[partition + 1, i] +
-						matrixDimention[0] * matrixDimention[partition] * matrixDimention[i];
+					int costUsingPartition = cost[1, j] +
+											cost[j + 1, i] +
+						matrixDimention[0] * matrixDimention[j] * matrixDimention[i];
 
-					if (costUsingPartition < cost[i, partition])
+					if (costUsingPartition < cost[i, j])
 					{
-						cost[i, partition] = costUsingPartition;
+						cost[i, j] = costUsingPartition;
 					}
 				}
 			}

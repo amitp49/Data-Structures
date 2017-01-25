@@ -62,6 +62,8 @@ namespace DynamicProgramming
 			int[] matrixDimention = new int[] { 1, 2, 3, 4 };
 			int minConstToMultiplyMatrix = dpAlgos.MatrixChainMultiplicationCost(matrixDimention);
 			Console.WriteLine("Min Const To Multiply Matrix: {0}",minConstToMultiplyMatrix);
+			int minConstToMultiplyMatrixOpt = dpAlgos.MatrixChainMultiplicationCostOptimize(matrixDimention);
+			Console.WriteLine("Min Const To Multiply Matrix OPT: {0}", minConstToMultiplyMatrixOpt);
 			Console.WriteLine("---------");
 
 			int n = 5, k = 2;
