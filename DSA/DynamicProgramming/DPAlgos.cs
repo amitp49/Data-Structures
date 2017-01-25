@@ -526,6 +526,63 @@ namespace DynamicProgramming
 			return lpsTable[0,n-1];
 		}
 
+		public int MinimumCutsRequiredMakeEachPartionPalindrome(string str)
+		{
+			int n = str.Length;
+			int[,] minCost = new int[n, n];
+
+			//for each char, cost size is 0
+			for (int i = 0; i < n; i++)
+			{
+				minCost[i, i] = 0;
+			}
+
+			//for each adjacent pair of char, cost is zero if equal, else cost is one
+			for (int i = 0; i < n - 1; i++)
+			{
+				if (str.ElementAt(i) == str.ElementAt(i + 1))
+					minCost[i, i + 1] = 0;
+				else
+					minCost[i, i + 1] = 1;
+			}
+
+			//fill diagonaly right up for chain legth>2
+			for (int chainLength = 3; chainLength <= n; chainLength++)
+			{
+				for (int row = 0; row < n - chainLength + 1; row++)
+				{
+					int col = row + chainLength - 1;
+					// if row to col is nothing but start to end in str
+
+					//check if start to end is palindrome, then cost is zero
+					if (str.ElementAt(row) == str.ElementAt(col) &&
+						minCost[row + 1, col - 1] == 0) // IMP CHECK as we are not maining any other boolean 2D array for palindrome
+					{
+						minCost[row, col] = 0;
+					}
+					else
+					{
+						//Partition logic
+						minCost[row, col] = Int32.MaxValue;
+
+						for (int partition = row; partition < col; partition++)
+						{
+							int costUsingPartition = minCost[row, partition] +
+													minCost[partition + 1, col] +
+													1; //parition itself
+
+							if (costUsingPartition < minCost[row, col])
+							{
+								minCost[row, col] = costUsingPartition;
+							}
+						}
+					}
+				}
+			}
+
+			return minCost[0, n-1];
+		}
+
 		/// <summary>
 		/// Binomials the coeff - find C(n,k)
 		/// </summary>

@@ -95,7 +95,8 @@ namespace DynamicProgramming
 			Console.WriteLine("Length of LBS is " + dpAlgos.LongestBitonicSubsequence(lbsarr));
 			Console.WriteLine("---------");
 
-
+			string strToPartition = "ababbbabbababa";
+			Console.WriteLine("Min cuts needed for Palindrome Partitioning is {0}", dpAlgos.MinimumCutsRequiredMakeEachPartionPalindrome(strToPartition));
 			Console.WriteLine("---------");
 			Console.ReadKey();
 		}
