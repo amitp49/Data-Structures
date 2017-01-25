@@ -694,6 +694,26 @@ namespace DynamicProgramming
 			return score[n,knapsackCapacity];
 		}
 
+		public bool CanPartitionInTwoEqualSum(int[] arr)
+		{
+			int sum = 0;
+			int n = arr.Length;
+
+			//find total sum
+			for (int i = 0; i < n; i++)
+			{
+				sum += arr[i];
+			}
+
+			//if sum is odd, then can't partition in two equal sum set ever
+			if(sum%2!=0)
+				return false;
+
+			//Use knapsack of weight = sum/2, pass same array for weight & values 
+			int score = this.KnapSackZeroOne(sum/2,arr,arr);
+			return (score==sum/2);
+		}
+
 		public int EggDrop(int totalEggs, int totalFloors)
 		{
 			int[,] minimumTrials = new int[totalEggs+1,totalFloors+1];

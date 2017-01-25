@@ -100,6 +100,14 @@ namespace DynamicProgramming
 			string strToPartition = "ababbbabbababa";
 			Console.WriteLine("Min cuts needed for Palindrome Partitioning is {0}", dpAlgos.MinimumCutsRequiredMakeEachPartionPalindrome(strToPartition));
 			Console.WriteLine("---------");
+
+			int[] setarr = { 3, 1, 1, 2, 2, 1 };
+			if (dpAlgos.CanPartitionInTwoEqualSum(setarr) == true)
+				Console.WriteLine("Can be divided into two subsets of equal sum");
+        	else
+           		Console.WriteLine("Can not be divided into two subsets of equal sum");
+			Console.WriteLine("---------");
+			
 			Console.ReadKey();
 		}
 	}
