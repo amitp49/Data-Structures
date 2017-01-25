@@ -83,6 +83,8 @@ namespace DynamicProgramming
 			Console.WriteLine("The length of the lps is " + dpAlgos.LongestPalindromicSubsequence(seq));
 			Console.WriteLine("---------");
 
+			int[] rodPrice = new int[] { 1, 5, 8, 9, 10, 17, 17, 20 };
+			Console.WriteLine("Maximum Obtainable Value is " + dpAlgos.CutRod(rodPrice));
 
 			Console.WriteLine("---------");
 			Console.ReadKey();

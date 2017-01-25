@@ -305,6 +305,32 @@ namespace DynamicProgramming
 			return minJumpToReachIndex[n - 1];
 		}
 
+		/// <summary>
+		/// Get maximum value by cutting rod. Rod size = index+1
+		/// </summary>
+		/// <returns>The rod.</returns>
+		/// <param name="rodPrice">Rod price.</param>
+		public int CutRod(int[] rodPrice)
+		{
+			int n = rodPrice.Length;
+			int[] maxValueOfSize = new int[n+1];
+
+			//for zero size rod, value would be zero
+			maxValueOfSize[0] = 0;
+			maxValueOfSize[1] = rodPrice[0]; // index zero gives rod size one
+
+
+			for (int i = 2; i <= n; i++)
+			{
+				for (int j = 0; j < i; j++) 
+				{
+					if(maxValueOfSize[i] < rodPrice[j] + maxValueOfSize[i - j -1])
+						maxValueOfSize[i] = rodPrice[j] + maxValueOfSize[i - j -1];
+				}
+			}
+			return maxValueOfSize[n];
+		}
+
 		public int CountWaysToMakeMoneyUsingCoins(int value, int[] coinArr)
 		{
 			int nCoin = coinArr.Length;
@@ -392,6 +418,7 @@ namespace DynamicProgramming
 			}
 
 			//chain length >= 3
+
 			for (int chainLength = 3; chainLength <= n; chainLength++)
 			{
 				for (int start = 0; start < n-chainLength+1; start++)
