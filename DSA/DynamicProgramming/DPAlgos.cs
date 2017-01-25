@@ -44,6 +44,37 @@ namespace DynamicProgramming
 			return maxLisSoFar;
 		}
 
+		public int MaxSumIncreasingSubsequence(int[] arr)
+		{
+			int n = arr.Length;
+			int[] msiUptoIndex = new int[n]; //every msi is element itself for size one
+
+			for (int i = 0; i < n; i++)
+			{
+				msiUptoIndex[i] = arr[i];
+			}
+
+			int maxMsiSoFar = 0;
+
+			for (int i = 1; i < n; i++)
+			{
+				for (int j = 0; j < i; j++)
+				{
+					if (arr[j] < arr[i] && msiUptoIndex[i] < msiUptoIndex[j] + arr[i])
+					{
+						msiUptoIndex[i] = msiUptoIndex[j] + arr[i];
+					}
+				}
+
+				//update max so far
+				if (msiUptoIndex[i] > maxMsiSoFar)
+				{
+					maxMsiSoFar = msiUptoIndex[i];
+				}
+			}
+			return maxMsiSoFar;
+		}
+
 		/// <summary>
 		/// LIS in NLogN using binary search.
 		/// http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/

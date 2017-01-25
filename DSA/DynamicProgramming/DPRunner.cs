@@ -85,7 +85,10 @@ namespace DynamicProgramming
 
 			int[] rodPrice = new int[] { 1, 5, 8, 9, 10, 17, 17, 20 };
 			Console.WriteLine("Maximum Obtainable Value is " + dpAlgos.CutRod(rodPrice));
+			Console.WriteLine("---------");
 
+			int[] msiarr = new int[] { 1, 101, 2, 3, 100, 4, 5 };
+			Console.WriteLine("Sum of maximum sum increasing subsequence is: " + dpAlgos.MaxSumIncreasingSubsequence(msiarr));
 			Console.WriteLine("---------");
 			Console.ReadKey();
 		}
