@@ -75,6 +75,60 @@ namespace DynamicProgramming
 			return maxMsiSoFar;
 		}
 
+		public int LongestBitonicSubsequence(int[] arr)
+		{
+			int n = arr.Length;
+
+			//Step:1 Find LIS from right
+
+			int[] lisUptoIndexFromRight = new int[n];
+			for (int i = 0; i < n; i++)
+			{
+				lisUptoIndexFromRight[i] = 1;
+			}
+
+			for (int i = 1; i < n; i++) // start from second element
+			{
+				for (int j = 0; j < i; j++)
+				{
+					if (arr[j] < arr[i] && lisUptoIndexFromRight[i] < lisUptoIndexFromRight[j] + 1)
+					{
+						lisUptoIndexFromRight[i] = lisUptoIndexFromRight[j] + 1;
+					}
+				}
+			}
+
+			//Step:2 Find LIS from left to right
+			int[] lisUptoIndexFromLeft = new int[n];
+			for (int i = 0; i < n; i++)
+			{
+				lisUptoIndexFromLeft[i] = 1;
+			}
+
+			for (int i = n-2; i >= 0; i--) // start from second last element
+			{
+				for (int j = n-1; j > i; j--)
+				{
+					if (arr[j] < arr[i] && lisUptoIndexFromLeft[i] < lisUptoIndexFromLeft[j] + 1)
+					{
+						lisUptoIndexFromLeft[i] = lisUptoIndexFromLeft[j] + 1;
+					}
+				}
+			}
+
+			//Step:3 add both at each location
+			int runningMax = lisUptoIndexFromLeft[0] + lisUptoIndexFromRight[0] - 1; // current element is counted twise
+			for (int i = 1; i < n; i++)
+			{
+				if (runningMax < lisUptoIndexFromLeft[i] + lisUptoIndexFromRight[i] - 1)
+				{
+					runningMax = lisUptoIndexFromLeft[i] + lisUptoIndexFromRight[i] - 1;
+				}
+			}
+
+			return runningMax;
+		}
+
 		/// <summary>
 		/// LIS in NLogN using binary search.
 		/// http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/

@@ -90,6 +90,13 @@ namespace DynamicProgramming
 			int[] msiarr = new int[] { 1, 101, 2, 3, 100, 4, 5 };
 			Console.WriteLine("Sum of maximum sum increasing subsequence is: " + dpAlgos.MaxSumIncreasingSubsequence(msiarr));
 			Console.WriteLine("---------");
+
+			int[] lbsarr = {0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5,13, 3, 11, 7, 15};
+			Console.WriteLine("Length of LBS is " + dpAlgos.LongestBitonicSubsequence(lbsarr));
+			Console.WriteLine("---------");
+
+
+			Console.WriteLine("---------");
 			Console.ReadKey();
 		}
 	}
