@@ -105,8 +105,12 @@ namespace Arrays
 
 		public static int CanCompleteCircuit(List<int> A, List<int> B)
 		{
-			// Consider first petrol pump as a starting point
 			int n = A.Count;
+			
+			if (n == 0 || n == 1)
+				return 0;
+			
+			// Consider first petrol pump as a starting point
 			int start = 0;
 			int end = 1;
 
