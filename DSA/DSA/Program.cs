@@ -34,7 +34,7 @@ namespace DSA
             //queueRunner.Run();
 
             IRunner arrayRunner = new ArrayRunner();
-            //arrayRunner.Run();
+            arrayRunner.Run();
 
             IRunner stringRunner = new StringRunner();
             //stringRunner.Run();
@@ -46,7 +46,7 @@ namespace DSA
 			//unionFindRunner.Run();
 
 			IRunner graphRunner = new GraphRunner();
-			graphRunner.Run();
+			//graphRunner.Run();
 
 			IRunner dpRunner = new DPRunner();
 			//dpRunner.Run();

@@ -102,5 +102,42 @@ namespace Arrays
 
             Console.WriteLine("Celebrity: " + start);
         }
+
+		public static int CanCompleteCircuit(List<int> A, List<int> B)
+		{
+			// Consider first petrol pump as a starting point
+			int n = A.Count;
+			int start = 0;
+			int end = 1;
+
+			int curr_petrol = A[start] - B[start];
+
+			/* Run a loop while all petrol pumps are not visited.
+			  And we have reached first petrol pump again with 0 or more petrol */
+			while (end != start || curr_petrol < 0)
+			{
+				// If curremt amount of petrol in truck becomes less than 0, then
+				// remove the starting petrol pump from tour
+				while (curr_petrol < 0 && start != end)
+				{
+					// Remove starting petrol pump. Change start
+					curr_petrol -= A[start] - B[start];
+					start = (start + 1) % n;
+
+					// If 0 is being considered as start again, then there is no
+					// possible solution
+					if (start == 0)
+						return -1;
+				}
+
+				// Add a petrol pump to current tour
+				curr_petrol += A[end] - B[end];
+
+				end = (end + 1) % n;
+			}
+
+			// Return starting point
+			return start;
+		}
     }
 }

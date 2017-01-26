@@ -56,6 +56,17 @@ namespace Arrays
 			int[] arr = new int[] { 1, 4, 45, 6, 10, 8 };
 			ArrayAlgos.FindTripletsHavingSumAs(arr, 22);
 
+			Console.WriteLine("------------");
+			List<int> petrol = new List<int>();
+			petrol.Add(6);
+			petrol.Add(3);
+			petrol.Add(7);
+			List<int> distanceToNextStation = new List<int>();
+			distanceToNextStation.Add(4);
+			distanceToNextStation.Add(6);
+			distanceToNextStation.Add(3);
+			int starting = ArrayAlgos.CanCompleteCircuit(petrol, distanceToNextStation);
+			Console.WriteLine("Start station: {0}",starting);
 			Console.ReadLine();
 
 		}
