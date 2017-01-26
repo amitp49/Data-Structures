@@ -46,10 +46,10 @@ namespace DSA
 			//unionFindRunner.Run();
 
 			IRunner graphRunner = new GraphRunner();
-			//graphRunner.Run();
+			graphRunner.Run();
 
 			IRunner dpRunner = new DPRunner();
-			dpRunner.Run();
+			//dpRunner.Run();
 		}
     }
 }

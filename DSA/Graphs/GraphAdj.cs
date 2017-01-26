@@ -9,6 +9,8 @@ using UnionFind;
 using Heaps;
 using Interfaces;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Graphs
 {
@@ -160,6 +162,93 @@ namespace Graphs
 					}
 				}
 			}
+		}
+
+		public string GetMultipleInZeroOneOnlyFor(int n)
+		{
+			Queue<int> queueForNumbers = new Queue<int>();
+			string result = String.Empty;
+			bool[] visitedForNumbers = new bool[this.V];
+			int[] suffixes = new int[2] { 0, 1 };
+			//we will start from 1st node out of n node
+
+			queueForNumbers.Enqueue(1);
+			visitedForNumbers[1] = true;
+
+			while (true)
+			{
+				int from = queueForNumbers.Dequeue();
+				if (from == 0)
+					break;
+				
+				for (int i = 0; i < suffixes.Length; i++)
+				{
+					int toNode = from * 10 + suffixes[i];
+					int reminder = toNode % n;
+					if (visitedForNumbers[reminder] == false)
+					{
+						visitedForNumbers[reminder] = true;
+						queueForNumbers.Enqueue(reminder);
+						this.AddDirectedEdge(from, reminder,suffixes[i]);
+					}
+				}
+			}
+
+			//Do BFS traversal with edges until zero th node encounters
+			bool[] visitedForBfs = new bool[this.V];
+			Queue<int> queueForBfs = new Queue<int>();
+			int[] parent = new int[this.V];
+
+			int source = 1;
+			visitedForBfs[source] = true;
+			queueForBfs.Enqueue(source);
+			parent[source] = -1;
+
+			while (queueForBfs.Count > 0)
+			{
+				int currentVertex = queueForBfs.Dequeue();
+				
+				foreach (var adjacentVertex in this.adj[currentVertex])
+				{
+					if (visitedForBfs[adjacentVertex.Id] == false)
+					{
+						queueForBfs.Enqueue(adjacentVertex.Id);
+						parent[adjacentVertex.Id] = currentVertex;
+						visitedForBfs[adjacentVertex.Id] = true;
+					}
+					if (adjacentVertex.Id == 0) // we reach zero th node
+					{
+						queueForBfs.Clear(); //break out of bfs
+					}
+				}
+			}
+
+			//now time to find path all the way to start from zero using parent
+			List<int> pathListUsingParent = new List<int>();
+			int current = 0;
+			pathListUsingParent.Add(0); // add zero
+
+			while (current!=1)
+			{
+				pathListUsingParent.Add(parent[current]);
+				current = parent[current];
+			}
+
+			//reverse path to make number using edges
+			pathListUsingParent.Reverse();
+
+			result += "1"; //start node
+
+			//now read edges
+			for (int i = 0; i < pathListUsingParent.Count-1; i++)
+			{
+				int from = pathListUsingParent[i];
+				int to = pathListUsingParent[i + 1];
+
+				result += this.adj[from].FirstOrDefault(adj => adj.Id == to).EdgeWeight;
+			}
+
+			return result;
 		}
 
 		public List<int> DFSTraversal()

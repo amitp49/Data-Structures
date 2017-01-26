@@ -332,6 +332,15 @@ namespace Graphs
 			int maxFlow = directedGraph4.FordFulkarsonMaximumFlow(0,5);
 			Console.WriteLine("Max Flow: {0}",maxFlow);
 
+			Console.WriteLine("-----------------");
+
+
+			int numberToRepresentMultipleInZeroOne = 55;
+			GraphAdj directedGraphForNumber = new GraphAdj(numberToRepresentMultipleInZeroOne);
+			String resultString = directedGraphForNumber.GetMultipleInZeroOneOnlyFor(numberToRepresentMultipleInZeroOne);
+			Console.WriteLine("Multiple of {0} -> {1}",numberToRepresentMultipleInZeroOne,resultString);
+			Console.WriteLine("-----------------");
+			
 			Console.ReadKey();
 
 		}
