@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace Stacks
 {
@@ -18,7 +19,7 @@ namespace Stacks
 
 		public static void TowerOfHanoiUsingRecursion(int disk)
 		{
-			TowerOfHanoiRecUtil(disk,Pole.Src,Pole.Dest,Pole.Aux);
+			TowerOfHanoiRecUtilTailRecRemoved(disk,Pole.Src,Pole.Dest,Pole.Aux);
 			return;
 		}
 
@@ -33,6 +34,34 @@ namespace Stacks
 			TowerOfHanoiRecUtil(n-1, src, aux, dest);
 			Console.WriteLine("Move disk {0} from {1} pole to {2} pole.", n, src, dest);
 			TowerOfHanoiRecUtil(n-1, aux, dest, src);
+		}
+
+		private static void TowerOfHanoiRecUtilTailRecRemoved(int n, Pole src, Pole dest, Pole aux)
+		{
+			while (true)
+			{
+				if (n == 1)
+				{
+					Console.WriteLine("Move disk {0} from {1} pole to {2} pole.", n, src, dest);
+					return;
+				}
+				else
+				{
+					TowerOfHanoiRecUtil(n - 1, src, aux, dest);
+					Console.WriteLine("Move disk {0} from {1} pole to {2} pole.", n, src, dest);
+
+
+
+					var tempN = n;
+					var tempAux = aux;
+					var tempSrc = src;
+
+					n = tempN - 1;
+					src = tempAux;
+					aux = tempSrc;
+				}
+			}
+			//TowerOfHanoiRecUtil(n - 1, aux, dest, src);
 		}
 
 		public static bool AreParenthesisBalanced(String str)
