@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
+using System.Data.SqlClient;
+using System.ComponentModel.Design;
+using System.Security.AccessControl;
 
 namespace Stacks
 {
@@ -17,9 +20,25 @@ namespace Stacks
 			Dest=3
 		}
 
-		public static void TowerOfHanoiUsingRecursion(int disk)
+		private class TowerOfHanoiFunctionData
 		{
-			TowerOfHanoiRecUtilTailRecRemoved(disk,Pole.Src,Pole.Dest,Pole.Aux);
+			public int disk;
+			public Pole src;
+			public Pole dest;
+			public Pole aux;
+
+			public TowerOfHanoiFunctionData(int disk, Pole src, Pole dest, Pole aux)
+			{
+				this.disk = disk;
+				this.src = src;
+				this.dest = dest;
+				this.aux = aux;
+			}
+		}
+
+		public static void TowerOfHanoi(int disk)
+		{
+			TowerOfHanoiRecUtilIterative(disk,Pole.Src,Pole.Dest,Pole.Aux);
 			return;
 		}
 
@@ -38,6 +57,7 @@ namespace Stacks
 
 		private static void TowerOfHanoiRecUtilTailRecRemoved(int n, Pole src, Pole dest, Pole aux)
 		{
+			
 			while (true)
 			{
 				if (n == 1)
@@ -63,6 +83,67 @@ namespace Stacks
 			}
 			//TowerOfHanoiRecUtil(n - 1, aux, dest, src);
 		}
+
+		private static void TowerOfHanoiRecUtilIterative(int n, Pole src, Pole dest, Pole aux,bool fromStackCall = false)
+		{
+			Stack<TowerOfHanoiFunctionData> stack = new Stack<TowerOfHanoiFunctionData>();
+
+			while (true)
+			{
+				if (n == 1)
+				{
+					Console.WriteLine("Move disk {0} from {1} pole to {2} pole.", n, src, dest);
+					if (stack.Count > 0)
+					{
+						var stackItem = stack.Pop();
+
+						//assign stack frame as current
+						
+						n = stackItem.disk;
+						src = stackItem.src;
+						dest = stackItem.dest;
+						aux = stackItem.aux;
+						fromStackCall = true;
+					}
+					else
+					{
+						return;
+					}
+				}
+				else
+				{
+					if (fromStackCall == false)
+					{
+						//TowerOfHanoiRecUtil(n - 1, src, aux, dest);
+
+						stack.Push(new TowerOfHanoiFunctionData(n, src, dest, aux));
+
+						//mimic current flow as new flow
+						n = n - 1;
+						var tempDest = dest;
+						var tempAux = aux;
+						dest = tempAux;
+						aux = tempDest;
+					}
+					else
+					{
+						fromStackCall = false; // critical
+
+						Console.WriteLine("Move disk {0} from {1} pole to {2} pole.", n, src, dest);
+
+						//TowerOfHanoiRecUtil(n - 1, aux, dest, src);
+
+						var tempAux = aux;
+						var tempSrc = src;
+
+						n = n - 1;
+						src = tempAux;
+						aux = tempSrc;
+					}
+				}
+			}
+		}
+
 
 		public static bool AreParenthesisBalanced(String str)
         {

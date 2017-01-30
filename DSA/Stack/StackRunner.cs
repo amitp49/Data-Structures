@@ -90,7 +90,7 @@ namespace Stacks
             Console.WriteLine("---------");
 
 			int disk = 4;
-			StackAlgos.TowerOfHanoiUsingRecursion(disk);
+			StackAlgos.TowerOfHanoi(disk);
 			Console.WriteLine("---------");
 			
             Console.ReadKey();
