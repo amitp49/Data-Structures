@@ -9,8 +9,33 @@ namespace Stacks
 {
     public class StackAlgos
     {
-        
-        public static bool AreParenthesisBalanced(String str)
+		enum Pole
+		{
+			Src=1,
+			Aux=2,
+			Dest=3
+		}
+
+		public static void TowerOfHanoiUsingRecursion(int disk)
+		{
+			TowerOfHanoiRecUtil(disk,Pole.Src,Pole.Dest,Pole.Aux);
+			return;
+		}
+
+		private static void TowerOfHanoiRecUtil(int n, Pole src, Pole dest, Pole aux)
+		{
+			if (n == 1)
+			{
+				Console.WriteLine("Move disk {0} from {1} pole to {2} pole.",n,src,dest);
+				return;
+			}
+
+			TowerOfHanoiRecUtil(n-1, src, aux, dest);
+			Console.WriteLine("Move disk {0} from {1} pole to {2} pole.", n, src, dest);
+			TowerOfHanoiRecUtil(n-1, aux, dest, src);
+		}
+
+		public static bool AreParenthesisBalanced(String str)
         {
             MyStack<char> myStack = new SllStack<char>();
             List<Char> startingParenthsis = new List<char>() {'[','{','('};
@@ -33,7 +58,7 @@ namespace Stacks
                     {
                         myStack.Pop();
                     }
-                    else
+					else
                     {
                         return false;
                     }
@@ -112,7 +137,7 @@ namespace Stacks
             }
         }
 
-        private static void RecursiveReverseInternalUtil(MyStack<int> myStack)
+		private static void RecursiveReverseInternalUtil(MyStack<int> myStack)
         {
             if(!myStack.IsEmpty())
             {

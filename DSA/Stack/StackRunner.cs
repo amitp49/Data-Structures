@@ -89,6 +89,10 @@ namespace Stacks
             Console.WriteLine("Number of reversal nedded:" + count);
             Console.WriteLine("---------");
 
+			int disk = 4;
+			StackAlgos.TowerOfHanoiUsingRecursion(disk);
+			Console.WriteLine("---------");
+			
             Console.ReadKey();
         }
     }
