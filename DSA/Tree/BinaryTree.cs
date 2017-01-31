@@ -335,6 +335,71 @@ namespace Tree
             }
         }
 
+		private class PostOrderStackData
+		{
+			public BinaryTreeNode<T> node;
+			public int recursionId;
+			public PostOrderStackData(BinaryTreeNode<T> node, int recursionId)
+			{
+				this.node = node;
+				this.recursionId = recursionId;
+			}
+		}
+
+		public void PostOrderTraversalIterativeCompilerMimic()
+		{
+			Stack<PostOrderStackData> myStack = new Stack<PostOrderStackData>();
+			var current = this.Root;
+			bool flagRec1 = false;
+			bool flagRec2 = false;
+			
+			Console.WriteLine("Compiler mimic post order...");
+			while (true)
+			{
+				if (current == null)
+				{
+					if (myStack.Count <= 0)
+					{
+						break;
+					}
+					else
+					{
+						var item = myStack.Pop();
+						current = item.node;
+
+						if(item.recursionId==1)
+							flagRec1 = true;
+						else
+							flagRec2 = true;
+					}
+				}
+				else
+				{
+					if (flagRec1 == false && flagRec2==false)
+					{
+						myStack.Push(new PostOrderStackData(current,1));
+						current = current.Left;
+					}
+					else
+					{
+						flagRec1 = false;
+						if (flagRec2 == false)//CRITICAL FLAG2
+						{
+							myStack.Push(new PostOrderStackData(current, 2));
+							current = current.Right;
+						}
+						else
+						{
+							flagRec2 = false;
+							Console.Write("{0}, ", current.Data);
+							current = null; //CRITICAL
+						}
+					}
+				}
+			}
+			Console.WriteLine("");
+		}
+
         public void PostOrderTraversalIterative()
         {
             Stack<BinaryTreeNode<T>> myStack = new Stack<BinaryTreeNode<T>>();
@@ -380,6 +445,45 @@ namespace Tree
             Console.WriteLine();
         }
 
+		public void PreOrderTraversalIterativeCompilerMimic()
+		{
+			Stack<BinaryTreeNode<T>> myStack = new Stack<BinaryTreeNode<T>>();
+			var current = this.Root;
+			bool flagRec = false;
+			Console.WriteLine("Compiler mimic pre order...");
+			while (true)
+			{
+				if (current == null)
+				{
+					if (myStack.Count <= 0)
+					{
+						break;
+					}
+					else
+					{
+						var item = myStack.Pop();
+						current = item;
+						flagRec = true;
+					}
+				}
+				else
+				{
+					if (flagRec == false)
+					{
+						Console.Write("{0}, ", current.Data);
+						myStack.Push(current);
+						current = current.Left;
+					}
+					else
+					{
+						flagRec = false;
+						current = current.Right;
+					}
+				}
+			}
+			Console.WriteLine("");
+		}
+
         public void PreOrderTraversalIterative()
         {
             Stack<BinaryTreeNode<T>> myStack = new Stack<BinaryTreeNode<T>>();
@@ -416,6 +520,45 @@ namespace Tree
         {
             return (current.Right == null && current.Left == null);
         }
+
+		public void InOrderTraversalIterativeCompilerMimic()
+		{
+			Stack<BinaryTreeNode<T>> myStack = new Stack<BinaryTreeNode<T>>();
+			var current = this.Root;
+			bool flagRec = false;
+			Console.WriteLine("Compiler mimic in order...");
+			while (true)
+			{
+				if (current == null)
+				{
+					if (myStack.Count <= 0)
+					{
+						break;
+					}
+					else
+					{
+						var item = myStack.Pop();
+						current = item;
+						flagRec = true;
+					}
+				}
+				else
+				{
+					if (flagRec == false)
+					{
+						myStack.Push(current);
+						current = current.Left;
+					}
+					else
+					{
+						flagRec = false;
+						Console.Write("{0}, ", current.Data);
+						current = current.Right;
+					}
+				}
+			}
+			Console.WriteLine("");
+		}
 
         public void InorderTraversalIterative()
         {

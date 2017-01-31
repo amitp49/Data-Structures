@@ -22,6 +22,7 @@ namespace Tree
             btree.Root.Right.Right = new BinaryTreeNode<int>(5);
 
             btree.Root.Left.Left.Right = new BinaryTreeNode<int>(6);
+			
             btree.Root.Right.Right.Right = new BinaryTreeNode<int>(7);
 
             btree.Root.Right.Right.Right.Right = new BinaryTreeNode<int>(8);
@@ -36,18 +37,23 @@ namespace Tree
             btreeOther.Root.Right.Right = new BinaryTreeNode<int>(5);
 
             btreeOther.Root.Left.Left.Right = new BinaryTreeNode<int>(6);
+			
             btreeOther.Root.Right.Right.Right = new BinaryTreeNode<int>(7);
 
             btreeOther.Root.Right.Right.Right.Right = new BinaryTreeNode<int>(8);
 
-            btree.PostorderTraversalRecursive();
-            btree.PreorderTraversalRecursive();
+			btree.PreorderTraversalRecursive();
+			btree.PreOrderTraversalIterative();
+			btree.PreOrderTraversalIterativeCompilerMimic();
+
+			btree.PostorderTraversalRecursive();
+			btree.PostOrderTraversalIterative();
+			btree.PostOrderTraversalIterativeCompilerMimic();
+			
             btree.InorderTraversalRecursive();
-
-            btree.PostOrderTraversalIterative();
-            btree.PreOrderTraversalIterative();
             btree.InorderTraversalIterative();
-
+			btree.InOrderTraversalIterativeCompilerMimic();
+			
             btree.PrintLevelOrderTranversal();
             Console.WriteLine("Size of tree:" + btree.GetSizeOfTree());
 
