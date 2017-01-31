@@ -791,5 +791,44 @@ namespace DynamicProgramming
 
 			return resultTable[targetX, targetY];
 		}
+
+		public int GetAllValidIpAddressesCount(string str)
+		{
+			List<string> validIpAddresses = new List<string>();
+			int n = str.Length;
+			int dots=3;
+			int[,] DP = new int[4,n]; // 3 dots + 0 dots
+
+			//Base row filling for row 0th, col 1,2,3
+			DP[0, 0] = isValidNumber(str, 0, 0) ? 1 : 0;
+			DP[0, 1] = isValidNumber(str, 0, 1) ? 1 : 0;
+			DP[0, 2] = isValidNumber(str, 0, 2) ? 1 : 0;
+
+			//Fill other cells
+			for (int i = 1; i < dots+1; i++)
+			{
+				for (int j = i; j < n; j++)
+				{
+					int prev1 = (j - 1) >= 0 && isValidNumber(str, j, j) ? DP[i - 1,j - 1] : 0;
+					int prev2 = (j - 2) >= 0 && isValidNumber(str, j-1, j) ? DP[i - 1,j - 2] : 0;
+					int prev3 = (j - 3) >= 0 && isValidNumber(str, j-2, j) ? DP[i - 1,j - 3] : 0;
+
+					DP[i, j] = prev1 + prev2 + prev3;
+				}
+			}
+			return DP[3,n-1];
+		}
+
+		private bool isValidNumber(string str, int j1, int j2)
+		{
+			string number = str.Substring(j1, j2 - j1+1);
+			int num=0;
+			bool parsingSuccess = Int32.TryParse(number,out num);
+			if (parsingSuccess && num <= 255)
+			{
+				return true;
+			}
+			return false;
+		}
 	}
 }

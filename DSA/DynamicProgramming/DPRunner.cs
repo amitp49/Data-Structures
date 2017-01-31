@@ -107,6 +107,11 @@ namespace DynamicProgramming
         	else
            		Console.WriteLine("Can not be divided into two subsets of equal sum");
 			Console.WriteLine("---------");
+
+			string ipwithoutdots = "255255111";
+			int validIpAddressCount = dpAlgos.GetAllValidIpAddressesCount(ipwithoutdots);
+			Console.WriteLine("Valid ip address ways: {0}",validIpAddressCount);
+			Console.WriteLine("---------");
 			
 			Console.ReadKey();
 		}

@@ -25,7 +25,7 @@ namespace DSA
             //linkedListRunner.Run();
 
             IRunner btRunner = new BTRunner();
-            btRunner.Run();
+            //btRunner.Run();
 
             IRunner stackRunner = new StackRunner();
             //stackRunner.Run();
@@ -49,7 +49,7 @@ namespace DSA
 			//graphRunner.Run();
 
 			IRunner dpRunner = new DPRunner();
-			//dpRunner.Run();
+			dpRunner.Run();
 		}
     }
 }

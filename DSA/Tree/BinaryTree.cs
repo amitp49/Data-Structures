@@ -383,6 +383,7 @@ namespace Tree
 					else
 					{
 						flagRec1 = false;
+
 						if (flagRec2 == false)//CRITICAL FLAG2
 						{
 							myStack.Push(new PostOrderStackData(current, 2));
