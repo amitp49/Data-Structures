@@ -794,7 +794,6 @@ namespace DynamicProgramming
 
 		public int GetAllValidIpAddressesCount(string str)
 		{
-			List<string> validIpAddresses = new List<string>();
 			int n = str.Length;
 			int dots=3;
 			int[,] DP = new int[4,n]; // 3 dots + 0 dots
