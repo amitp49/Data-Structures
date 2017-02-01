@@ -11,6 +11,8 @@ using Interfaces;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Reflection;
+using Newtonsoft.Json;
 
 namespace Graphs
 {
@@ -81,6 +83,34 @@ namespace Graphs
 			{
 				adj[edge.To].Add(new AdjNode(edge.From, edge.Weight));
 			}
+		}
+
+		public GraphAdj CloneOfGraph()
+		{
+			var returnObj = (GraphAdj)MemberwiseClone();
+
+			var type = returnObj.GetType();
+			var fieldInfoArray = type.GetRuntimeFields().ToArray();
+
+			foreach (var fieldInfo in fieldInfoArray)
+			{
+				object sourceFieldValue = fieldInfo.GetValue(this);
+				if (!(sourceFieldValue is GraphAdj))
+				{
+					continue;
+				}
+
+				var sourceObj = (GraphAdj)sourceFieldValue;
+				var clonedObj = this.DeepCopy(sourceObj);
+				fieldInfo.SetValue(returnObj, clonedObj);
+			}
+			return returnObj;
+		}
+
+		private GraphAdj DeepCopy(GraphAdj source)
+		{
+			var DeserializeSettings = new JsonSerializerSettings { ObjectCreationHandling = ObjectCreationHandling.Replace };
+			return JsonConvert.DeserializeObject<GraphAdj>(JsonConvert.SerializeObject(source), DeserializeSettings);
 		}
 
 		public GraphAdj GetTransposeGraph()
