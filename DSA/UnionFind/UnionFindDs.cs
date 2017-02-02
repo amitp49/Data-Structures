@@ -49,7 +49,7 @@ namespace UnionFind
 			{
 				return groupLeader;
 			}
-			groupLeader = Find(groupLeader); // path compression
+			this.group[a].Parent = Find(groupLeader); // path compression
 			return groupLeader;
 		}
 	}
