@@ -415,7 +415,7 @@ namespace Tree
                 BinaryTreeNode<T> current = myStack.Peek();
 
                 if (IsLeaf(current) || 
-                    current.Right == prev || 
+				    (current.Right != null && current.Right == prev) || 
                     (current.Right==null && current.Left==prev))
                 {
                     //leaf or upward  - Process it
