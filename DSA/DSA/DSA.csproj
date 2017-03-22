@@ -92,6 +92,10 @@
       <Project>{06B15D35-C556-45E4-B1AE-94C62FC18EEC}</Project>
       <Name>DynamicProgramming</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Codility\Codility.csproj">
+      <Project>{7D7B94C1-8BD1-48DA-87E7-012130465A90}</Project>
+      <Name>Codility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

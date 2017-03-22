@@ -540,6 +540,24 @@ namespace Tree
             return new BinarySearchTree<T>(root);
         }
 
+        private static BinaryTreeNode<T> ConstructBstFromPreOrderInternalUtil(T[] preOrderOfTree, ref int currentIndex, T minValueAllowed, T maxValueAllowed)
+		{
+			if (currentIndex >= preOrderOfTree.Length)
+				return null;
+
+			BinaryTreeNode<T> newNode = null;
+			T currentKey = preOrderOfTree[currentIndex];
+			if ((currentKey.CompareTo(minValueAllowed) > 0) &&
+				(currentKey.CompareTo(maxValueAllowed) < 0))
+			{
+				newNode = new BinaryTreeNode<T>(currentKey);
+				currentIndex++;
+				newNode.Left = ConstructBstFromPreOrderInternalUtil(preOrderOfTree, ref currentIndex, minValueAllowed, currentKey);
+				newNode.Right = ConstructBstFromPreOrderInternalUtil(preOrderOfTree, ref currentIndex, currentKey, maxValueAllowed);
+			}
+			return newNode;
+		}
+
         public BinaryTreeNode<T> KthLargestElement(int K)
         {
             int count = 0;
@@ -566,23 +584,6 @@ namespace Tree
             return KthLargestElementInternalUtil(current, K, ref count);
         }
 
-        private static BinaryTreeNode<T> ConstructBstFromPreOrderInternalUtil(T[] preOrderOfTree, ref int currentIndex, T minValueAllowed, T maxValueAllowed)
-        {
-            if (currentIndex >= preOrderOfTree.Length)
-                return null;
-
-            BinaryTreeNode<T> newNode = null;
-            T currentKey = preOrderOfTree[currentIndex];
-            if ((currentKey.CompareTo(minValueAllowed) > 0) &&
-                (currentKey.CompareTo(maxValueAllowed) < 0))
-            {
-                newNode = new BinaryTreeNode<T>(currentKey);
-                currentIndex++;
-                newNode.Left = ConstructBstFromPreOrderInternalUtil(preOrderOfTree, ref currentIndex, minValueAllowed, currentKey);
-                newNode.Right = ConstructBstFromPreOrderInternalUtil(preOrderOfTree, ref currentIndex, currentKey, maxValueAllowed);
-            }
-            return newNode;
-        }
 
         public void RemoveOutsideRangeNodes(T min, T max)
         {

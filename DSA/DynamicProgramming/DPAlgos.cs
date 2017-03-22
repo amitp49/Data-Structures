@@ -484,12 +484,11 @@ namespace DynamicProgramming
 			return minCost[1, numberOfMatrix];
 		}
 
-		//NOT WORKING
+		//TODO: NOT WORKING
 		public int MatrixChainMultiplicationCostOptimize(int[] matrixDimention)
 		{
 			int numberOfMatrix = matrixDimention.Length - 1;
 			int[,] cost = new int[numberOfMatrix + 1, numberOfMatrix + 1]; // will not use zero index for simplicity
-			int[] minCostUptoIndex = new int[numberOfMatrix];
 
 			//for each individual matrix, cost is zero for chain length = 1
 			for (int i = 0; i <= numberOfMatrix; i++)

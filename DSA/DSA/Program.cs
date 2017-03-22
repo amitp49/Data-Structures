@@ -14,6 +14,7 @@ using Graphs;
 using Heaps;
 using UnionFind;
 using DynamicProgramming;
+using Codility;
 
 namespace DSA
 {
@@ -28,7 +29,7 @@ namespace DSA
             //btRunner.Run();
 
             IRunner stackRunner = new StackRunner();
-            stackRunner.Run();
+            //stackRunner.Run();
 
             IRunner queueRunner = new QueueRunner();
             //queueRunner.Run();
@@ -50,6 +51,9 @@ namespace DSA
 
 			IRunner dpRunner = new DPRunner();
 			//dpRunner.Run();
+
+			IRunner codilityRunner = new CodilityRunner();
+			codilityRunner.Run();
 		}
     }
 }

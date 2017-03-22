@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heaps", "Heaps\Heaps.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicProgramming", "DynamicProgramming\DynamicProgramming.csproj", "{06B15D35-C556-45E4-B1AE-94C62FC18EEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codility", "Codility\Codility.csproj", "{7D7B94C1-8BD1-48DA-87E7-012130465A90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{06B15D35-C556-45E4-B1AE-94C62FC18EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06B15D35-C556-45E4-B1AE-94C62FC18EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06B15D35-C556-45E4-B1AE-94C62FC18EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D7B94C1-8BD1-48DA-87E7-012130465A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7B94C1-8BD1-48DA-87E7-012130465A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7B94C1-8BD1-48DA-87E7-012130465A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7B94C1-8BD1-48DA-87E7-012130465A90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
